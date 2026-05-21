@@ -2,543 +2,252 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>创业信号 · 2026-05-21 · 今日</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>创业信号 2026-05-21 日扫</title>
 <style>
-  :root {
-    --bg: #0d0f14;
-    --card: #161922;
-    --border: #252836;
-    --text: #e2e8f0;
-    --muted: #8892a4;
-    --accent: #7c6af7;
-    --green: #06d6a0;
-    --blue: #74c0fc;
-    --yellow: #ffd166;
-    --orange: #ff9a3c;
-    --red: #ff4d6d;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    padding: 32px 16px;
-  }
-  .header {
-    max-width: 900px;
-    margin: 0 auto 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 20px;
-  }
-  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-  .header h1 span { color: var(--accent); }
-  .meta { color: var(--muted); font-size: 12px; text-align: right; line-height: 1.8; }
-  .summary-bar {
-    max-width: 900px;
-    margin: 0 auto 24px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 20px;
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .summary-bar strong { color: var(--text); font-size: 15px; }
-  .tag-new { background: #7c6af722; color: var(--accent); border: 1px solid #7c6af744; border-radius: 4px; padding: 1px 7px; font-size: 11px; font-weight: 600; }
-  .tag-repeat { background: #ff4d6d22; color: var(--red); border: 1px solid #ff4d6d44; border-radius: 4px; padding: 1px 7px; font-size: 11px; font-weight: 600; }
-  .container { max-width: 900px; margin: 0 auto; }
-  .signal-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    margin-bottom: 20px;
-    overflow: hidden;
-  }
-  .signal-card.repeat { opacity: 0.65; }
-  .signal-header {
-    padding: 18px 20px 14px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .signal-header:hover { background: #1a1d27; }
-  .signal-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .signal-title { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.4; }
-  .signal-pattern {
-    background: #7c6af715;
-    color: var(--accent);
-    border: 1px solid #7c6af730;
-    border-radius: 4px;
-    padding: 1px 8px;
-    font-size: 11px;
-    white-space: nowrap;
-  }
-  .signal-expand { color: var(--muted); font-size: 16px; transition: transform 0.2s; flex-shrink: 0; }
-  .signal-body { padding: 0 20px 18px; }
-  .signal-desc { color: var(--muted); font-size: 13px; margin-bottom: 14px; line-height: 1.7; }
-  .scores {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 14px;
-    position: relative;
-  }
-  .score-cell {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    min-width: 70px;
-    text-align: center;
-    cursor: default;
-  }
-  .score-label { font-weight: 400; opacity: 0.85; margin-bottom: 2px; font-size: 10px; }
-  .score-num { font-size: 17px; font-weight: 700; }
-  .score-5 { background: #06d6a015; color: var(--green); border: 1px solid #06d6a030; }
-  .score-4 { background: #74c0fc15; color: var(--blue); border: 1px solid #74c0fc30; }
-  .score-3 { background: #ffd16615; color: var(--yellow); border: 1px solid #ffd16630; }
-  .score-2 { background: #ff9a3c15; color: var(--orange); border: 1px solid #ff9a3c30; }
-  .score-1 { background: #ff4d6d15; color: var(--red); border: 1px solid #ff4d6d30; }
-  /* Tooltip */
-  [data-tip] { position: relative; }
-  [data-tip]:hover::after {
-    content: attr(data-tip);
-    position: absolute;
-    bottom: calc(100% + 6px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1e2130;
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 11px;
-    font-weight: 400;
-    white-space: pre-wrap;
-    width: 200px;
-    text-align: left;
-    z-index: 100;
-    box-shadow: 0 4px 16px #00000066;
-    line-height: 1.5;
-  }
-  .sources { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .source-link {
-    background: #252836;
-    color: var(--muted);
-    border-radius: 5px;
-    padding: 4px 10px;
-    font-size: 11px;
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: all 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .source-link:hover { color: var(--text); border-color: var(--accent); background: #252836dd; }
-  .opportunity-box {
-    background: #7c6af710;
-    border-left: 3px solid var(--accent);
-    border-radius: 0 6px 6px 0;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 14px;
-  }
-  .opportunity-box em { color: var(--accent); font-style: normal; font-weight: 600; }
-  details > summary { list-style: none; }
-  details > summary::-webkit-details-marker { display: none; }
-  details[open] .signal-expand { transform: rotate(180deg); }
-  .section-label {
-    color: var(--muted);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  .opp-score {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    border-radius: 20px;
-    padding: 2px 10px;
-    font-size: 11px;
-    font-weight: 700;
-    margin-left: 8px;
-    vertical-align: middle;
-  }
-  .total-opp { font-size: 12px; color: var(--muted); margin-top: 4px; }
+:root{--bg:#0d0f14;--card:#161922;--border:#252836;--text:#e2e8f0;--muted:#8892a4;--accent:#7c6af7;
+      --green:#06d6a0;--blue:#74c0fc;--yellow:#ffd166;--orange:#ff9a3c;--red:#ff4d6d;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;padding:32px 16px}
+.wrap{max-width:780px;margin:0 auto}
+h1{font-size:22px;font-weight:700;margin-bottom:6px}
+h1 span{color:var(--accent)}
+.meta{color:var(--muted);font-size:12px;margin-bottom:20px}
+.stats{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px}
+.stat strong{font-size:18px;display:block}
+.filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.filter-btn{background:none;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;font-size:12px;cursor:pointer;transition:.15s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--text)}
+.signal-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:.15s}
+.signal-card:hover{border-color:#3a4055}
+.signal-card.repeat{opacity:.75}
+details summary{list-style:none}
+details summary::-webkit-details-marker{display:none}
+.signal-header{display:flex;align-items:flex-start;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.signal-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.signal-title{font-weight:600;font-size:15px}
+.tag-new{background:#7c6af722;color:var(--accent);border:1px solid #7c6af744;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.tag-repeat{background:#f59e0b22;color:#f59e0b;border:1px solid #f59e0b44;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.badge{border-radius:6px;padding:3px 10px;font-size:11px;font-weight:600;white-space:nowrap;margin-left:auto;flex-shrink:0}
+.signal-expand{color:var(--muted);margin-left:8px;flex-shrink:0;transition:.2s}
+details[open] .signal-expand{transform:rotate(180deg)}
+.signal-pattern{color:var(--muted);font-size:12px}
+.signal-body{padding:0 20px 18px;border-top:1px solid var(--border)}
+.signal-desc{color:#c8d0dc;line-height:1.8;margin:14px 0 10px;font-size:13px}
+.signal-why,.signal-gap{color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:8px}
+.signal-why strong,.signal-gap strong{color:#a0a8b8}
+.signal-list{font-size:12px;color:var(--muted);margin-bottom:8px}
+.signal-list ul{padding-left:16px;margin-top:4px;line-height:1.8}
+.signal-opp{background:#7c6af712;border:1px solid #7c6af730;border-radius:8px;padding:10px 14px;color:#a090e0;font-size:13px;line-height:1.7;margin:10px 0}
+.signal-opp strong{color:var(--accent)}
+.scores{display:flex;gap:8px;margin:12px 0 8px;flex-wrap:wrap}
+.score-cell{border-radius:8px;padding:6px 10px;text-align:center;min-width:52px;position:relative;cursor:help}
+.score-label{display:block;font-size:10px;opacity:.85;margin-bottom:2px;font-weight:400}
+.score-num{display:block;font-size:17px;font-weight:700}
+.score-5{background:#06d6a015;color:var(--green);border:1px solid #06d6a030}
+.score-4{background:#74c0fc15;color:var(--blue);border:1px solid #74c0fc30}
+.score-3{background:#ffd16615;color:var(--yellow);border:1px solid #ffd16630}
+.score-2{background:#ff9a3c15;color:var(--orange);border:1px solid #ff9a3c30}
+.score-1{background:#ff4d6d15;color:var(--red);border:1px solid #ff4d6d30}
+[data-tip]{position:relative;cursor:help}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#2a2a35;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:160px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
+.sources{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.source-link{color:var(--accent);font-size:11px;text-decoration:none;background:#7c6af710;border:1px solid #7c6af730;border-radius:4px;padding:3px 8px}
+.source-link:hover{background:#7c6af725}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div>
-    <h1>⚡ 创业<span>信号</span></h1>
-    <div style="color:var(--muted);font-size:12px;margin-top:4px">每日扫描 · 全球 + 中文圈</div>
+<div class="wrap">
+  <h1>⚡ 创业<span>信号</span></h1>
+  <div class="meta">2026-05-21 · 日扫</div>
+  <div class="stats">
+    <div class="stat"><strong>2</strong>&nbsp;新信号</div>
+    <div class="stat"><strong>4</strong>&nbsp;已追踪</div>
   </div>
-  <div class="meta">
-    2026-05-21<br>
-    范围: 今日 (d)<br>
-    来源: Reddit · HN · Lobsters · 掘金 · 少数派
+  <div class="filters">
+    <button class="filter-btn active" onclick="filter('all',this)">全部</button>
+    <button class="filter-btn" onclick="filter('HIGH',this)">HIGH</button>
+    <button class="filter-btn" onclick="filter('MEDIUM',this)">MEDIUM</button>
+    <button class="filter-btn" onclick="filter('repeat',this)">🔁 已追踪</button>
   </div>
-</div>
-
-<div class="container">
-
-<div class="summary-bar">
-  <div><strong>4</strong> &nbsp;新信号</div>
-  <div><strong>1</strong> &nbsp;已追踪</div>
-  <div style="flex:1"></div>
-  <span class="tag-new">NEW</span>
-  <span class="tag-repeat">🔁 REPEAT</span>
-</div>
-
-<!-- ── SIGNAL 1 ─────────────────────────────────────────────── -->
+  
+<!-- ── SIGNAL s1 ───────────────────────────────────────────────────── -->
 <div class="signal-card">
 <details open>
 <summary class="signal-header">
   <div>
     <div class="signal-title-row">
-      <span class="signal-title">大厂全面封禁 Cursor：企业AI编程合规危机</span>
+      <span class="signal-title">云CI成本黑洞：DevOps团队每月不知不觉烧掉$300</span>
       <span class="tag-new">NEW</span>
     </div>
     <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">🇨🇳 企业封杀AI工具</span>
+      <span class="signal-pattern">💸 DevOps成本失控</span>
     </div>
   </div>
+  <span class="badge" style="background:#ffd16622;color:#ffd166;border:1px solid #ffd16644">MEDIUM</span>
   <span class="signal-expand">▼</span>
 </summary>
+
 <div class="signal-body">
-  <p class="signal-desc">
-    掘金今日热榜头条：<strong>"全面封禁 Cursor！又一家大厂出手了"</strong>，延续近期多家互联网/金融公司禁用 AI 编程工具的浪潮。
-    开发者陷入两难——个人效率依赖 Cursor，公司数据安全要求禁止。配套帖"我为什么最终还是回归了 Cursor"证明禁令执行阻力巨大，
-    反映出需求与合规之间真实且持续的摩擦。
-  </p>
-  <div class="opportunity-box">
-    <em>机会：</em> 企业级 AI 编程助手，本地部署 + 代码不出域 + 完整审计日志。中小企业版直接集成私有 GitLab/Bitbucket，
-    对标 Cursor 功能但满足等保 2.0 要求。
-  </div>
-  <div class="scores">
-    <div class="score-cell score-5" data-tip="痛点强度 5/5&#10;开发者每天用Cursor&#10;被禁后生产力明显下降&#10;且禁令难以撤回">
-      <div class="score-label">痛点</div>
-      <div class="score-num">5</div>
-    </div>
-    <div class="score-cell score-4" data-tip="市场空白 4/5&#10;本地部署方案存在但&#10;缺乏企业级合规功能&#10;和中文技术支持">
-      <div class="score-label">空白</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-4" data-tip="付费意愿 4/5&#10;企业IT预算充足&#10;合规不达标有法律风险&#10;ROI清晰">
-      <div class="score-label">付费</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-3" data-tip="获客难度 3/5&#10;需要企业销售渠道&#10;但行业口碑传播快&#10;开发者决策影响采购">
-      <div class="score-label">获客</div>
-      <div class="score-num">3</div>
-    </div>
-    <div class="score-cell score-5" data-tip="监管红利 5/5&#10;数据安全法/网络安全法&#10;直接驱动需求&#10;合规是刚需非可选项">
-      <div class="score-label">监管</div>
-      <div class="score-num">5</div>
-    </div>
-    <div class="score-cell score-4" data-tip="综合机会 4/5&#10;高痛 + 监管强制 + 付费能力强&#10;时间窗口：禁令潮持续扩大中">
-      <div class="score-label">机会</div>
-      <div class="score-num">4</div>
-    </div>
-  </div>
-  <div class="sources">
-    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金热榜</a>
-    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金: 全面封禁 Cursor！</a>
-    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金: 我为什么最终还是回归了Cursor</a>
-    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金: 豆包也开始抢程序员饭碗了</a>
-  </div>
+  <p class="signal-desc">r/devops 114票：「我们不小心用macOS runner跑lint，每月多花了$300，直到账单来了才发现」。评论区十几人跟帖分享自己的「云账单惊吓时刻」：用错实例类型、忘关测试环境、parallel job配置失误。共同点是：没人提前知道，都是账单来了才反应。</p>
+  <p class='signal-why'><strong>为什么是现在：</strong>GitHub Actions、CircleCI近年大幅扩展runner类型，选择越多越容易踩坑；AI生成的CI配置往往直接用最贵的runner。</p>
+  <p class='signal-gap'><strong>市场空白：</strong>CI/CD pipeline没有内置成本预估——合并PR前你不知道这个workflow每月会花多少钱。现有云成本工具（DataDog/Infracost）覆盖基础设施，不覆盖CI层。</p>
+  <div class='signal-list'><strong>核心痛点：</strong><ul><li>macOS runner vs Ubuntu runner价差10倍</li><li>没有预算警报机制</li><li>AI生成的CI配置不考虑成本</li></ul></div>
+  <p class='signal-opp'><strong>创业切入点：</strong>PR合并前自动预测CI月账单变化 / 智能推荐最优runner组合 / CI成本异常告警（Slack/PD集成）</p>
+  <div class="scores"><div class="score-cell score-3" data-tip="痛点 3/5"><span class="score-label">痛点</span><span class="score-num">3</span></div><div class="score-cell score-4" data-tip="空白 4/5"><span class="score-label">空白</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="付费 4/5"><span class="score-label">付费</span><span class="score-num">4</span></div><div class="score-cell score-5" data-tip="获客 5/5"><span class="score-label">获客</span><span class="score-num">5</span></div><div class="score-cell score-5" data-tip="监管 5/5"><span class="score-label">监管</span><span class="score-num">5</span></div><div class="score-cell score-3" data-tip="机会 3/5"><span class="score-label">机会</span><span class="score-num">3</span></div></div>
+  <div class="sources"><a href="https://www.reddit.com/r/devops/comments/1kp8y9v/we_accidentally_spent_300month_running_lint_on/" target="_blank" class="source-link">↗ r/devops: We accidentally spent $300/month running lint on macOS runners</a></div>
 </div>
 </details>
 </div>
 
-<!-- ── SIGNAL 2 ─────────────────────────────────────────────── -->
+<!-- ── SIGNAL s2 ───────────────────────────────────────────────────── -->
 <div class="signal-card">
 <details open>
 <summary class="signal-header">
   <div>
     <div class="signal-title-row">
-      <span class="signal-title">Meta 8000人裁员：AI替代驱动的科技失业潮</span>
+      <span class="signal-title">IT工程师20年经验：我已经完全失去了做这行的欲望</span>
       <span class="tag-new">NEW</span>
+    </div>
+    <div style="margin-top:6px;color:var(--muted);font-size:12px">
+      <span class="signal-pattern">😮‍💨 职业倦怠</span>
+    </div>
+  </div>
+  <span class="badge" style="background:#ffd16622;color:#ffd166;border:1px solid #ffd16644">MEDIUM</span>
+  <span class="signal-expand">▼</span>
+</summary>
+
+<div class="signal-body">
+  <p class="signal-desc">r/devops 571票：一位有20年经验、担任10年team lead的工程师写道「今天（事故）是压垮我的最后一根稻草，我已经完全失去了做IT的欲望」。评论区清一色共鸣——不是年轻人抱怨，是真正资深的工程师在集体表达倦怠。结合近期科技行业大规模裁员，IT行业的「隐性失业」（在职但已精神离职）正在浮出水面。</p>
+  <p class='signal-why'><strong>为什么是现在：</strong>AI浪潮加速了组织重组和技术栈迭代，20年经验的人反而更难适应「用AI反复重写一切」的节奏；同时裁员让留下来的人承担了更多工作量。</p>
+  <p class='signal-gap'><strong>市场空白：</strong>面向资深IT工程师的「职业重新定位」工具几乎为空白——不是简历优化，是帮他们把20年经验转化为顾问/独立外包/内容创作的具体路径规划。</p>
+  <div class='signal-list'><strong>核心痛点：</strong><ul><li>技术栈更迭比人快</li><li>管理层不理解底层困境</li><li>AI引入后工作量不减反增</li></ul></div>
+  <p class='signal-opp'><strong>创业切入点：</strong>资深工程师经验变现评估工具（顾问定价/外包定位） / IT倦怠管理SaaS（面向工程团队HR） / 技术转型路径规划（20yr→独立顾问）</p>
+  <div class="scores"><div class="score-cell score-4" data-tip="痛点 4/5"><span class="score-label">痛点</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="空白 3/5"><span class="score-label">空白</span><span class="score-num">3</span></div><div class="score-cell score-2" data-tip="付费 2/5"><span class="score-label">付费</span><span class="score-num">2</span></div><div class="score-cell score-4" data-tip="获客 4/5"><span class="score-label">获客</span><span class="score-num">4</span></div><div class="score-cell score-5" data-tip="监管 5/5"><span class="score-label">监管</span><span class="score-num">5</span></div><div class="score-cell score-3" data-tip="机会 3/5"><span class="score-label">机会</span><span class="score-num">3</span></div></div>
+  <div class="sources"><a href="https://www.reddit.com/r/devops/" target="_blank" class="source-link">↗ r/devops: Today is why i no longer have the desire to work in IT anymore</a></div>
+</div>
+</details>
+</div>
+
+<!-- ── SIGNAL r1 ───────────────────────────────────────────────────── -->
+<div class="signal-card repeat">
+<details >
+<summary class="signal-header">
+  <div>
+    <div class="signal-title-row">
+      <span class="signal-title">大厂全面封禁Cursor：企业AI编程合规危机</span>
+      <span class="tag-repeat">🔁 已追踪</span>
+    </div>
+    <div style="margin-top:6px;color:var(--muted);font-size:12px">
+      <span class="signal-pattern">🔐 企业封杀AI工具</span>
+    </div>
+  </div>
+  
+  <span class="signal-expand">▼</span>
+</summary>
+
+<div class="signal-body">
+  <p class="signal-desc">掘金今日三条相关热帖同时爆发：「全面封禁Cursor！又一家大厂出手了」（607点赞）、「Cursor你要毁了我吗」（522点赞）、「我为什么最终还是回归了Cursor」（252点赞）。禁令范围持续扩大，开发者依赖度持续走高，两力对抗愈演愈烈。</p>
+  <div class="scores"><div class="score-cell score-5" data-tip="痛点 5/5"><span class="score-label">痛点</span><span class="score-num">5</span></div><div class="score-cell score-4" data-tip="空白 4/5"><span class="score-label">空白</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="付费 4/5"><span class="score-label">付费</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="获客 3/5"><span class="score-label">获客</span><span class="score-num">3</span></div><div class="score-cell score-5" data-tip="监管 5/5"><span class="score-label">监管</span><span class="score-num">5</span></div><div class="score-cell score-4" data-tip="机会 4/5"><span class="score-label">机会</span><span class="score-num">4</span></div></div>
+  <p style="font-size:11px;color:#f59e0b;margin:8px 0 4px">🔁 大厂封禁Cursor · 出现次数+1</p>
+  <div class="sources"><a href="https://juejin.cn/" target="_blank" class="source-link">↗ 掘金：全面封禁Cursor！又一家大厂出手了</a></div>
+</div>
+</details>
+</div>
+
+<!-- ── SIGNAL r2 ───────────────────────────────────────────────────── -->
+<div class="signal-card repeat">
+<details >
+<summary class="signal-header">
+  <div>
+    <div class="signal-title-row">
+      <span class="signal-title">GitHub持续遭攻击 + 用户开始集体出走</span>
+      <span class="tag-repeat">🔁 已追踪</span>
+    </div>
+    <div style="margin-top:6px;color:var(--muted);font-size:12px">
+      <span class="signal-pattern">🏗️ 基础设施风险</span>
+    </div>
+  </div>
+  
+  <span class="signal-expand">▼</span>
+</summary>
+
+<div class="signal-body">
+  <p class="signal-desc">今日新增：r/selfhosted 325票「Leaving GitHub for private repos」 + Lobsters TeamPCP声称拥有GitHub内部源码。VSCode扩展攻击（上周）→ GitHub内部源码疑似泄露（本周）→ 用户开始用脚投票，迁移潮在加速。</p>
+  <div class="scores"><div class="score-cell score-4" data-tip="痛点 4/5"><span class="score-label">痛点</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="空白 3/5"><span class="score-label">空白</span><span class="score-num">3</span></div><div class="score-cell score-4" data-tip="付费 4/5"><span class="score-label">付费</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="获客 4/5"><span class="score-label">获客</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="监管 4/5"><span class="score-label">监管</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="机会 3/5"><span class="score-label">机会</span><span class="score-num">3</span></div></div>
+  <p style="font-size:11px;color:#f59e0b;margin:8px 0 4px">🔁 Railway GCP封锁 · GitHub被黑迁移潮 · 出现次数+1</p>
+  <div class="sources"><a href="https://www.reddit.com/r/selfhosted/" target="_blank" class="source-link">↗ r/selfhosted: Leaving GitHub for private repos</a><a href="https://lobste.rs/" target="_blank" class="source-link">↗ Lobsters: GitHub Source Code Breach</a></div>
+</div>
+</details>
+</div>
+
+<!-- ── SIGNAL r3 ───────────────────────────────────────────────────── -->
+<div class="signal-card repeat">
+<details >
+<summary class="signal-header">
+  <div>
+    <div class="signal-title-row">
+      <span class="signal-title">Meta 8000人裁员：AI替代驱动的科技失业潮</span>
+      <span class="tag-repeat">🔁 已追踪</span>
     </div>
     <div style="margin-top:6px;color:var(--muted);font-size:12px">
       <span class="signal-pattern">📉 降本增效</span>
     </div>
   </div>
+  
   <span class="signal-expand">▼</span>
 </summary>
+
 <div class="signal-body">
-  <p class="signal-desc">
-    Meta 宣布裁员 8000 人（约员工总数 10%），明确指向 AI 驱动的岗位重组，r/singularity 922票验证讨论热度。
-    同期会计行业 Forvis Mazar 裁员（r/Accounting 361票），内部员工发现自己的岗位在招人（r/Accounting 328票），
-    多赛道同时出现失业焦虑——这是新一波结构性失业的起点信号。
-  </p>
-  <div class="opportunity-box">
-    <em>机会：</em> 面向"被 AI 替代中层"的职业再定位平台。不是简单的招聘板块，而是
-    <em>"AI 时代我的价值在哪"</em>精准诊断 + 技能图谱重建 + 高薪小众赛道撮合。
-    B端切口：外包公司/猎头公司的候选人 AI 技能评级 SaaS。
-  </div>
-  <div class="scores">
-    <div class="score-cell score-4" data-tip="痛点强度 4/5&#10;失业恐慌 + 简历竞争加剧&#10;情绪强烈，话题扩散快">
-      <div class="score-label">痛点</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-3" data-tip="市场空白 3/5&#10;已有招聘平台和培训机构&#10;但AI时代技能诊断/重定位缺工具">
-      <div class="score-label">空白</div>
-      <div class="score-num">3</div>
-    </div>
-    <div class="score-cell score-3" data-tip="付费意愿 3/5&#10;失业者C端付费弱&#10;但B端(企业/猎头)有预算">
-      <div class="score-label">付费</div>
-      <div class="score-num">3</div>
-    </div>
-    <div class="score-cell score-4" data-tip="获客难度 4/5&#10;LinkedIn/科技社区聚集&#10;情绪驱动内容易传播">
-      <div class="score-label">获客</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-2" data-tip="监管红利 2/5&#10;就业保护政策方向不明&#10;监管助力有限">
-      <div class="score-label">监管</div>
-      <div class="score-num">2</div>
-    </div>
-    <div class="score-cell score-3" data-tip="综合机会 3/5&#10;窗口期明确但竞争出现快&#10;需要精准切入特定行业">
-      <div class="score-label">机会</div>
-      <div class="score-num">3</div>
-    </div>
-  </div>
-  <div class="sources">
-    <a class="source-link" href="https://www.reddit.com/r/singularity/comments/1tiosgg/" target="_blank">🔴 r/singularity ★922</a>
-    <a class="source-link" href="https://www.reddit.com/r/Accounting/comments/1timhsb/" target="_blank">🔴 r/Accounting ★361</a>
-    <a class="source-link" href="https://www.reddit.com/r/Accounting/comments/1timhsb/" target="_blank">🔴 r/Accounting ★328</a>
-  </div>
+  <p class="signal-desc">r/singularity 999票持续发酵。今日同时出现Intuit裁员3000人（HN 185票）明确表示「重押AI」，r/Accounting多条帖子记录会计行业AI替换进行时——失业潮从科技扩散至专业服务行业。</p>
+  <div class="scores"><div class="score-cell score-4" data-tip="痛点 4/5"><span class="score-label">痛点</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="空白 3/5"><span class="score-label">空白</span><span class="score-num">3</span></div><div class="score-cell score-3" data-tip="付费 3/5"><span class="score-label">付费</span><span class="score-num">3</span></div><div class="score-cell score-4" data-tip="获客 4/5"><span class="score-label">获客</span><span class="score-num">4</span></div><div class="score-cell score-2" data-tip="监管 2/5"><span class="score-label">监管</span><span class="score-num">2</span></div><div class="score-cell score-3" data-tip="机会 3/5"><span class="score-label">机会</span><span class="score-num">3</span></div></div>
+  <p style="font-size:11px;color:#f59e0b;margin:8px 0 4px">🔁 Meta裁员 · Intuit裁员 · 出现次数+1</p>
+  <div class="sources"><a href="https://www.reddit.com/r/singularity/" target="_blank" class="source-link">↗ r/singularity: Meta kicks off major bloodbath with 8,000 layoffs</a><a href="https://news.ycombinator.com/" target="_blank" class="source-link">↗ HN: Intuit to lay off over 3k to refocus on AI</a></div>
 </div>
 </details>
 </div>
 
-<!-- ── SIGNAL 3 ─────────────────────────────────────────────── -->
-<div class="signal-card">
-<details open>
+<!-- ── SIGNAL r4 ───────────────────────────────────────────────────── -->
+<div class="signal-card repeat">
+<details >
 <summary class="signal-header">
   <div>
     <div class="signal-title-row">
       <span class="signal-title">"那个没用AI的自己"：AI焦虑催生数字健康市场</span>
-      <span class="tag-new">NEW</span>
+      <span class="tag-repeat">🔁 已追踪</span>
     </div>
     <div style="margin-top:6px;color:var(--muted);font-size:12px">
       <span class="signal-pattern">💭 用户心理痛点</span>
     </div>
   </div>
+  
   <span class="signal-expand">▼</span>
 </summary>
+
 <div class="signal-body">
-  <p class="signal-desc">
-    r/ChatGPT 1278票帖子 <strong>"i miss the person i was before ai tools and side projects"</strong>——
-    在AI工具最重度用户的社区里反向情绪如此高票，说明这是普遍的、真实的痛苦。
-    "Claude 在会话中途告诉用户去睡觉" (925票) 进一步印证：AI工具开始侵入个人时间边界，用户感到失控。
-    掘金同期出现："面试官问我 AI 写代码比你快100倍，你的价值在哪？"——焦虑蔓延到职业认同层面。
-  </p>
-  <div class="opportunity-box">
-    <em>机会：</em> AI使用量化追踪 + 数字健康引导产品。
-    类比 Screen Time 但专注于 AI 工具依赖：追踪你的"AI辅助率"、识别技能退化风险、
-    建议"数字断食"计划。反向定位：<em>不是让你用更多AI，而是让你用得更清醒</em>。
-  </div>
-  <div class="scores">
-    <div class="score-cell score-4" data-tip="痛点强度 4/5&#10;1278票证明情绪强烈且普遍&#10;内容创作者/程序员群体尤其共鸣">
-      <div class="score-label">痛点</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-4" data-tip="市场空白 4/5&#10;Screen Time有但不够精准&#10;专门针对AI使用焦虑的工具几乎为零">
-      <div class="score-label">空白</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-3" data-tip="付费意愿 3/5&#10;消费者市场，订阅5-10美元可行&#10;但需要情绪共鸣才能转化">
-      <div class="score-label">付费</div>
-      <div class="score-num">3</div>
-    </div>
-    <div class="score-cell score-5" data-tip="获客难度 5/5&#10;情感共鸣内容传播极快&#10;这条帖子本身就是产品广告">
-      <div class="score-label">获客</div>
-      <div class="score-num">5</div>
-    </div>
-    <div class="score-cell score-1" data-tip="监管红利 1/5&#10;监管暂无助力&#10;纯靠自愿消费">
-      <div class="score-label">监管</div>
-      <div class="score-num">1</div>
-    </div>
-    <div class="score-cell score-3" data-tip="综合机会 3/5&#10;情绪窗口明确但变现路径不清晰&#10;适合低成本MVP验证">
-      <div class="score-label">机会</div>
-      <div class="score-num">3</div>
-    </div>
-  </div>
-  <div class="sources">
-    <a class="source-link" href="https://www.reddit.com/r/ChatGPT/comments/1tihmey/" target="_blank">🔴 r/ChatGPT ★1278</a>
-    <a class="source-link" href="https://www.reddit.com/r/singularity/comments/1tib9so/" target="_blank">🔴 r/singularity ★925 Claude告用户去睡觉</a>
-    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金: AI写代码比你快100倍</a>
-  </div>
+  <p class="signal-desc">r/ChatGPT 1453票原帖持续高热，今日再次上榜。同日 r/SaaS 有开发者分享「焦虑App赚了第一个$3」——做自己亲身经历的产品，两天变现，验证了市场存在。</p>
+  <div class="scores"><div class="score-cell score-4" data-tip="痛点 4/5"><span class="score-label">痛点</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="空白 4/5"><span class="score-label">空白</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="付费 3/5"><span class="score-label">付费</span><span class="score-num">3</span></div><div class="score-cell score-5" data-tip="获客 5/5"><span class="score-label">获客</span><span class="score-num">5</span></div><div class="score-cell score-5" data-tip="监管 5/5"><span class="score-label">监管</span><span class="score-num">5</span></div><div class="score-cell score-4" data-tip="机会 4/5"><span class="score-label">机会</span><span class="score-num">4</span></div></div>
+  <p style="font-size:11px;color:#f59e0b;margin:8px 0 4px">🔁 AI焦虑数字健康 · 出现次数+1</p>
+  <div class="sources"><a href="https://www.reddit.com/r/ChatGPT/" target="_blank" class="source-link">↗ r/ChatGPT: i miss the person i was before ai tools</a></div>
 </div>
 </details>
 </div>
-
-<!-- ── SIGNAL 4 ─────────────────────────────────────────────── -->
-<div class="signal-card">
-<details open>
-<summary class="signal-header">
-  <div>
-    <div class="signal-title-row">
-      <span class="signal-title">Google Ads $2180亿隐性欺诈：小商家维权工具空白</span>
-      <span class="tag-new">NEW</span>
-    </div>
-    <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">💰 用户痛点/反垄断</span>
-    </div>
-  </div>
-  <span class="signal-expand">▼</span>
-</summary>
-<div class="signal-body">
-  <p class="signal-desc">
-    r/smallbusiness "$218 billion in Google Ads overcharges"——小商家长期被超额收费，规模高达$2180亿美元，
-    但绝大多数商家无工具验证广告真实效果，退款流程不透明。同期 HN："Google Declaring War on the Web"（396票）
-    和 "Google's AI is being manipulated" （272票）——Google广告生态正在被AI作弊刷流量，损失最终由广告主承担。
-  </p>
-  <div class="opportunity-box">
-    <em>机会：</em> Google Ads 独立第三方审计 SaaS。
-    接入客户 Google Ads 账户，自动识别无效点击/流量异常/超收费情况，
-    生成可向 Google 申诉的证据报告。<em>商业模式：退款金额的20%佣金</em>——ROI对用户是正数，完全无需前期说服。
-  </div>
-  <div class="scores">
-    <div class="score-cell score-5" data-tip="痛点强度 5/5&#10;直接经济损失&#10;$2180亿规模证明&#10;每个广告主都可能受害">
-      <div class="score-label">痛点</div>
-      <div class="score-num">5</div>
-    </div>
-    <div class="score-cell score-4" data-tip="市场空白 4/5&#10;现有工具依赖Google自报数据&#10;独立审计几乎空白">
-      <div class="score-label">空白</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-5" data-tip="付费意愿 5/5&#10;退款佣金模型：不花钱就能赚钱&#10;用户决策摩擦极低">
-      <div class="score-label">付费</div>
-      <div class="score-num">5</div>
-    </div>
-    <div class="score-cell score-3" data-tip="获客难度 3/5&#10;需触达中小商家主&#10;Facebook/LinkedIn广告主群体可精准定向">
-      <div class="score-label">获客</div>
-      <div class="score-num">3</div>
-    </div>
-    <div class="score-cell score-3" data-tip="监管红利 3/5&#10;反垄断调查背景下&#10;第三方审计工具有合法性&#10;欧盟/美国诉讼推波助澜">
-      <div class="score-label">监管</div>
-      <div class="score-num">3</div>
-    </div>
-    <div class="score-cell score-4" data-tip="综合机会 4/5&#10;高痛 + 自付费模型 + 市场明确&#10;主要风险是Google限制API访问">
-      <div class="score-label">机会</div>
-      <div class="score-num">4</div>
-    </div>
-  </div>
-  <div class="sources">
-    <a class="source-link" href="https://www.reddit.com/r/smallbusiness/comments/1tijt33/" target="_blank">🔴 r/smallbusiness ★41</a>
-    <a class="source-link" href="https://news.ycombinator.com/" target="_blank">🟠 HN: Google Declaring War on the Web ★396</a>
-    <a class="source-link" href="https://news.ycombinator.com/" target="_blank">🟠 HN: Google's AI is being manipulated ★272</a>
-  </div>
 </div>
-</details>
-</div>
-
-<!-- ── SIGNAL 5 (REPEAT) ─────────────────────────────────────── -->
-<div class="signal-card repeat">
-<details>
-<summary class="signal-header">
-  <div>
-    <div class="signal-title-row">
-      <span class="signal-title">Railway ToS崩塌 + GitHub持续被黑：独立托管迁移潮扩大</span>
-      <span class="tag-repeat">🔁 已追踪</span>
-    </div>
-    <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">🏗️ 基础设施风险</span>
-      &nbsp;<span style="color:var(--muted);font-size:11px">关联: Railway GCP封锁 · VSCode供应链攻击</span>
-    </div>
-  </div>
-  <span class="signal-expand">▼</span>
-</summary>
-<div class="signal-body">
-  <p class="signal-desc">
-    延续追踪中的信号。今日新增数据点：r/webdev 253票 "Railway has new term of service" + r/webdev 59票 "Railway is STILL down"
-    + r/selfhosted 294票 "Leaving GitHub for private repos"。三条帖子共同指向：SaaS基础设施的信任危机正在推动开发者主动迁移到自托管。
-    r/selfhosted 整体板块今日最高票达 1787 — 自托管社区热度持续高涨。
-  </p>
-  <div class="scores">
-    <div class="score-cell score-4" data-tip="痛点强度 4/5&#10;生产环境中断 + 信任破裂&#10;开发者已在行动">
-      <div class="score-label">痛点</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-3" data-tip="市场空白 3/5&#10;自托管工具存在&#10;但迁移门槛高&#10;一键迁移工具缺失">
-      <div class="score-label">空白</div>
-      <div class="score-num">3</div>
-    </div>
-    <div class="score-cell score-4" data-tip="付费意愿 4/5&#10;企业级稳定性&#10;开发者愿意付费">
-      <div class="score-label">付费</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-4" data-tip="获客难度 4/5&#10;开发者社区自传播">
-      <div class="score-label">获客</div>
-      <div class="score-num">4</div>
-    </div>
-    <div class="score-cell score-2" data-tip="监管红利 2/5&#10;无直接监管驱动">
-      <div class="score-label">监管</div>
-      <div class="score-num">2</div>
-    </div>
-    <div class="score-cell score-4" data-tip="综合机会 4/5&#10;信号持续增强&#10;迁移窗口正在打开">
-      <div class="score-label">机会</div>
-      <div class="score-num">4</div>
-    </div>
-  </div>
-  <div class="sources">
-    <a class="source-link" href="https://www.reddit.com/r/webdev/comments/1tijhfx/" target="_blank">🔴 r/webdev ★253 Railway ToS</a>
-    <a class="source-link" href="https://www.reddit.com/r/selfhosted/comments/1timhsb/" target="_blank">🔴 r/selfhosted ★294 Leaving GitHub</a>
-    <a class="source-link" href="https://www.reddit.com/r/selfhosted/comments/1tior0l/" target="_blank">🔴 r/selfhosted ★1787</a>
-  </div>
-</div>
-</details>
-</div>
-
-<!-- ── BONUS ─────────────────────────────────────────────── -->
-<div style="margin-top:32px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
-  <div class="section-label">今日其他值得关注</div>
-  <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;color:var(--muted);">
-    <div>🧮 <strong style="color:var(--text)">OpenAI模型破解80年数学难题</strong> — HN ★830 + singularity ★365。AI数学能力突破，验证科研加速趋势。</div>
-    <div>🤖 <strong style="color:var(--text)">Qwen3.7-Max：开源Agent前沿</strong> — HN ★636 + r/LocalLLaMA ★728。开源模型追平Frontier能力，LLM API商品化加速。</div>
-    <div>🛡️ <strong style="color:var(--text)">Colorado年龄验证法案豁免开源</strong> — HN ★159。监管对开源项目的态度趋向宽松，注意法规动向。</div>
-    <div>💸 <strong style="color:var(--text)">Anthropic Q2首次盈利</strong> — singularity ★346。头部AI公司商业化验证，行业信心信号。</div>
-    <div>🔧 <strong style="color:var(--text)">DevOps: Jira AI生成内容质量差</strong> — r/devops ★243。AI生成的项目管理内容质量问题，AI PM工具机会。</div>
-  </div>
-</div>
-
-<div style="margin-top:20px;text-align:center;color:var(--muted);font-size:11px;padding-bottom:24px;">
-  生成于 2026-05-21 · signal-discovery · 4个新信号 / 1个已追踪
-</div>
-
-</div>
-
 <script>
-// Keep details elements in sync with expand indicator
-document.querySelectorAll('details').forEach(d => {
-  d.addEventListener('toggle', () => {
-    const arrow = d.querySelector('.signal-expand');
-    if (arrow) arrow.textContent = d.open ? '▲' : '▼';
+function filter(t,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(c=>{
+    if(t==='all'){c.style.display='';return;}
+    if(t==='repeat'){c.style.display=c.classList.contains('repeat')?'':'none';return;}
+    const badge=c.querySelector('.badge');
+    c.style.display=(badge&&badge.textContent.includes(t))?'':'none';
   });
-});
+}
+</script>
+<script type="application/json" id="signal-extras">
+[{"title": "被招聘者联系——招的是我自己的岗位", "source": "r/Accounting ★353", "note": "会计师被裁后发现公司用更低薪资招同样岗位，AI降本替换的实际操作路径开始清晰可见。"}, {"title": "焦虑App卖出第一个$3", "source": "r/SaaS ★289", "note": "土耳其最低工资开发者月薪$600，做自己亲历的焦虑App，两天内变现——痛点即产品的最佳验证。"}, {"title": "机柜里发现来源不明的8核设备", "source": "r/selfhosted ★657", "note": "没有MAC地址，不在DHCP记录里，不知道怎么进来的——小团队物理安全管理工具空白。"}, {"title": "开发者开始反弹「纯对话式AI工具」", "source": "r/singularity ★34", "note": "「我需要的是真正的IDE集成，不是又一个聊天框」——纯chat接口的上限开始显现，工具层机会。"}]
 </script>
 </body>
 </html>
