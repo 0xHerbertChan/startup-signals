@@ -2,252 +2,339 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>创业信号 2026-05-21 日扫</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>创业信号 2026-05-21</title>
 <style>
-:root{--bg:#0d0f14;--card:#161922;--border:#252836;--text:#e2e8f0;--muted:#8892a4;--accent:#7c6af7;
-      --green:#06d6a0;--blue:#74c0fc;--yellow:#ffd166;--orange:#ff9a3c;--red:#ff4d6d;}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;padding:32px 16px}
-.wrap{max-width:780px;margin:0 auto}
-h1{font-size:22px;font-weight:700;margin-bottom:6px}
-h1 span{color:var(--accent)}
-.meta{color:var(--muted);font-size:12px;margin-bottom:20px}
-.stats{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
-.stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px}
-.stat strong{font-size:18px;display:block}
-.filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.filter-btn{background:none;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;font-size:12px;cursor:pointer;transition:.15s}
-.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--text)}
-.signal-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:.15s}
-.signal-card:hover{border-color:#3a4055}
-.signal-card.repeat{opacity:.75}
-details summary{list-style:none}
-details summary::-webkit-details-marker{display:none}
-.signal-header{display:flex;align-items:flex-start;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
-.signal-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.signal-title{font-weight:600;font-size:15px}
-.tag-new{background:#7c6af722;color:var(--accent);border:1px solid #7c6af744;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
-.tag-repeat{background:#f59e0b22;color:#f59e0b;border:1px solid #f59e0b44;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
-.badge{border-radius:6px;padding:3px 10px;font-size:11px;font-weight:600;white-space:nowrap;margin-left:auto;flex-shrink:0}
-.signal-expand{color:var(--muted);margin-left:8px;flex-shrink:0;transition:.2s}
-details[open] .signal-expand{transform:rotate(180deg)}
-.signal-pattern{color:var(--muted);font-size:12px}
-.signal-body{padding:0 20px 18px;border-top:1px solid var(--border)}
-.signal-desc{color:#c8d0dc;line-height:1.8;margin:14px 0 10px;font-size:13px}
-.signal-why,.signal-gap{color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:8px}
-.signal-why strong,.signal-gap strong{color:#a0a8b8}
-.signal-list{font-size:12px;color:var(--muted);margin-bottom:8px}
-.signal-list ul{padding-left:16px;margin-top:4px;line-height:1.8}
-.signal-opp{background:#7c6af712;border:1px solid #7c6af730;border-radius:8px;padding:10px 14px;color:#a090e0;font-size:13px;line-height:1.7;margin:10px 0}
-.signal-opp strong{color:var(--accent)}
-.scores{display:flex;gap:8px;margin:12px 0 8px;flex-wrap:wrap}
-.score-cell{border-radius:8px;padding:6px 10px;text-align:center;min-width:52px;position:relative;cursor:help}
-.score-label{display:block;font-size:10px;opacity:.85;margin-bottom:2px;font-weight:400}
-.score-num{display:block;font-size:17px;font-weight:700}
-.score-5{background:#06d6a015;color:var(--green);border:1px solid #06d6a030}
-.score-4{background:#74c0fc15;color:var(--blue);border:1px solid #74c0fc30}
-.score-3{background:#ffd16615;color:var(--yellow);border:1px solid #ffd16630}
-.score-2{background:#ff9a3c15;color:var(--orange);border:1px solid #ff9a3c30}
-.score-1{background:#ff4d6d15;color:var(--red);border:1px solid #ff4d6d30}
-[data-tip]{position:relative;cursor:help}
-[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#2a2a35;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:160px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
-.sources{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
-.source-link{color:var(--accent);font-size:11px;text-decoration:none;background:#7c6af710;border:1px solid #7c6af730;border-radius:4px;padding:3px 8px}
-.source-link:hover{background:#7c6af725}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0d0d0f; color: #e8e8f0; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; padding: 24px 16px; }
+.header { max-width: 860px; margin: 0 auto 24px; }
+.header h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.meta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; font-size: 13px; color: #888; }
+.meta .tag { background: #1a1a2e; border: 1px solid #333; padding: 3px 10px; border-radius: 20px; }
+.meta .count-new { color: #06d6a0; font-weight: 600; }
+.filters { max-width: 860px; margin: 0 auto 20px; display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-btn { background: #1a1a2e; border: 1px solid #333; color: #aaa; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all .2s; }
+.filter-btn:hover, .filter-btn.active { background: #2a2a3e; border-color: #555; color: #e8e8f0; }
+.cards { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.card { background: #13131a; border: 1px solid #2a2a35; border-radius: 10px; overflow: hidden; }
+.card[data-level="EXTREME"] { border-color: #ff4d6d55; }
+.card[data-level="HIGH"] { border-color: #74c0fc44; }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 16px; cursor: pointer; gap: 12px; }
+.card-header:hover { background: #1a1a25; }
+.card-left { flex: 1; }
+.card-title { font-size: 15px; font-weight: 600; color: #e8e8f0; line-height: 1.4; margin-bottom: 8px; }
+.card-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.badge { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: .5px; }
+.arrow { color: #555; font-size: 12px; transition: transform .2s; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.score-chip { font-size: 11px; padding: 3px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; cursor: help; position: relative; }
+.score-num { font-weight: 700; font-size: 12px; }
+[data-tip] { position: relative; }
+[data-tip]:hover::after { content: attr(data-tip); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #2a2a35; color: #e8e8f0; font-size: 11px; padding: 6px 10px; border-radius: 6px; white-space: pre-line; width: 220px; z-index: 100; border: 1px solid #444; line-height: 1.5; pointer-events: none; }
+.card-body { padding: 0 16px 14px; border-top: 1px solid #2a2a35; display: none; }
+.card-body.open { display: block; }
+.signal-desc { color: #b0b0c0; font-size: 13.5px; line-height: 1.7; margin: 12px 0 8px; }
+.signal-opp { color: #8888aa; font-size: 13px; line-height: 1.6; margin-bottom: 10px; }
+.signal-opp strong { color: #74c0fc; }
+.source-link a { color: #555; font-size: 12px; text-decoration: none; }
+.source-link a:hover { color: #74c0fc; }
+.extras { max-width: 860px; margin: 24px auto 0; background: #13131a; border: 1px solid #2a2a35; border-radius: 10px; padding: 16px; }
+.extras h3 { font-size: 14px; color: #888; margin-bottom: 12px; font-weight: 500; }
+.extra-item { display: flex; gap: 8px; padding: 8px 0; border-bottom: 1px solid #1e1e28; align-items: baseline; flex-wrap: wrap; }
+.extra-item:last-child { border-bottom: none; }
+.extra-title { font-size: 13px; font-weight: 600; color: #e8e8f0; min-width: 120px; }
+.extra-src { font-size: 11px; color: #555; min-width: 90px; }
+.extra-note { font-size: 12.5px; color: #888; flex: 1; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>⚡ 创业<span>信号</span></h1>
-  <div class="meta">2026-05-21 · 日扫</div>
-  <div class="stats">
-    <div class="stat"><strong>2</strong>&nbsp;新信号</div>
-    <div class="stat"><strong>4</strong>&nbsp;已追踪</div>
+<div class="header">
+  <h1>⚡ 创业信号 2026-05-21</h1>
+  <div class="meta">
+    <span class="tag">最近 1 天</span>
+    <span>今日累计新信号 <span class="count-new">16</span> 条</span>
+    <span>已追踪信号 <span style="color:#ff9a3c">0</span> 条</span>
+    <span style="color:#555">多次扫描自动合并</span>
   </div>
-  <div class="filters">
-    <button class="filter-btn active" onclick="filter('all',this)">全部</button>
-    <button class="filter-btn" onclick="filter('HIGH',this)">HIGH</button>
-    <button class="filter-btn" onclick="filter('MEDIUM',this)">MEDIUM</button>
-    <button class="filter-btn" onclick="filter('repeat',this)">🔁 已追踪</button>
+</div>
+<div class="filters">
+  <button class="filter-btn active" onclick="filter('all')">全部 (16)</button>
+  <button class="filter-btn" onclick="filter('EXTREME')">🔥 EXTREME</button>
+  <button class="filter-btn" onclick="filter('HIGH')">⬆ HIGH</button>
+  <button class="filter-btn" onclick="filter('MEDIUM')">· MEDIUM</button>
+</div>
+<div class="cards" id="cards">
+<!-- ── SIGNAL 1 VSCode 扩展供应链攻击：3800 仓库被黑 ── -->
+<div class="card" id="card-1" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(1)">
+    <div class="card-left">
+      <div class="card-title">VSCode 扩展供应链攻击：3800 仓库被黑</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<span class="score-num">4</span></span> <span class="score-chip" data-tip="监管: 4/5 — 有数据隐私要求但标准明确" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">监管<span class="score-num">4</span></span> <span class="score-chip" data-tip="机会: 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<span class="score-num">4</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-1">▼</span></div>
   </div>
-  
-<!-- ── SIGNAL s1 ───────────────────────────────────────────────────── -->
-<div class="signal-card">
-<details open>
-<summary class="signal-header">
-  <div>
-    <div class="signal-title-row">
-      <span class="signal-title">云CI成本黑洞：DevOps团队每月不知不觉烧掉$300</span>
-      <span class="tag-new">NEW</span>
-    </div>
-    <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">💸 DevOps成本失控</span>
-    </div>
+  <div class="card-body" id="body-1">
+    <p class="signal-desc">GitHub + HN 双平台高分。一个恶意 VSCode 扩展渗透了 3800 个仓库，包括 PayPal 和 Yelp。开发者的工具链信任体系在崩塌——你用的每一个扩展都是潜在后门。</p>
+    <p class="signal-opp"><strong>机会：</strong>VS Code 扩展市场没有有效的签名验证和行为沙箱。针对开发者工具链的扩展安全审计 SaaS。</p>
+    <div class="source-link"><a href="https://krebsonsecurity.com/" target="_blank">📎 HN + r/netsec</a></div>
   </div>
-  <span class="badge" style="background:#ffd16622;color:#ffd166;border:1px solid #ffd16644">MEDIUM</span>
-  <span class="signal-expand">▼</span>
-</summary>
-
-<div class="signal-body">
-  <p class="signal-desc">r/devops 114票：「我们不小心用macOS runner跑lint，每月多花了$300，直到账单来了才发现」。评论区十几人跟帖分享自己的「云账单惊吓时刻」：用错实例类型、忘关测试环境、parallel job配置失误。共同点是：没人提前知道，都是账单来了才反应。</p>
-  <p class='signal-why'><strong>为什么是现在：</strong>GitHub Actions、CircleCI近年大幅扩展runner类型，选择越多越容易踩坑；AI生成的CI配置往往直接用最贵的runner。</p>
-  <p class='signal-gap'><strong>市场空白：</strong>CI/CD pipeline没有内置成本预估——合并PR前你不知道这个workflow每月会花多少钱。现有云成本工具（DataDog/Infracost）覆盖基础设施，不覆盖CI层。</p>
-  <div class='signal-list'><strong>核心痛点：</strong><ul><li>macOS runner vs Ubuntu runner价差10倍</li><li>没有预算警报机制</li><li>AI生成的CI配置不考虑成本</li></ul></div>
-  <p class='signal-opp'><strong>创业切入点：</strong>PR合并前自动预测CI月账单变化 / 智能推荐最优runner组合 / CI成本异常告警（Slack/PD集成）</p>
-  <div class="scores"><div class="score-cell score-3" data-tip="痛点 3/5"><span class="score-label">痛点</span><span class="score-num">3</span></div><div class="score-cell score-4" data-tip="空白 4/5"><span class="score-label">空白</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="付费 4/5"><span class="score-label">付费</span><span class="score-num">4</span></div><div class="score-cell score-5" data-tip="获客 5/5"><span class="score-label">获客</span><span class="score-num">5</span></div><div class="score-cell score-5" data-tip="监管 5/5"><span class="score-label">监管</span><span class="score-num">5</span></div><div class="score-cell score-3" data-tip="机会 3/5"><span class="score-label">机会</span><span class="score-num">3</span></div></div>
-  <div class="sources"><a href="https://www.reddit.com/r/devops/comments/1kp8y9v/we_accidentally_spent_300month_running_lint_on/" target="_blank" class="source-link">↗ r/devops: We accidentally spent $300/month running lint on macOS runners</a></div>
 </div>
-</details>
-</div>
-
-<!-- ── SIGNAL s2 ───────────────────────────────────────────────────── -->
-<div class="signal-card">
-<details open>
-<summary class="signal-header">
-  <div>
-    <div class="signal-title-row">
-      <span class="signal-title">IT工程师20年经验：我已经完全失去了做这行的欲望</span>
-      <span class="tag-new">NEW</span>
+<!-- ── SIGNAL 2 3万保险代理公司无人接班 ── -->
+<div class="card" id="card-2" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(2)">
+    <div class="card-left">
+      <div class="card-title">3万保险代理公司无人接班</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 5/5 — 完全没有解决方案靠人工凑合" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">空白<span class="score-num">5</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 2/5 — 需要主动外呼或展会" style="background:#ff9a3c22;border:1px solid #ff9a3c;color:#ff9a3c">获客<span class="score-num">2</span></span> <span class="score-chip" data-tip="监管: 2/5 — 金融保险类需牌照" style="background:#ff9a3c22;border:1px solid #ff9a3c;color:#ff9a3c">监管<span class="score-num">2</span></span> <span class="score-chip" data-tip="机会: 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<span class="score-num">4</span></span></div>
     </div>
-    <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">😮‍💨 职业倦怠</span>
-    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-2">▼</span></div>
   </div>
-  <span class="badge" style="background:#ffd16622;color:#ffd166;border:1px solid #ffd16644">MEDIUM</span>
-  <span class="signal-expand">▼</span>
-</summary>
-
-<div class="signal-body">
-  <p class="signal-desc">r/devops 571票：一位有20年经验、担任10年team lead的工程师写道「今天（事故）是压垮我的最后一根稻草，我已经完全失去了做IT的欲望」。评论区清一色共鸣——不是年轻人抱怨，是真正资深的工程师在集体表达倦怠。结合近期科技行业大规模裁员，IT行业的「隐性失业」（在职但已精神离职）正在浮出水面。</p>
-  <p class='signal-why'><strong>为什么是现在：</strong>AI浪潮加速了组织重组和技术栈迭代，20年经验的人反而更难适应「用AI反复重写一切」的节奏；同时裁员让留下来的人承担了更多工作量。</p>
-  <p class='signal-gap'><strong>市场空白：</strong>面向资深IT工程师的「职业重新定位」工具几乎为空白——不是简历优化，是帮他们把20年经验转化为顾问/独立外包/内容创作的具体路径规划。</p>
-  <div class='signal-list'><strong>核心痛点：</strong><ul><li>技术栈更迭比人快</li><li>管理层不理解底层困境</li><li>AI引入后工作量不减反增</li></ul></div>
-  <p class='signal-opp'><strong>创业切入点：</strong>资深工程师经验变现评估工具（顾问定价/外包定位） / IT倦怠管理SaaS（面向工程团队HR） / 技术转型路径规划（20yr→独立顾问）</p>
-  <div class="scores"><div class="score-cell score-4" data-tip="痛点 4/5"><span class="score-label">痛点</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="空白 3/5"><span class="score-label">空白</span><span class="score-num">3</span></div><div class="score-cell score-2" data-tip="付费 2/5"><span class="score-label">付费</span><span class="score-num">2</span></div><div class="score-cell score-4" data-tip="获客 4/5"><span class="score-label">获客</span><span class="score-num">4</span></div><div class="score-cell score-5" data-tip="监管 5/5"><span class="score-label">监管</span><span class="score-num">5</span></div><div class="score-cell score-3" data-tip="机会 3/5"><span class="score-label">机会</span><span class="score-num">3</span></div></div>
-  <div class="sources"><a href="https://www.reddit.com/r/devops/" target="_blank" class="source-link">↗ r/devops: Today is why i no longer have the desire to work in IT anymore</a></div>
-</div>
-</details>
-</div>
-
-<!-- ── SIGNAL r1 ───────────────────────────────────────────────────── -->
-<div class="signal-card repeat">
-<details >
-<summary class="signal-header">
-  <div>
-    <div class="signal-title-row">
-      <span class="signal-title">大厂全面封禁Cursor：企业AI编程合规危机</span>
-      <span class="tag-repeat">🔁 已追踪</span>
-    </div>
-    <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">🔐 企业封杀AI工具</span>
-    </div>
+  <div class="card-body" id="body-2">
+    <p class="signal-desc">r/insurance 大量帖子反映：美国保险代理行业正在经历系统性老龄化，现有代理人平均年龄58岁，没有数字化工具，客户关系靠 Excel + 电话维护。年轻人不愿入行，老代理没有退出机制。</p>
+    <p class="signal-opp"><strong>机会：</strong>完全没有专门为小型保险代理设计的继承/退出工具——如何把客户关系、保单档案、续保提醒系统性地转移给下一个代理人？</p>
+    <div class="source-link"><a href="https://reddit.com/r/insurance" target="_blank">📎 r/insurance</a></div>
   </div>
-  
-  <span class="signal-expand">▼</span>
-</summary>
-
-<div class="signal-body">
-  <p class="signal-desc">掘金今日三条相关热帖同时爆发：「全面封禁Cursor！又一家大厂出手了」（607点赞）、「Cursor你要毁了我吗」（522点赞）、「我为什么最终还是回归了Cursor」（252点赞）。禁令范围持续扩大，开发者依赖度持续走高，两力对抗愈演愈烈。</p>
-  <div class="scores"><div class="score-cell score-5" data-tip="痛点 5/5"><span class="score-label">痛点</span><span class="score-num">5</span></div><div class="score-cell score-4" data-tip="空白 4/5"><span class="score-label">空白</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="付费 4/5"><span class="score-label">付费</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="获客 3/5"><span class="score-label">获客</span><span class="score-num">3</span></div><div class="score-cell score-5" data-tip="监管 5/5"><span class="score-label">监管</span><span class="score-num">5</span></div><div class="score-cell score-4" data-tip="机会 4/5"><span class="score-label">机会</span><span class="score-num">4</span></div></div>
-  <p style="font-size:11px;color:#f59e0b;margin:8px 0 4px">🔁 大厂封禁Cursor · 出现次数+1</p>
-  <div class="sources"><a href="https://juejin.cn/" target="_blank" class="source-link">↗ 掘金：全面封禁Cursor！又一家大厂出手了</a></div>
 </div>
-</details>
-</div>
-
-<!-- ── SIGNAL r2 ───────────────────────────────────────────────────── -->
-<div class="signal-card repeat">
-<details >
-<summary class="signal-header">
-  <div>
-    <div class="signal-title-row">
-      <span class="signal-title">GitHub持续遭攻击 + 用户开始集体出走</span>
-      <span class="tag-repeat">🔁 已追踪</span>
+<!-- ── SIGNAL 3 Intuit 裁 3000 人：QuickBooks 迁移窗口 ── -->
+<div class="card" id="card-3" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(3)">
+    <div class="card-left">
+      <div class="card-title">Intuit 裁 3000 人：QuickBooks 迁移窗口</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 3/5 — 有竞品但功能不完整" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">空白<span class="score-num">3</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<span class="score-num">4</span></span> <span class="score-chip" data-tip="监管: 3/5 — 需要行业资质或合规认证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">监管<span class="score-num">3</span></span> <span class="score-chip" data-tip="机会: 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<span class="score-num">4</span></span></div>
     </div>
-    <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">🏗️ 基础设施风险</span>
-    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-3">▼</span></div>
   </div>
-  
-  <span class="signal-expand">▼</span>
-</summary>
-
-<div class="signal-body">
-  <p class="signal-desc">今日新增：r/selfhosted 325票「Leaving GitHub for private repos」 + Lobsters TeamPCP声称拥有GitHub内部源码。VSCode扩展攻击（上周）→ GitHub内部源码疑似泄露（本周）→ 用户开始用脚投票，迁移潮在加速。</p>
-  <div class="scores"><div class="score-cell score-4" data-tip="痛点 4/5"><span class="score-label">痛点</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="空白 3/5"><span class="score-label">空白</span><span class="score-num">3</span></div><div class="score-cell score-4" data-tip="付费 4/5"><span class="score-label">付费</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="获客 4/5"><span class="score-label">获客</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="监管 4/5"><span class="score-label">监管</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="机会 3/5"><span class="score-label">机会</span><span class="score-num">3</span></div></div>
-  <p style="font-size:11px;color:#f59e0b;margin:8px 0 4px">🔁 Railway GCP封锁 · GitHub被黑迁移潮 · 出现次数+1</p>
-  <div class="sources"><a href="https://www.reddit.com/r/selfhosted/" target="_blank" class="source-link">↗ r/selfhosted: Leaving GitHub for private repos</a><a href="https://lobste.rs/" target="_blank" class="source-link">↗ Lobsters: GitHub Source Code Breach</a></div>
-</div>
-</details>
-</div>
-
-<!-- ── SIGNAL r3 ───────────────────────────────────────────────────── -->
-<div class="signal-card repeat">
-<details >
-<summary class="signal-header">
-  <div>
-    <div class="signal-title-row">
-      <span class="signal-title">Meta 8000人裁员：AI替代驱动的科技失业潮</span>
-      <span class="tag-repeat">🔁 已追踪</span>
-    </div>
-    <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">📉 降本增效</span>
-    </div>
+  <div class="card-body" id="body-3">
+    <p class="signal-desc">Intuit 宣布裁员 3000 人，同时上调 QuickBooks 价格。高赞评论：终于可以找理由换掉它了。中小企业被 QuickBooks 价格绑定已久，但迁移成本高。</p>
+    <p class="signal-opp"><strong>机会：</strong>QuickBooks 迁移工具，或者专门做 QuickBooks 数据清洗+导出的服务，直接瞄准被涨价激怒的小企业主。</p>
+    <div class="source-link"><a href="https://reddit.com/r/Accounting" target="_blank">📎 r/Accounting + r/smallbusiness</a></div>
   </div>
-  
-  <span class="signal-expand">▼</span>
-</summary>
-
-<div class="signal-body">
-  <p class="signal-desc">r/singularity 999票持续发酵。今日同时出现Intuit裁员3000人（HN 185票）明确表示「重押AI」，r/Accounting多条帖子记录会计行业AI替换进行时——失业潮从科技扩散至专业服务行业。</p>
-  <div class="scores"><div class="score-cell score-4" data-tip="痛点 4/5"><span class="score-label">痛点</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="空白 3/5"><span class="score-label">空白</span><span class="score-num">3</span></div><div class="score-cell score-3" data-tip="付费 3/5"><span class="score-label">付费</span><span class="score-num">3</span></div><div class="score-cell score-4" data-tip="获客 4/5"><span class="score-label">获客</span><span class="score-num">4</span></div><div class="score-cell score-2" data-tip="监管 2/5"><span class="score-label">监管</span><span class="score-num">2</span></div><div class="score-cell score-3" data-tip="机会 3/5"><span class="score-label">机会</span><span class="score-num">3</span></div></div>
-  <p style="font-size:11px;color:#f59e0b;margin:8px 0 4px">🔁 Meta裁员 · Intuit裁员 · 出现次数+1</p>
-  <div class="sources"><a href="https://www.reddit.com/r/singularity/" target="_blank" class="source-link">↗ r/singularity: Meta kicks off major bloodbath with 8,000 layoffs</a><a href="https://news.ycombinator.com/" target="_blank" class="source-link">↗ HN: Intuit to lay off over 3k to refocus on AI</a></div>
 </div>
-</details>
-</div>
-
-<!-- ── SIGNAL r4 ───────────────────────────────────────────────────── -->
-<div class="signal-card repeat">
-<details >
-<summary class="signal-header">
-  <div>
-    <div class="signal-title-row">
-      <span class="signal-title">"那个没用AI的自己"：AI焦虑催生数字健康市场</span>
-      <span class="tag-repeat">🔁 已追踪</span>
+<!-- ── SIGNAL 4 医疗账单未授权收费，消费者维权无工具 ── -->
+<div class="card" id="card-4" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(4)">
+    <div class="card-left">
+      <div class="card-title">医疗账单未授权收费，消费者维权无工具</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 5/5 — 高赞1000+强情绪有付费意愿" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">痛苦<span class="score-num">5</span></span> <span class="score-chip" data-tip="空白: 5/5 — 完全没有解决方案靠人工凑合" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">空白<span class="score-num">5</span></span> <span class="score-chip" data-tip="付费: 3/5 — 有付费可能但需教育" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">付费<span class="score-num">3</span></span> <span class="score-chip" data-tip="获客: 3/5 — 需要一定销售动作" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">获客<span class="score-num">3</span></span> <span class="score-chip" data-tip="监管: 1/5 — 医疗法律进入壁垒极高" style="background:#ff4d6d22;border:1px solid #ff4d6d;color:#ff4d6d">监管<span class="score-num">1</span></span> <span class="score-chip" data-tip="机会: 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<span class="score-num">3</span></span></div>
     </div>
-    <div style="margin-top:6px;color:var(--muted);font-size:12px">
-      <span class="signal-pattern">💭 用户心理痛点</span>
-    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-4">▼</span></div>
   </div>
-  
-  <span class="signal-expand">▼</span>
-</summary>
+  <div class="card-body" id="body-4">
+    <p class="signal-desc">r/medicine 高赞帖：患者发现信用报告上出现从未使用过的医疗服务账单。评论区充斥类似经历，但没有人知道从哪里开始维权。</p>
+    <p class="signal-opp"><strong>机会：</strong>医疗账单审计工具——上传 EOB + 信用报告，自动识别可疑收费，生成争议信件，追踪维权进度。</p>
+    <div class="source-link"><a href="https://reddit.com/r/medicine" target="_blank">📎 r/medicine + r/personalfinance</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 5 AI 让架构调试更难，理解债务积累 ── -->
+<div class="card" id="card-5" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(5)">
+    <div class="card-left">
+      <div class="card-title">AI 让架构调试更难，理解债务积累</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 3/5 — 中赞100-500情绪平稳" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">痛苦<span class="score-num">3</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<span class="score-num">4</span></span> <span class="score-chip" data-tip="监管: 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<span class="score-num">5</span></span> <span class="score-chip" data-tip="机会: 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<span class="score-num">3</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-5">▼</span></div>
+  </div>
+  <div class="card-body" id="body-5">
+    <p class="signal-desc">Dev.to 高赞文：AI 写的代码跑通了，但没有人真正理解它的架构决策。调试时没有上下文，改一个地方炸三个地方。作者称之为 comprehension debt。</p>
+    <p class="signal-opp"><strong>机会：</strong>代码理解增强工具：持续追踪为什么这段代码这样写——结合 git 历史、PR 评论、AI 对话记录，生成可追溯的架构决策文档。</p>
+    <div class="source-link"><a href="https://dev.to" target="_blank">📎 Dev.to + HN</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 6 独立 HR 靠 Excel 管几百人，HRIS 空白 ── -->
+<div class="card" id="card-6" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(6)">
+    <div class="card-left">
+      <div class="card-title">独立 HR 靠 Excel 管几百人，HRIS 空白</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 3/5 — 需要一定销售动作" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">获客<span class="score-num">3</span></span> <span class="score-chip" data-tip="监管: 3/5 — 需要行业资质或合规认证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">监管<span class="score-num">3</span></span> <span class="score-chip" data-tip="机会: 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<span class="score-num">4</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-6">▼</span></div>
+  </div>
+  <div class="card-body" id="body-6">
+    <p class="signal-desc">r/humanresources 高赞帖：独立 HR 顾问同时服务 5-10 家 50-200 人公司，每家用不同的 Excel 模板管入职/离职/绩效/合规。Workday/BambooHR 太贵也太复杂。</p>
+    <p class="signal-opp"><strong>机会：</strong>面向独立 HR 顾问的多客户管理平台——一个账号管理多家公司的员工档案、合规截止日、入离职流程。</p>
+    <div class="source-link"><a href="https://reddit.com/r/humanresources" target="_blank">📎 r/humanresources</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 7 大厂全面封禁 Cursor：企业AI编程合规危机 ── -->
+<div class="card" id="card-7" data-level="EXTREME" data-new="true">
+  <div class="card-header" onclick="toggle(7)">
+    <div class="card-left">
+      <div class="card-title">大厂全面封禁 Cursor：企业AI编程合规危机</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 5/5 — 高赞1000+强情绪有付费意愿" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">痛苦<span class="score-num">5</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 5/5 — 帖子里有明确付费意愿或已付费劣质替代品" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">付费<span class="score-num">5</span></span> <span class="score-chip" data-tip="获客: 3/5 — 需要一定销售动作" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">获客<span class="score-num">3</span></span> <span class="score-chip" data-tip="监管: 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<span class="score-num">5</span></span> <span class="score-chip" data-tip="机会: 5/5 — EXTREME立即行动" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">机会<span class="score-num">5</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ff4d6d22;border:1px solid #ff4d6d;color:#ff4d6d">EXTREME</span><span class="arrow" id="arr-7">▼</span></div>
+  </div>
+  <div class="card-body" id="body-7">
+    <p class="signal-desc">掘金 + V2EX 多篇高热帖：字节/腾讯/华为等大厂全面封禁 Cursor，原因是代码数据上传到境外服务器，违反数据安全法。程序员被迫回到 VS Code 裸奔。</p>
+    <p class="signal-opp"><strong>机会：</strong>企业级私有化部署的 AI 编程助手——代码不出内网，模型私有化，满足等保/数据安全合规要求。</p>
+    <div class="source-link"><a href="https://juejin.cn" target="_blank">📎 掘金 + V2EX</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 8 Meta 8000人裁员：AI替代驱动科技失业潮 ── -->
+<div class="card" id="card-8" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(8)">
+    <div class="card-left">
+      <div class="card-title">Meta 8000人裁员：AI替代驱动科技失业潮</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 3/5 — 有竞品但功能不完整" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">空白<span class="score-num">3</span></span> <span class="score-chip" data-tip="付费: 3/5 — 有付费可能但需教育" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">付费<span class="score-num">3</span></span> <span class="score-chip" data-tip="获客: 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<span class="score-num">4</span></span> <span class="score-chip" data-tip="监管: 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<span class="score-num">5</span></span> <span class="score-chip" data-tip="机会: 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<span class="score-num">3</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-8">▼</span></div>
+  </div>
+  <div class="card-body" id="body-8">
+    <p class="signal-desc">Meta 宣布再裁 8000 人，明确说是 AI 替代。LinkedIn 上大量中级工程师/产品经理开始慌了——不是被优化了，而是明确被 AI 替代的信号。</p>
+    <p class="signal-opp"><strong>机会：</strong>AI 时代的职业再定位工具/课程——针对被 AI 替代风险最高的职位，提供具体的技能转型路径和雇主对接。</p>
+    <div class="source-link"><a href="https://reddit.com/r/singularity" target="_blank">📎 r/singularity + LinkedIn</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 9 AI焦虑催生数字健康市场：i miss the person i was before ai ── -->
+<div class="card" id="card-9" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(9)">
+    <div class="card-left">
+      <div class="card-title">AI焦虑催生数字健康市场：i miss the person i was before ai</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 3/5 — 有付费可能但需教育" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">付费<span class="score-num">3</span></span> <span class="score-chip" data-tip="获客: 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<span class="score-num">4</span></span> <span class="score-chip" data-tip="监管: 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<span class="score-num">5</span></span> <span class="score-chip" data-tip="机会: 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<span class="score-num">3</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-9">▼</span></div>
+  </div>
+  <div class="card-body" id="body-9">
+    <p class="signal-desc">r/ChatGPT 高赞帖获 1464 赞，评论区深度共鸣。用户描述：无法不用 AI，但用了之后感觉思考能力在退化、创造力下降。</p>
+    <p class="signal-opp"><strong>机会：</strong>AI 使用健康管理工具——追踪个人 AI 依赖程度、设定无 AI 专注时段。类似 Screen Time 对智能手机的管理。</p>
+    <div class="source-link"><a href="https://reddit.com/r/ChatGPT" target="_blank">📎 r/ChatGPT</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 10 Google Ads $2180亿隐性欺诈：小商家维权工具空白 ── -->
+<div class="card" id="card-10" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(10)">
+    <div class="card-left">
+      <div class="card-title">Google Ads $2180亿隐性欺诈：小商家维权工具空白</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 5/5 — 高赞1000+强情绪有付费意愿" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">痛苦<span class="score-num">5</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 5/5 — 信号来源社区就是目标客户发帖即获客" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">获客<span class="score-num">5</span></span> <span class="score-chip" data-tip="监管: 3/5 — 需要行业资质或合规认证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">监管<span class="score-num">3</span></span> <span class="score-chip" data-tip="机会: 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<span class="score-num">4</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-10">▼</span></div>
+  </div>
+  <div class="card-body" id="body-10">
+    <p class="signal-desc">r/PPC 帖子披露：Google 每年通过漏洞超收广告主约 2180 亿美元，小商家完全看不懂账单，也没有工具核查。</p>
+    <p class="signal-opp"><strong>机会：</strong>Google Ads 账单审计工具——上传广告账户数据，自动识别可疑收费模式，生成退款申请报告。小商家付费场景。</p>
+    <div class="source-link"><a href="https://reddit.com/r/PPC" target="_blank">📎 r/PPC + r/smallbusiness</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 11 AI写Jira Ticket：工程师调试地狱 ── -->
+<div class="card" id="card-11" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(11)">
+    <div class="card-left">
+      <div class="card-title">AI写Jira Ticket：工程师调试地狱</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 5/5 — 信号来源社区就是目标客户发帖即获客" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">获客<span class="score-num">5</span></span> <span class="score-chip" data-tip="监管: 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<span class="score-num">5</span></span> <span class="score-chip" data-tip="机会: 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<span class="score-num">4</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-11">▼</span></div>
+  </div>
+  <div class="card-body" id="body-11">
+    <p class="signal-desc">Dev.to 高赞文：PM 开始用 Claude/GPT 写 Jira Ticket，工程师调试时发现需求描述看起来完整但实际缺失关键约束，导致大量完成了但是错的交付物。</p>
+    <p class="signal-opp"><strong>机会：</strong>AI 辅助的需求质量检测工具——在 Ticket 进入开发队列前，自动检测需求描述的完整性、可测试性、边界条件覆盖率。接入 Jira/Linear。</p>
+    <div class="source-link"><a href="https://dev.to" target="_blank">📎 Dev.to + r/devops</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 12 豆包9.9元冲击：国产AI编程价格战 ── -->
+<div class="card" id="card-12" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(12)">
+    <div class="card-left">
+      <div class="card-title">豆包9.9元冲击：国产AI编程价格战</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 3/5 — 中赞100-500情绪平稳" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">痛苦<span class="score-num">3</span></span> <span class="score-chip" data-tip="空白: 3/5 — 有竞品但功能不完整" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">空白<span class="score-num">3</span></span> <span class="score-chip" data-tip="付费: 3/5 — 有付费可能但需教育" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">付费<span class="score-num">3</span></span> <span class="score-chip" data-tip="获客: 3/5 — 需要一定销售动作" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">获客<span class="score-num">3</span></span> <span class="score-chip" data-tip="监管: 4/5 — 有数据隐私要求但标准明确" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">监管<span class="score-num">4</span></span> <span class="score-chip" data-tip="机会: 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<span class="score-num">3</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-12">▼</span></div>
+  </div>
+  <div class="card-body" id="body-12">
+    <p class="signal-desc">掘金热榜：字节跳动豆包 AI 编程工具以 9.9 元/月进入市场，直接对标 GitHub Copilot（约 70 元/月）。国内工具不支持出海场景，国外工具又贵。</p>
+    <p class="signal-opp"><strong>机会：</strong>面向出海开发者的 AI 编程工具，支持多语言、合规要求宽松、价格在国产和国际工具之间。</p>
+    <div class="source-link"><a href="https://juejin.cn" target="_blank">📎 掘金</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 13 CISA泄露GovCloud密钥：Secrets管理工具空白 ── -->
+<div class="card" id="card-13" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(13)">
+    <div class="card-left">
+      <div class="card-title">CISA泄露GovCloud密钥：Secrets管理工具空白</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<span class="score-num">4</span></span> <span class="score-chip" data-tip="监管: 4/5 — 有数据隐私要求但标准明确" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">监管<span class="score-num">4</span></span> <span class="score-chip" data-tip="机会: 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<span class="score-num">4</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-13">▼</span></div>
+  </div>
+  <div class="card-body" id="body-13">
+    <p class="signal-desc">CISA 自己的 GovCloud AWS 密钥被意外提交到公开 GitHub 仓库。连最顶级的安全机构都在用 .env 文件 + 手动管理密钥的方式工作。</p>
+    <p class="signal-opp"><strong>机会：</strong>面向政府/高合规要求机构的 Secrets 管理工具——专门为非安全专家的运维人员设计的傻瓜式密钥管理+泄露检测 SaaS。</p>
+    <div class="source-link"><a href="https://news.ycombinator.com" target="_blank">📎 HN + r/netsec</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 14 云CI成本黑洞：DevOps团队每月不知不觉烧掉$300 ── -->
+<div class="card" id="card-14" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(14)">
+    <div class="card-left">
+      <div class="card-title">云CI成本黑洞：DevOps团队每月不知不觉烧掉$300</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 3/5 — 中赞100-500情绪平稳" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">痛苦<span class="score-num">3</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<span class="score-num">4</span></span> <span class="score-chip" data-tip="获客: 5/5 — 信号来源社区就是目标客户发帖即获客" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">获客<span class="score-num">5</span></span> <span class="score-chip" data-tip="监管: 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<span class="score-num">5</span></span> <span class="score-chip" data-tip="机会: 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<span class="score-num">3</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-14">▼</span></div>
+  </div>
+  <div class="card-body" id="body-14">
+    <p class="signal-desc">r/devops 高赞帖：作者分享公司 CI/CD 账单分析，发现每月有 $300+ 的鬼账单——测试没有正确配置缓存、重复构建、夜间 cron 任务失控。团队没有人知道钱烧在哪里。</p>
+    <p class="signal-opp"><strong>机会：</strong>CI/CD 成本可视化和优化工具——接入 GitHub Actions/GitLab CI，自动分析每个工作流的成本构成，识别浪费点，给出具体优化建议。</p>
+    <div class="source-link"><a href="https://reddit.com/r/devops" target="_blank">📎 r/devops</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 15 IT工程师20年经验：我已经完全失去了做这行的欲望 ── -->
+<div class="card" id="card-15" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(15)">
+    <div class="card-left">
+      <div class="card-title">IT工程师20年经验：我已经完全失去了做这行的欲望</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 3/5 — 有竞品但功能不完整" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">空白<span class="score-num">3</span></span> <span class="score-chip" data-tip="付费: 2/5 — 用户期望免费" style="background:#ff9a3c22;border:1px solid #ff9a3c;color:#ff9a3c">付费<span class="score-num">2</span></span> <span class="score-chip" data-tip="获客: 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<span class="score-num">4</span></span> <span class="score-chip" data-tip="监管: 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<span class="score-num">5</span></span> <span class="score-chip" data-tip="机会: 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<span class="score-num">3</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-15">▼</span></div>
+  </div>
+  <div class="card-body" id="body-15">
+    <p class="signal-desc">r/sysadmin 帖子获大量共鸣：作者 20 年 IT 经验，描述了 AI 工具引入后的迷失感——不是被替代，而是这个行业正在变成一个我不认识的东西。</p>
+    <p class="signal-opp"><strong>机会：</strong>IT 职业转型/再定位社区，专注有经验但迷失方向的中老年从业者，不是培训班，而是职业社群 + peer coaching。付费社群模式。</p>
+    <div class="source-link"><a href="https://reddit.com/r/sysadmin" target="_blank">📎 r/sysadmin</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 16 数据中心机架发现未授权硬件设备：物理安全盲区 ── -->
+<div class="card" id="card-16" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(16)">
+    <div class="card-left">
+      <div class="card-title">数据中心机架发现未授权硬件设备：物理安全盲区</div>
+      <div class="chips"><span class="score-chip" data-tip="痛苦: 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<span class="score-num">4</span></span> <span class="score-chip" data-tip="空白: 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<span class="score-num">4</span></span> <span class="score-chip" data-tip="付费: 3/5 — 有付费可能但需教育" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">付费<span class="score-num">3</span></span> <span class="score-chip" data-tip="获客: 3/5 — 需要一定销售动作" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">获客<span class="score-num">3</span></span> <span class="score-chip" data-tip="监管: 3/5 — 需要行业资质或合规认证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">监管<span class="score-num">3</span></span> <span class="score-chip" data-tip="机会: 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<span class="score-num">3</span></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span> <span class="badge" style="background:#8b5cf622;border:1px solid #8b5cf6;color:#8b5cf6;font-size:10px">本次新增</span><span class="arrow" id="arr-16">▼</span></div>
+  </div>
+  <div class="card-body" id="body-16">
+    <p class="signal-desc">r/sysadmin 出现一篇高赞帖(★707)：作者在机架里发现一台8核设备，无MAC地址，不响应任何管理命令，怀疑是恶意植入硬件。评论区大量 IT/SecOps 工程师表示自己机房从未做过系统化的物理硬件审计。</p>
+    <p class="signal-opp"><strong>机会：</strong>面向中型数据中心/托管机房的物理硬件资产发现工具——自动扫描机架、识别未登记设备、对接 CMDB、生成异常报警。无需 agent，通过网络指纹即可工作。</p>
+    <div class="source-link"><a href="https://reddit.com/r/sysadmin" target="_blank">📎 r/sysadmin ★707</a></div>
+  </div>
+</div>
 
-<div class="signal-body">
-  <p class="signal-desc">r/ChatGPT 1453票原帖持续高热，今日再次上榜。同日 r/SaaS 有开发者分享「焦虑App赚了第一个$3」——做自己亲身经历的产品，两天变现，验证了市场存在。</p>
-  <div class="scores"><div class="score-cell score-4" data-tip="痛点 4/5"><span class="score-label">痛点</span><span class="score-num">4</span></div><div class="score-cell score-4" data-tip="空白 4/5"><span class="score-label">空白</span><span class="score-num">4</span></div><div class="score-cell score-3" data-tip="付费 3/5"><span class="score-label">付费</span><span class="score-num">3</span></div><div class="score-cell score-5" data-tip="获客 5/5"><span class="score-label">获客</span><span class="score-num">5</span></div><div class="score-cell score-5" data-tip="监管 5/5"><span class="score-label">监管</span><span class="score-num">5</span></div><div class="score-cell score-4" data-tip="机会 4/5"><span class="score-label">机会</span><span class="score-num">4</span></div></div>
-  <p style="font-size:11px;color:#f59e0b;margin:8px 0 4px">🔁 AI焦虑数字健康 · 出现次数+1</p>
-  <div class="sources"><a href="https://www.reddit.com/r/ChatGPT/" target="_blank" class="source-link">↗ r/ChatGPT: i miss the person i was before ai tools</a></div>
 </div>
-</details>
+<div class="extras">
+  <h3>📎 今日还值得关注 (4 条)</h3>
+  <div class="extra-item"><span class="extra-title">Railway ToS变更</span><span class="extra-src">r/webdev ★296</span><span class="extra-note">Railway.app 修改服务条款，开发者在找替代品。平台 ToS 不透明 → 迁移工具需求。</span></div><div class="extra-item"><span class="extra-title">Microsoft Teams企业痛苦</span><span class="extra-src">r/sysadmin ★233</span><span class="extra-note">大量企业被迫使用 Teams 但集成体验差。B2B Teams 替代方案或迁移工具机会。</span></div><div class="extra-item"><span class="extra-title">OpenAI数学证明突破</span><span class="extra-src">HN ★1153</span><span class="extra-note">OpenAI 模型推翻离散几何核心猜想。AI 进入严格数学推理，可能影响学术软件工具市场。</span></div><div class="extra-item"><span class="extra-title">Google搜索AI反操纵</span><span class="extra-src">HN ★312</span><span class="extra-note">Google 承认搜索结果被 AI 内容系统性操纵。SEO 工具与 AI 内容检测是两个对立方向的机会。</span></div>
 </div>
-</div>
+<script type="application/json" id="signal-extras">
+[{"title": "Railway ToS变更", "source": "r/webdev ★296", "note": "Railway.app 修改服务条款，开发者在找替代品。平台 ToS 不透明 → 迁移工具需求。"}, {"title": "Microsoft Teams企业痛苦", "source": "r/sysadmin ★233", "note": "大量企业被迫使用 Teams 但集成体验差。B2B Teams 替代方案或迁移工具机会。"}, {"title": "OpenAI数学证明突破", "source": "HN ★1153", "note": "OpenAI 模型推翻离散几何核心猜想。AI 进入严格数学推理，可能影响学术软件工具市场。"}, {"title": "Google搜索AI反操纵", "source": "HN ★312", "note": "Google 承认搜索结果被 AI 内容系统性操纵。SEO 工具与 AI 内容检测是两个对立方向的机会。"}]
+</script>
 <script>
-function filter(t,btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.signal-card').forEach(c=>{
-    if(t==='all'){c.style.display='';return;}
-    if(t==='repeat'){c.style.display=c.classList.contains('repeat')?'':'none';return;}
-    const badge=c.querySelector('.badge');
-    c.style.display=(badge&&badge.textContent.includes(t))?'':'none';
+function toggle(id) {
+  var b = document.getElementById("body-"+id);
+  var a = document.getElementById("arr-"+id);
+  b.classList.toggle("open");
+  a.style.transform = b.classList.contains("open") ? "rotate(180deg)" : "";
+}
+function filter(level) {
+  document.querySelectorAll(".filter-btn").forEach(function(b){ b.classList.remove("active"); });
+  event.target.classList.add("active");
+  document.querySelectorAll(".card").forEach(function(c){
+    c.style.display = (level === "all" || c.dataset.level === level) ? "" : "none";
   });
 }
-</script>
-<script type="application/json" id="signal-extras">
-[{"title": "被招聘者联系——招的是我自己的岗位", "source": "r/Accounting ★353", "note": "会计师被裁后发现公司用更低薪资招同样岗位，AI降本替换的实际操作路径开始清晰可见。"}, {"title": "焦虑App卖出第一个$3", "source": "r/SaaS ★289", "note": "土耳其最低工资开发者月薪$600，做自己亲历的焦虑App，两天内变现——痛点即产品的最佳验证。"}, {"title": "机柜里发现来源不明的8核设备", "source": "r/selfhosted ★657", "note": "没有MAC地址，不在DHCP记录里，不知道怎么进来的——小团队物理安全管理工具空白。"}, {"title": "开发者开始反弹「纯对话式AI工具」", "source": "r/singularity ★34", "note": "「我需要的是真正的IDE集成，不是又一个聊天框」——纯chat接口的上限开始显现，工具层机会。"}]
+document.querySelectorAll(".card").forEach(function(c) {
+  if (["EXTREME","HIGH"].includes(c.dataset.level)) {
+    var id = c.id.replace("card-","");
+    var b = document.getElementById("body-"+id);
+    var a = document.getElementById("arr-"+id);
+    if(b) { b.classList.add("open"); a.style.transform="rotate(180deg)"; }
+  }
+});
 </script>
 </body>
 </html>
