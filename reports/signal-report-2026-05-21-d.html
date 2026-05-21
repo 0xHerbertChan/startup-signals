@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创业信号 · 2026-05-21 · 今日</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --card: #161922;
+    --border: #252836;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --accent: #7c6af7;
+    --green: #06d6a0;
+    --blue: #74c0fc;
+    --yellow: #ffd166;
+    --orange: #ff9a3c;
+    --red: #ff4d6d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 32px 16px;
+  }
+  .header {
+    max-width: 900px;
+    margin: 0 auto 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+  }
+  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent); }
+  .meta { color: var(--muted); font-size: 12px; text-align: right; line-height: 1.8; }
+  .summary-bar {
+    max-width: 900px;
+    margin: 0 auto 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .summary-bar strong { color: var(--text); font-size: 15px; }
+  .tag-new { background: #7c6af722; color: var(--accent); border: 1px solid #7c6af744; border-radius: 4px; padding: 1px 7px; font-size: 11px; font-weight: 600; }
+  .tag-repeat { background: #ff4d6d22; color: var(--red); border: 1px solid #ff4d6d44; border-radius: 4px; padding: 1px 7px; font-size: 11px; font-weight: 600; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .signal-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .signal-card.repeat { opacity: 0.65; }
+  .signal-header {
+    padding: 18px 20px 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .signal-header:hover { background: #1a1d27; }
+  .signal-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .signal-title { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .signal-pattern {
+    background: #7c6af715;
+    color: var(--accent);
+    border: 1px solid #7c6af730;
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .signal-expand { color: var(--muted); font-size: 16px; transition: transform 0.2s; flex-shrink: 0; }
+  .signal-body { padding: 0 20px 18px; }
+  .signal-desc { color: var(--muted); font-size: 13px; margin-bottom: 14px; line-height: 1.7; }
+  .scores {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .score-cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 70px;
+    text-align: center;
+    cursor: default;
+  }
+  .score-label { font-weight: 400; opacity: 0.85; margin-bottom: 2px; font-size: 10px; }
+  .score-num { font-size: 17px; font-weight: 700; }
+  .score-5 { background: #06d6a015; color: var(--green); border: 1px solid #06d6a030; }
+  .score-4 { background: #74c0fc15; color: var(--blue); border: 1px solid #74c0fc30; }
+  .score-3 { background: #ffd16615; color: var(--yellow); border: 1px solid #ffd16630; }
+  .score-2 { background: #ff9a3c15; color: var(--orange); border: 1px solid #ff9a3c30; }
+  .score-1 { background: #ff4d6d15; color: var(--red); border: 1px solid #ff4d6d30; }
+  /* Tooltip */
+  [data-tip] { position: relative; }
+  [data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e2130;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 400;
+    white-space: pre-wrap;
+    width: 200px;
+    text-align: left;
+    z-index: 100;
+    box-shadow: 0 4px 16px #00000066;
+    line-height: 1.5;
+  }
+  .sources { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .source-link {
+    background: #252836;
+    color: var(--muted);
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-size: 11px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .source-link:hover { color: var(--text); border-color: var(--accent); background: #252836dd; }
+  .opportunity-box {
+    background: #7c6af710;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .opportunity-box em { color: var(--accent); font-style: normal; font-weight: 600; }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .signal-expand { transform: rotate(180deg); }
+  .section-label {
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .opp-score {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .total-opp { font-size: 12px; color: var(--muted); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>⚡ 创业<span>信号</span></h1>
+    <div style="color:var(--muted);font-size:12px;margin-top:4px">每日扫描 · 全球 + 中文圈</div>
+  </div>
+  <div class="meta">
+    2026-05-21<br>
+    范围: 今日 (d)<br>
+    来源: Reddit · HN · Lobsters · 掘金 · 少数派
+  </div>
+</div>
+
+<div class="container">
+
+<div class="summary-bar">
+  <div><strong>4</strong> &nbsp;新信号</div>
+  <div><strong>1</strong> &nbsp;已追踪</div>
+  <div style="flex:1"></div>
+  <span class="tag-new">NEW</span>
+  <span class="tag-repeat">🔁 REPEAT</span>
+</div>
+
+<!-- ── SIGNAL 1 ─────────────────────────────────────────────── -->
+<div class="signal-card">
+<details open>
+<summary class="signal-header">
+  <div>
+    <div class="signal-title-row">
+      <span class="signal-title">大厂全面封禁 Cursor：企业AI编程合规危机</span>
+      <span class="tag-new">NEW</span>
+    </div>
+    <div style="margin-top:6px;color:var(--muted);font-size:12px">
+      <span class="signal-pattern">🇨🇳 企业封杀AI工具</span>
+    </div>
+  </div>
+  <span class="signal-expand">▼</span>
+</summary>
+<div class="signal-body">
+  <p class="signal-desc">
+    掘金今日热榜头条：<strong>"全面封禁 Cursor！又一家大厂出手了"</strong>，延续近期多家互联网/金融公司禁用 AI 编程工具的浪潮。
+    开发者陷入两难——个人效率依赖 Cursor，公司数据安全要求禁止。配套帖"我为什么最终还是回归了 Cursor"证明禁令执行阻力巨大，
+    反映出需求与合规之间真实且持续的摩擦。
+  </p>
+  <div class="opportunity-box">
+    <em>机会：</em> 企业级 AI 编程助手，本地部署 + 代码不出域 + 完整审计日志。中小企业版直接集成私有 GitLab/Bitbucket，
+    对标 Cursor 功能但满足等保 2.0 要求。
+  </div>
+  <div class="scores">
+    <div class="score-cell score-5" data-tip="痛点强度 5/5&#10;开发者每天用Cursor&#10;被禁后生产力明显下降&#10;且禁令难以撤回">
+      <div class="score-label">痛点</div>
+      <div class="score-num">5</div>
+    </div>
+    <div class="score-cell score-4" data-tip="市场空白 4/5&#10;本地部署方案存在但&#10;缺乏企业级合规功能&#10;和中文技术支持">
+      <div class="score-label">空白</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-4" data-tip="付费意愿 4/5&#10;企业IT预算充足&#10;合规不达标有法律风险&#10;ROI清晰">
+      <div class="score-label">付费</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-3" data-tip="获客难度 3/5&#10;需要企业销售渠道&#10;但行业口碑传播快&#10;开发者决策影响采购">
+      <div class="score-label">获客</div>
+      <div class="score-num">3</div>
+    </div>
+    <div class="score-cell score-5" data-tip="监管红利 5/5&#10;数据安全法/网络安全法&#10;直接驱动需求&#10;合规是刚需非可选项">
+      <div class="score-label">监管</div>
+      <div class="score-num">5</div>
+    </div>
+    <div class="score-cell score-4" data-tip="综合机会 4/5&#10;高痛 + 监管强制 + 付费能力强&#10;时间窗口：禁令潮持续扩大中">
+      <div class="score-label">机会</div>
+      <div class="score-num">4</div>
+    </div>
+  </div>
+  <div class="sources">
+    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金热榜</a>
+    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金: 全面封禁 Cursor！</a>
+    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金: 我为什么最终还是回归了Cursor</a>
+    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金: 豆包也开始抢程序员饭碗了</a>
+  </div>
+</div>
+</details>
+</div>
+
+<!-- ── SIGNAL 2 ─────────────────────────────────────────────── -->
+<div class="signal-card">
+<details open>
+<summary class="signal-header">
+  <div>
+    <div class="signal-title-row">
+      <span class="signal-title">Meta 8000人裁员：AI替代驱动的科技失业潮</span>
+      <span class="tag-new">NEW</span>
+    </div>
+    <div style="margin-top:6px;color:var(--muted);font-size:12px">
+      <span class="signal-pattern">📉 降本增效</span>
+    </div>
+  </div>
+  <span class="signal-expand">▼</span>
+</summary>
+<div class="signal-body">
+  <p class="signal-desc">
+    Meta 宣布裁员 8000 人（约员工总数 10%），明确指向 AI 驱动的岗位重组，r/singularity 922票验证讨论热度。
+    同期会计行业 Forvis Mazar 裁员（r/Accounting 361票），内部员工发现自己的岗位在招人（r/Accounting 328票），
+    多赛道同时出现失业焦虑——这是新一波结构性失业的起点信号。
+  </p>
+  <div class="opportunity-box">
+    <em>机会：</em> 面向"被 AI 替代中层"的职业再定位平台。不是简单的招聘板块，而是
+    <em>"AI 时代我的价值在哪"</em>精准诊断 + 技能图谱重建 + 高薪小众赛道撮合。
+    B端切口：外包公司/猎头公司的候选人 AI 技能评级 SaaS。
+  </div>
+  <div class="scores">
+    <div class="score-cell score-4" data-tip="痛点强度 4/5&#10;失业恐慌 + 简历竞争加剧&#10;情绪强烈，话题扩散快">
+      <div class="score-label">痛点</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-3" data-tip="市场空白 3/5&#10;已有招聘平台和培训机构&#10;但AI时代技能诊断/重定位缺工具">
+      <div class="score-label">空白</div>
+      <div class="score-num">3</div>
+    </div>
+    <div class="score-cell score-3" data-tip="付费意愿 3/5&#10;失业者C端付费弱&#10;但B端(企业/猎头)有预算">
+      <div class="score-label">付费</div>
+      <div class="score-num">3</div>
+    </div>
+    <div class="score-cell score-4" data-tip="获客难度 4/5&#10;LinkedIn/科技社区聚集&#10;情绪驱动内容易传播">
+      <div class="score-label">获客</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-2" data-tip="监管红利 2/5&#10;就业保护政策方向不明&#10;监管助力有限">
+      <div class="score-label">监管</div>
+      <div class="score-num">2</div>
+    </div>
+    <div class="score-cell score-3" data-tip="综合机会 3/5&#10;窗口期明确但竞争出现快&#10;需要精准切入特定行业">
+      <div class="score-label">机会</div>
+      <div class="score-num">3</div>
+    </div>
+  </div>
+  <div class="sources">
+    <a class="source-link" href="https://www.reddit.com/r/singularity/comments/1tiosgg/" target="_blank">🔴 r/singularity ★922</a>
+    <a class="source-link" href="https://www.reddit.com/r/Accounting/comments/1timhsb/" target="_blank">🔴 r/Accounting ★361</a>
+    <a class="source-link" href="https://www.reddit.com/r/Accounting/comments/1timhsb/" target="_blank">🔴 r/Accounting ★328</a>
+  </div>
+</div>
+</details>
+</div>
+
+<!-- ── SIGNAL 3 ─────────────────────────────────────────────── -->
+<div class="signal-card">
+<details open>
+<summary class="signal-header">
+  <div>
+    <div class="signal-title-row">
+      <span class="signal-title">"那个没用AI的自己"：AI焦虑催生数字健康市场</span>
+      <span class="tag-new">NEW</span>
+    </div>
+    <div style="margin-top:6px;color:var(--muted);font-size:12px">
+      <span class="signal-pattern">💭 用户心理痛点</span>
+    </div>
+  </div>
+  <span class="signal-expand">▼</span>
+</summary>
+<div class="signal-body">
+  <p class="signal-desc">
+    r/ChatGPT 1278票帖子 <strong>"i miss the person i was before ai tools and side projects"</strong>——
+    在AI工具最重度用户的社区里反向情绪如此高票，说明这是普遍的、真实的痛苦。
+    "Claude 在会话中途告诉用户去睡觉" (925票) 进一步印证：AI工具开始侵入个人时间边界，用户感到失控。
+    掘金同期出现："面试官问我 AI 写代码比你快100倍，你的价值在哪？"——焦虑蔓延到职业认同层面。
+  </p>
+  <div class="opportunity-box">
+    <em>机会：</em> AI使用量化追踪 + 数字健康引导产品。
+    类比 Screen Time 但专注于 AI 工具依赖：追踪你的"AI辅助率"、识别技能退化风险、
+    建议"数字断食"计划。反向定位：<em>不是让你用更多AI，而是让你用得更清醒</em>。
+  </div>
+  <div class="scores">
+    <div class="score-cell score-4" data-tip="痛点强度 4/5&#10;1278票证明情绪强烈且普遍&#10;内容创作者/程序员群体尤其共鸣">
+      <div class="score-label">痛点</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-4" data-tip="市场空白 4/5&#10;Screen Time有但不够精准&#10;专门针对AI使用焦虑的工具几乎为零">
+      <div class="score-label">空白</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-3" data-tip="付费意愿 3/5&#10;消费者市场，订阅5-10美元可行&#10;但需要情绪共鸣才能转化">
+      <div class="score-label">付费</div>
+      <div class="score-num">3</div>
+    </div>
+    <div class="score-cell score-5" data-tip="获客难度 5/5&#10;情感共鸣内容传播极快&#10;这条帖子本身就是产品广告">
+      <div class="score-label">获客</div>
+      <div class="score-num">5</div>
+    </div>
+    <div class="score-cell score-1" data-tip="监管红利 1/5&#10;监管暂无助力&#10;纯靠自愿消费">
+      <div class="score-label">监管</div>
+      <div class="score-num">1</div>
+    </div>
+    <div class="score-cell score-3" data-tip="综合机会 3/5&#10;情绪窗口明确但变现路径不清晰&#10;适合低成本MVP验证">
+      <div class="score-label">机会</div>
+      <div class="score-num">3</div>
+    </div>
+  </div>
+  <div class="sources">
+    <a class="source-link" href="https://www.reddit.com/r/ChatGPT/comments/1tihmey/" target="_blank">🔴 r/ChatGPT ★1278</a>
+    <a class="source-link" href="https://www.reddit.com/r/singularity/comments/1tib9so/" target="_blank">🔴 r/singularity ★925 Claude告用户去睡觉</a>
+    <a class="source-link" href="https://juejin.cn/recommended" target="_blank">📰 掘金: AI写代码比你快100倍</a>
+  </div>
+</div>
+</details>
+</div>
+
+<!-- ── SIGNAL 4 ─────────────────────────────────────────────── -->
+<div class="signal-card">
+<details open>
+<summary class="signal-header">
+  <div>
+    <div class="signal-title-row">
+      <span class="signal-title">Google Ads $2180亿隐性欺诈：小商家维权工具空白</span>
+      <span class="tag-new">NEW</span>
+    </div>
+    <div style="margin-top:6px;color:var(--muted);font-size:12px">
+      <span class="signal-pattern">💰 用户痛点/反垄断</span>
+    </div>
+  </div>
+  <span class="signal-expand">▼</span>
+</summary>
+<div class="signal-body">
+  <p class="signal-desc">
+    r/smallbusiness "$218 billion in Google Ads overcharges"——小商家长期被超额收费，规模高达$2180亿美元，
+    但绝大多数商家无工具验证广告真实效果，退款流程不透明。同期 HN："Google Declaring War on the Web"（396票）
+    和 "Google's AI is being manipulated" （272票）——Google广告生态正在被AI作弊刷流量，损失最终由广告主承担。
+  </p>
+  <div class="opportunity-box">
+    <em>机会：</em> Google Ads 独立第三方审计 SaaS。
+    接入客户 Google Ads 账户，自动识别无效点击/流量异常/超收费情况，
+    生成可向 Google 申诉的证据报告。<em>商业模式：退款金额的20%佣金</em>——ROI对用户是正数，完全无需前期说服。
+  </div>
+  <div class="scores">
+    <div class="score-cell score-5" data-tip="痛点强度 5/5&#10;直接经济损失&#10;$2180亿规模证明&#10;每个广告主都可能受害">
+      <div class="score-label">痛点</div>
+      <div class="score-num">5</div>
+    </div>
+    <div class="score-cell score-4" data-tip="市场空白 4/5&#10;现有工具依赖Google自报数据&#10;独立审计几乎空白">
+      <div class="score-label">空白</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-5" data-tip="付费意愿 5/5&#10;退款佣金模型：不花钱就能赚钱&#10;用户决策摩擦极低">
+      <div class="score-label">付费</div>
+      <div class="score-num">5</div>
+    </div>
+    <div class="score-cell score-3" data-tip="获客难度 3/5&#10;需触达中小商家主&#10;Facebook/LinkedIn广告主群体可精准定向">
+      <div class="score-label">获客</div>
+      <div class="score-num">3</div>
+    </div>
+    <div class="score-cell score-3" data-tip="监管红利 3/5&#10;反垄断调查背景下&#10;第三方审计工具有合法性&#10;欧盟/美国诉讼推波助澜">
+      <div class="score-label">监管</div>
+      <div class="score-num">3</div>
+    </div>
+    <div class="score-cell score-4" data-tip="综合机会 4/5&#10;高痛 + 自付费模型 + 市场明确&#10;主要风险是Google限制API访问">
+      <div class="score-label">机会</div>
+      <div class="score-num">4</div>
+    </div>
+  </div>
+  <div class="sources">
+    <a class="source-link" href="https://www.reddit.com/r/smallbusiness/comments/1tijt33/" target="_blank">🔴 r/smallbusiness ★41</a>
+    <a class="source-link" href="https://news.ycombinator.com/" target="_blank">🟠 HN: Google Declaring War on the Web ★396</a>
+    <a class="source-link" href="https://news.ycombinator.com/" target="_blank">🟠 HN: Google's AI is being manipulated ★272</a>
+  </div>
+</div>
+</details>
+</div>
+
+<!-- ── SIGNAL 5 (REPEAT) ─────────────────────────────────────── -->
+<div class="signal-card repeat">
+<details>
+<summary class="signal-header">
+  <div>
+    <div class="signal-title-row">
+      <span class="signal-title">Railway ToS崩塌 + GitHub持续被黑：独立托管迁移潮扩大</span>
+      <span class="tag-repeat">🔁 已追踪</span>
+    </div>
+    <div style="margin-top:6px;color:var(--muted);font-size:12px">
+      <span class="signal-pattern">🏗️ 基础设施风险</span>
+      &nbsp;<span style="color:var(--muted);font-size:11px">关联: Railway GCP封锁 · VSCode供应链攻击</span>
+    </div>
+  </div>
+  <span class="signal-expand">▼</span>
+</summary>
+<div class="signal-body">
+  <p class="signal-desc">
+    延续追踪中的信号。今日新增数据点：r/webdev 253票 "Railway has new term of service" + r/webdev 59票 "Railway is STILL down"
+    + r/selfhosted 294票 "Leaving GitHub for private repos"。三条帖子共同指向：SaaS基础设施的信任危机正在推动开发者主动迁移到自托管。
+    r/selfhosted 整体板块今日最高票达 1787 — 自托管社区热度持续高涨。
+  </p>
+  <div class="scores">
+    <div class="score-cell score-4" data-tip="痛点强度 4/5&#10;生产环境中断 + 信任破裂&#10;开发者已在行动">
+      <div class="score-label">痛点</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-3" data-tip="市场空白 3/5&#10;自托管工具存在&#10;但迁移门槛高&#10;一键迁移工具缺失">
+      <div class="score-label">空白</div>
+      <div class="score-num">3</div>
+    </div>
+    <div class="score-cell score-4" data-tip="付费意愿 4/5&#10;企业级稳定性&#10;开发者愿意付费">
+      <div class="score-label">付费</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-4" data-tip="获客难度 4/5&#10;开发者社区自传播">
+      <div class="score-label">获客</div>
+      <div class="score-num">4</div>
+    </div>
+    <div class="score-cell score-2" data-tip="监管红利 2/5&#10;无直接监管驱动">
+      <div class="score-label">监管</div>
+      <div class="score-num">2</div>
+    </div>
+    <div class="score-cell score-4" data-tip="综合机会 4/5&#10;信号持续增强&#10;迁移窗口正在打开">
+      <div class="score-label">机会</div>
+      <div class="score-num">4</div>
+    </div>
+  </div>
+  <div class="sources">
+    <a class="source-link" href="https://www.reddit.com/r/webdev/comments/1tijhfx/" target="_blank">🔴 r/webdev ★253 Railway ToS</a>
+    <a class="source-link" href="https://www.reddit.com/r/selfhosted/comments/1timhsb/" target="_blank">🔴 r/selfhosted ★294 Leaving GitHub</a>
+    <a class="source-link" href="https://www.reddit.com/r/selfhosted/comments/1tior0l/" target="_blank">🔴 r/selfhosted ★1787</a>
+  </div>
+</div>
+</details>
+</div>
+
+<!-- ── BONUS ─────────────────────────────────────────────── -->
+<div style="margin-top:32px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+  <div class="section-label">今日其他值得关注</div>
+  <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;color:var(--muted);">
+    <div>🧮 <strong style="color:var(--text)">OpenAI模型破解80年数学难题</strong> — HN ★830 + singularity ★365。AI数学能力突破，验证科研加速趋势。</div>
+    <div>🤖 <strong style="color:var(--text)">Qwen3.7-Max：开源Agent前沿</strong> — HN ★636 + r/LocalLLaMA ★728。开源模型追平Frontier能力，LLM API商品化加速。</div>
+    <div>🛡️ <strong style="color:var(--text)">Colorado年龄验证法案豁免开源</strong> — HN ★159。监管对开源项目的态度趋向宽松，注意法规动向。</div>
+    <div>💸 <strong style="color:var(--text)">Anthropic Q2首次盈利</strong> — singularity ★346。头部AI公司商业化验证，行业信心信号。</div>
+    <div>🔧 <strong style="color:var(--text)">DevOps: Jira AI生成内容质量差</strong> — r/devops ★243。AI生成的项目管理内容质量问题，AI PM工具机会。</div>
+  </div>
+</div>
+
+<div style="margin-top:20px;text-align:center;color:var(--muted);font-size:11px;padding-bottom:24px;">
+  生成于 2026-05-21 · signal-discovery · 4个新信号 / 1个已追踪
+</div>
+
+</div>
+
+<script>
+// Keep details elements in sync with expand indicator
+document.querySelectorAll('details').forEach(d => {
+  d.addEventListener('toggle', () => {
+    const arrow = d.querySelector('.signal-expand');
+    if (arrow) arrow.textContent = d.open ? '▲' : '▼';
+  });
+});
+</script>
+</body>
+</html>
