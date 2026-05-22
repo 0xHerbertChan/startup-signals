@@ -19,14 +19,14 @@
 
 **数据源：**
 
-| 英文圈 | 中文圈 |
-|--------|--------|
-| Reddit（19个版块） | 掘金 |
-| Hacker News | V2EX |
-| Lobsters | 少数派 |
-| Product Hunt | 36Kr |
-| Dev.to | — |
-| GitHub Trending | — |
+| 英文圈             | 中文圈 |
+| ------------------ | ------ |
+| Reddit（19个版块） | 掘金   |
+| Hacker News        | V2EX   |
+| Lobsters           | 少数派 |
+| Product Hunt       | 36Kr   |
+| Dev.to             | —      |
+| GitHub Trending    | —      |
 
 ---
 
@@ -34,25 +34,14 @@
 
 每个信号在 6 个维度上评 1-5 分：
 
-| 维度 | 含义 | 5分代表 |
-|------|------|---------|
-| **痛点** | 用户痛苦有多真实 | 强情绪用词 + 1000+ 赞 + 明确付费意愿 |
-| **空白** | 现有方案有多差 | 完全没有解决方案，靠 Excel 凑合 |
-| **付费** | 用户愿意掏钱吗 | 帖子里直接说了"I'd pay $X for this" |
-| **获客** | 能低成本触达客户吗 | 信号来源社区就是目标客户 |
-| **监管** | 进入市场有多难 | 纯软件工具，无行业监管 |
-| **机会** | 综合加权结论 | EXTREME — 现在就应该做 |
-
----
-
-## 报告归档
-
-| 日期 | 范围 | 新信号 | 查看 |
-|------|------|--------|------|
-| 2026-05-21 | 今日 | 3 | [报告](https://0xHerbertChan.github.io/startup-signals/reports/signal-report-2026-05-21-d2.html) |
-| 2026-05-21 | 今日 | 4 | [报告](https://0xHerbertChan.github.io/startup-signals/reports/signal-report-2026-05-21-d.html) |
-| 2026-05-21 | 本周 | 6 | [报告](https://0xHerbertChan.github.io/startup-signals/reports/signal-report-2026-05-21-week.html) |
-| 2026-05-20 | 3日 | 5 | [报告](https://0xHerbertChan.github.io/startup-signals/reports/signal-report-2026-05-20-3d.html) |
+| 维度     | 含义               | 5分代表                              |
+| -------- | ------------------ | ------------------------------------ |
+| **痛点** | 用户痛苦有多真实   | 强情绪用词 + 1000+ 赞 + 明确付费意愿 |
+| **空白** | 现有方案有多差     | 完全没有解决方案，靠 Excel 凑合      |
+| **付费** | 用户愿意掏钱吗     | 帖子里直接说了"I'd pay $X for this"  |
+| **获客** | 能低成本触达客户吗 | 信号来源社区就是目标客户             |
+| **监管** | 进入市场有多难     | 纯软件工具，无行业监管               |
+| **机会** | 综合加权结论       | EXTREME — 现在就应该做               |
 
 ---
 
@@ -78,4 +67,4 @@
 
 ---
 
-*Powered by Claude Code · 数据来源均为公开社区内容*
+_Powered by Claude Code · 数据来源均为公开社区内容_

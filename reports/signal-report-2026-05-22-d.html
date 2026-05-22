@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>创业信号 2026-05-22</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d0f;color:#e8e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:24px 16px}
+.header{max-width:860px;margin:0 auto 24px}
+.header h1{font-size:22px;font-weight:700;color:#fff;margin-bottom:8px}
+.meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:13px;color:#888}
+.meta .tag{background:#1a1a2e;border:1px solid #333;padding:3px 10px;border-radius:20px}
+.filters{max-width:860px;margin:0 auto 20px;display:flex;gap:8px;flex-wrap:wrap}
+.fb{background:#1a1a2e;border:1px solid #333;color:#aaa;padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13px;transition:all .2s}
+.fb:hover,.fb.active{background:#2a2a3e;border-color:#555;color:#e8e8f0}
+.cards{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.card{background:#13131a;border:1px solid #2a2a35;border-radius:10px;overflow:hidden}
+.card[data-level="EXTREME"]{border-color:#ff4d6d55}
+.card[data-level="HIGH"]{border-color:#74c0fc44}
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;padding:14px 16px;cursor:pointer;gap:12px}
+.card-header:hover{background:#1a1a25}
+.card-left{flex:1}
+.card-title{font-size:15px;font-weight:600;color:#e8e8f0;line-height:1.4;margin-bottom:8px}
+.card-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:.5px}
+.arrow{color:#555;font-size:12px;transition:transform .2s}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.sc{font-size:11px;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:3px;cursor:help;position:relative}
+.sc b{font-weight:700;font-size:12px}
+[data-tip]{position:relative}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#2a2a35;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:200px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
+.card-body{padding:0 16px 14px;border-top:1px solid #2a2a35;display:none}
+.card-body.open{display:block}
+.signal-desc{color:#b0b0c0;font-size:13.5px;line-height:1.7;margin:12px 0 8px}
+.signal-opp{color:#8888aa;font-size:13px;line-height:1.6;margin-bottom:10px}
+.signal-opp strong{color:#74c0fc}
+.src a{color:#555;font-size:12px;text-decoration:none}
+.src a:hover{color:#74c0fc}
+.extras{max-width:860px;margin:24px auto 0;background:#13131a;border:1px solid #2a2a35;border-radius:10px;padding:16px}
+.extras h3{font-size:14px;color:#888;margin-bottom:12px;font-weight:500}
+.extra-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid #1e1e28;align-items:baseline;flex-wrap:wrap}
+.extra-item:last-child{border-bottom:none}
+.et{font-size:13px;font-weight:600;color:#e8e8f0;min-width:120px}
+.es{font-size:11px;color:#555;min-width:90px}
+.en{font-size:12.5px;color:#888;flex:1}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>⚡ 创业信号 2026-05-22</h1>
+  <div class="meta">
+    <span class="tag">最近 1 天</span>
+    <span>新信号 <span style="color:#06d6a0;font-weight:600">5</span> 条</span>
+    <span>已追踪 <span style="color:#ff9a3c">1</span> 条</span>
+  </div>
+</div>
+<div class="filters">
+  <button class="fb active" onclick="filter('all')">全部 (6)</button>
+  <button class="fb" onclick="filter('HIGH')">⬆ HIGH</button>
+  <button class="fb" onclick="filter('MEDIUM')">· MEDIUM</button>
+  <button class="fb" onclick="filter('REPEAT')">🔁 已追踪</button>
+</div>
+<div class="cards" id="cards">
+<!-- ── SIGNAL 1 Excel 强制添加 Copilot：微软把 AI 塞进用户工作流 ── -->
+<div class="card" id="card-1" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(1)">
+    <div class="card-left">
+      <div class="card-title">Excel 强制添加 Copilot：微软把 AI 塞进用户工作流</div>
+      <div class="chips"><span class="sc" data-tip="痛苦 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<b>4</b></span> <span class="sc" data-tip="空白 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<b>4</b></span> <span class="sc" data-tip="付费 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<b>4</b></span> <span class="sc" data-tip="获客 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<b>4</b></span> <span class="sc" data-tip="监管 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<b>5</b></span> <span class="sc" data-tip="机会 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<b>4</b></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-1">▼</span></div>
+  </div>
+  <div class="card-body" id="body-1">
+    <p class="signal-desc">r/Accounting 高赞帖（★1015）：微软悄悄在 Excel 里强制开启 Copilot，用户发现后试图关掉，评论区满是各种失败的尝试。最讽刺的那句话：'用 Copilot 问如何关掉 Copilot，它告诉我没有问题需要解决'。这是一个典型的企业软件强迫依赖信号——用户没有选择退出的权利。</p>
+    <p class="signal-opp"><strong>机会：</strong>企业 Office 插件管理工具：让 IT 管理员能统一控制 Microsoft 365 里每个 AI 功能的开关，并追踪各部门使用情况。现有的 Microsoft Intune 太复杂，中型企业完全缺乏轻量级方案。</p>
+    <div class="src"><a href="https://www.reddit.com/r/Accounting/comments/1tjo3i4/excel_has_force_added_copilot_tried_u" target="_blank">📎 r/Accounting ★1015</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 2 企业员工盲目信任 AI 输出：sysadmin 现场目击 ── -->
+<div class="card" id="card-2" data-level="HIGH" data-new="true">
+  <div class="card-header" onclick="toggle(2)">
+    <div class="card-left">
+      <div class="card-title">企业员工盲目信任 AI 输出：sysadmin 现场目击</div>
+      <div class="chips"><span class="sc" data-tip="痛苦 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<b>4</b></span> <span class="sc" data-tip="空白 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<b>4</b></span> <span class="sc" data-tip="付费 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<b>4</b></span> <span class="sc" data-tip="获客 3/5 — 需要一定销售动作" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">获客<b>3</b></span> <span class="sc" data-tip="监管 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<b>5</b></span> <span class="sc" data-tip="机会 4/5 — HIGH值得认真评估" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">机会<b>4</b></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">HIGH</span><span class="arrow" id="arr-2">▼</span></div>
+  </div>
+  <div class="card-body" id="body-2">
+    <p class="signal-desc">r/sysadmin 帖子（★1175）：作者描述同事遇到系统问题时，直接把 AI 的答案当事实执行——即使答案是错的。高赞评论里出现了多个'我们组也这样'的回复。这不是技术问题，是企业里正在蔓延的认知习惯：AI 说的比手册可信，比同事可信，比自己判断可信。</p>
+    <p class="signal-opp"><strong>机会：</strong>企业 AI 输出验证层：接入内部知识库，对 AI 给出的关键操作建议进行置信度评分和来源核查。不是替换 AI，而是在 AI 和执行之间加一层'确认机制'。ToB 销售，切 IT/运维场景。</p>
+    <div class="src"><a href="https://www.reddit.com/r/sysadmin/comments/1tjjio7/my_older_coworkers_have_accepted_ai_as_" target="_blank">📎 r/sysadmin ★1175</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 3 Meta 向 Heretic 发律师函：开源 LLaMA 生态的法律炸弹 ── -->
+<div class="card" id="card-3" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(3)">
+    <div class="card-left">
+      <div class="card-title">Meta 向 Heretic 发律师函：开源 LLaMA 生态的法律炸弹</div>
+      <div class="chips"><span class="sc" data-tip="痛苦 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<b>4</b></span> <span class="sc" data-tip="空白 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<b>4</b></span> <span class="sc" data-tip="付费 3/5 — 有付费可能但需教育" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">付费<b>3</b></span> <span class="sc" data-tip="获客 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<b>4</b></span> <span class="sc" data-tip="监管 2/5 — 需牌照或持牌机构合作" style="background:#ff9a3c22;border:1px solid #ff9a3c;color:#ff9a3c">监管<b>2</b></span> <span class="sc" data-tip="机会 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<b>3</b></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-3">▼</span></div>
+  </div>
+  <div class="card-body" id="body-3">
+    <p class="signal-desc">r/LocalLLaMA 高赞帖（★1745）：Meta 向开源项目 Heretic 发出法律通知，理由是侵犯 LLaMA 商标和许可协议。开源社区炸了——LLaMA 是'开源'的，但 Meta 保留了追究衍生项目的权利。这意味着：用 LLaMA 底座构建商业产品的公司，都在法律灰区里。</p>
+    <p class="signal-opp"><strong>机会：</strong>AI 模型许可合规工具：帮助使用开源 LLM 构建产品的公司，自动扫描所用模型的许可条款、使用限制和商业化条件，生成合规报告。目前完全空白，但需求在爆发。</p>
+    <div class="src"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tjmvx6/heretic_has_been_served_a_legal_notic" target="_blank">📎 r/LocalLLaMA ★1745</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 4 Plex 收紧政策：自托管媒体服务迁移潮 ── -->
+<div class="card" id="card-4" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(4)">
+    <div class="card-left">
+      <div class="card-title">Plex 收紧政策：自托管媒体服务迁移潮</div>
+      <div class="chips"><span class="sc" data-tip="痛苦 4/5 — 高赞500+多人共鸣痛苦具体" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">痛苦<b>4</b></span> <span class="sc" data-tip="空白 3/5 — 有竞品但功能不完整" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">空白<b>3</b></span> <span class="sc" data-tip="付费 3/5 — 有付费可能但需教育" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">付费<b>3</b></span> <span class="sc" data-tip="获客 4/5 — 有清晰线上社区或SEO渠道" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">获客<b>4</b></span> <span class="sc" data-tip="监管 5/5 — 纯软件无监管全球可售" style="background:#06d6a022;border:1px solid #06d6a0;color:#06d6a0">监管<b>5</b></span> <span class="sc" data-tip="机会 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<b>3</b></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-4">▼</span></div>
+  </div>
+  <div class="card-body" id="body-4">
+    <p class="signal-desc">r/selfhosted 高赞帖（★1479）：Plex 又一次改变政策，大量用户宣布彻底迁移到 Jellyfin/Emby。评论区有人说'这是我第三次说永别了'——这个社区每次 Plex 改条款都会爆发迁移潮，但每次又有新用户被吸引过来重演一遍。</p>
+    <p class="signal-opp"><strong>机会：</strong>Plex → Jellyfin 一键迁移工具：自动迁移播放记录、元数据、用户偏好、播放列表。这个需求每次政策变更都会爆发，但从来没有人做好这个工具。简单的一次性收费产品。</p>
+    <div class="src"><a href="https://www.reddit.com/r/selfhosted/comments/1tjp5ou/opinion_nows_the_perfect_time_to_move" target="_blank">📎 r/selfhosted ★1479</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 5 Deloitte 裁员审计师：大型会计事务所 AI 化提速 ── -->
+<div class="card" id="card-5" data-level="MEDIUM" data-new="true">
+  <div class="card-header" onclick="toggle(5)">
+    <div class="card-left">
+      <div class="card-title">Deloitte 裁员审计师：大型会计事务所 AI 化提速</div>
+      <div class="chips"><span class="sc" data-tip="痛苦 3/5 — 中赞100-500情绪平稳" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">痛苦<b>3</b></span> <span class="sc" data-tip="空白 4/5 — 有方案但极贵或只服务大企业" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">空白<b>4</b></span> <span class="sc" data-tip="付费 4/5 — 行业有付费习惯且属核心工作流" style="background:#74c0fc22;border:1px solid #74c0fc;color:#74c0fc">付费<b>4</b></span> <span class="sc" data-tip="获客 3/5 — 需要一定销售动作" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">获客<b>3</b></span> <span class="sc" data-tip="监管 2/5 — 需牌照或持牌机构合作" style="background:#ff9a3c22;border:1px solid #ff9a3c;color:#ff9a3c">监管<b>2</b></span> <span class="sc" data-tip="机会 3/5 — MEDIUM需要更多验证" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">机会<b>3</b></span></div>
+    </div>
+    <div class="card-right"><span class="badge" style="background:#ffd16622;border:1px solid #ffd166;color:#ffd166">MEDIUM</span><span class="arrow" id="arr-5">▼</span></div>
+  </div>
+  <div class="card-body" id="body-5">
+    <p class="signal-desc">r/Accounting 帖子（★308）：Deloitte 这周对审计师发出坏消息，裁减范围集中在初级和中级审计岗位。评论区里出现了'AI 替代审计员'的讨论，有人说大所已经在内部用 AI 做以前需要 5 个 junior 完成的工作。这是 Big 4 开始系统性用 AI 替代人工审计的早期信号。</p>
+    <p class="signal-opp"><strong>机会：</strong>面向被替代的初级审计师的技能再定位工具——不是泛泛的 AI 技能培训，而是精准到'审计员转型 AI 审计工具配置和质控'的专项服务。Big 4 裁出来的人本身就是潜在付费用户。</p>
+    <div class="src"><a href="https://www.reddit.com/r/Accounting/comments/1tjyg86/layoff_watch_26_deloitte_auditors_got" target="_blank">📎 r/Accounting ★308</a></div>
+  </div>
+</div>
+<!-- ── SIGNAL 6 大厂全面封禁 Cursor（续） ── -->
+<div class="card tag-repeat" id="card-6" data-level="REPEAT">
+  <div class="card-header" onclick="toggle(6)">
+    <div class="card-left"><div class="card-title">大厂全面封禁 Cursor（续）</div></div>
+    <div class="card-right">
+      <span class="badge" style="background:#ff9a3c22;border:1px solid #ff9a3c;color:#ff9a3c">🔁 已追踪</span>
+      <span class="arrow" id="arr-6">▼</span>
+    </div>
+  </div>
+  <div class="card-body" id="body-6">
+    <div class="src"><a href="https://juejin.cn/post/7584110439933100078" target="_blank">📎 掘金 ★608</a></div>
+  </div>
+</div>
+
+</div>
+<div class="extras">
+  <h3>📎 今日还值得关注（4 条）</h3>
+  <div class="extra-item"><span class="et">"It finally happened"</span><span class="es">r/webdev ★1875</span><span class="en">webdev 社区高赞帖，内容不明但热度极高，疑似某个重大工具/框架变化。值得关注。</span></div><div class="extra-item"><span class="et">Microsoft 挖自家 CSP 客户</span><span class="es">r/sysadmin ★291</span><span class="en">微软自己的销售代表用 $50万 激励去撬动自家渠道合作伙伴的客户。渠道冲突信号，中间商/MSP 的生意正在被上游直接吃掉。</span></div><div class="extra-item"><span class="et">AI 驱动内存短缺：廉价手机消失</span><span class="es">HN ★132</span><span class="en">AI 基础设施对内存的需求正在推高 DRAM 价格，廉价安卓手机正在退市。消费电子下沉市场的结构性变化。</span></div><div class="extra-item"><span class="et">ChatGPT 替代社交连接</span><span class="es">r/ChatGPT ★382</span><span class="en">高赞帖：'我跟 ChatGPT 说话因为生活里没有在乎我的人'。AI 伴侣/社交需求正在成为真实的市场，Replika 之外还有很大空白。</span></div>
+</div>
+<script type="application/json" id="signal-extras">
+[{"title": "\"It finally happened\"", "source": "r/webdev ★1875", "note": "webdev 社区高赞帖，内容不明但热度极高，疑似某个重大工具/框架变化。值得关注。"}, {"title": "Microsoft 挖自家 CSP 客户", "source": "r/sysadmin ★291", "note": "微软自己的销售代表用 $50万 激励去撬动自家渠道合作伙伴的客户。渠道冲突信号，中间商/MSP 的生意正在被上游直接吃掉。"}, {"title": "AI 驱动内存短缺：廉价手机消失", "source": "HN ★132", "note": "AI 基础设施对内存的需求正在推高 DRAM 价格，廉价安卓手机正在退市。消费电子下沉市场的结构性变化。"}, {"title": "ChatGPT 替代社交连接", "source": "r/ChatGPT ★382", "note": "高赞帖：'我跟 ChatGPT 说话因为生活里没有在乎我的人'。AI 伴侣/社交需求正在成为真实的市场，Replika 之外还有很大空白。"}]
+</script>
+<script>
+function toggle(id){var b=document.getElementById("body-"+id),a=document.getElementById("arr-"+id);b.classList.toggle("open");a.style.transform=b.classList.contains("open")?"rotate(180deg)":""}
+function filter(level){document.querySelectorAll(".fb").forEach(b=>b.classList.remove("active"));event.target.classList.add("active");document.querySelectorAll(".card").forEach(c=>{c.style.display=(level==="all"||c.dataset.level===level)?"":"none"})}
+document.querySelectorAll(".card[data-level='HIGH'],.card[data-level='EXTREME']").forEach(c=>{var id=c.id.replace("card-",""),b=document.getElementById("body-"+id),a=document.getElementById("arr-"+id);if(b){b.classList.add("open");a.style.transform="rotate(180deg)"}})</script>
+</body></html>
