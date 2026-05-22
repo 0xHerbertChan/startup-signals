@@ -19,15 +19,14 @@ body{background:#0d0d0f;color:#e8e8f0;font-family:-apple-system,'PingFang SC','H
 .cards{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 .signal-card{background:#12121a;border:1px solid #2a2a35;border-radius:12px;padding:20px;transition:border-color .2s}
 .signal-card:hover{border-color:#7c6af7}
-.signal-card.repeated{opacity:.75}
 .card-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
 .signal-emoji{font-size:22px}
 .signal-title{font-size:17px;font-weight:600;flex:1;min-width:200px}
 .badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;white-space:nowrap}
-.badge-today{background:#2a2a35;color:#aaa}
+.tag-repeat{background:#f59e0b;color:#000}
 .signal-desc{color:#ccc;font-size:14px;line-height:1.8;margin-bottom:14px}
 .score-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.score-chip{position:relative;cursor:help;display:flex;align-items:center;gap:0;border-radius:6px;overflow:hidden;border:1px solid #2a2a35}
+.score-chip{position:relative;cursor:help;display:flex;align-items:center;border-radius:6px;overflow:hidden;border:1px solid #2a2a35}
 .score-label{background:#1e1e2a;color:#888;font-size:11px;padding:3px 7px}
 .score-num{color:#000;font-size:12px;font-weight:700;padding:3px 8px;min-width:22px;text-align:center}
 [data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#2a2a35;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:220px;z-index:100;border:1px solid #444;line-height:1.5}
@@ -45,172 +44,168 @@ details[open] summary{margin-bottom:10px}
 </style>
 </head>
 <body>
-
 <div class="header">
   <h1>⚡ 创业信号 · 2026-05-22</h1>
   <div class="meta">时间范围：最近 1 天 · 扫描 28 个数据源 · 270 条原始数据</div>
   <div class="stats">
-    <div class="stat-chip"><span>12</span>今日累计新信号</div>
-    <div class="stat-chip"><span>1</span>持续追踪</div>
+    <div class="stat-chip"><span>12</span>今日新信号</div>
+    <div class="stat-chip"><span>0</span>持续追踪</div>
   </div>
 </div>
-
 <div class="filters">
-  <button class="filter-btn active" onclick="filterCards('all')">全部</button>
-  <button class="filter-btn" onclick="filterCards('EXTREME')">EXTREME</button>
-  <button class="filter-btn" onclick="filterCards('HIGH')">HIGH</button>
-  <button class="filter-btn" onclick="filterCards('MEDIUM')">MEDIUM</button>
-  <button class="filter-btn" onclick="filterCards('repeated')">🔁 已追踪</button>
+  <button class="filter-btn active" onclick="filterCards('all',this)">全部</button>
+  <button class="filter-btn" onclick="filterCards('EXTREME',this)">EXTREME</button>
+  <button class="filter-btn" onclick="filterCards('HIGH',this)">HIGH</button>
+  <button class="filter-btn" onclick="filterCards('MEDIUM',this)">MEDIUM</button>
+  <button class="filter-btn" onclick="filterCards('repeated',this)">🔁 已追踪</button>
 </div>
-
 <div class="cards">
 
 <!-- ── SIGNAL 1: Excel 强制添加 Copilot：微软把 AI 塞进用户工作流 ── -->
-<div class="signal-card new" data-level="prev-today">
+<div class="signal-card new" data-level="HIGH">
   <div class="card-header">
-    <span class="signal-emoji">💡</span>
+    <span class="signal-emoji">📊</span>
     <span class="signal-title">Excel 强制添加 Copilot：微软把 AI 塞进用户工作流</span>
-    <span class="badge badge-today">今日早扫</span>
+    <span class="badge" style="background:#74c0fc;color:#000">HIGH</span>
   </div>
-  <p class="signal-desc">（今日早先扫描中已记录）</p>
+  <p class="signal-desc">微软悄悄给 Excel 强制添加 Copilot 按钮，用户试图让 Copilot 教自己怎么关掉 Copilot——结果 Copilot 演示了如何使用 Copilot。r/Accounting 高赞帖，评论区充满愤怒。</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 3/5: 有竞品但体验差"><span class="score-label">空白</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="付费 4/5: 行业有付费习惯，属核心工作流"><span class="score-label">付费</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="获客 3/5: 需销售动作"><span class="score-label">获客</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="监管 4/5: 数据隐私（GDPR）要求但标准明确"><span class="score-label">监管</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="机会 4/5: HIGH — 强烈建议关注"><span class="score-label">机会</span><span class="score-num" style="background:#74c0fc">4</span></span></div>
+  <details>
+    <summary>机会切入点 →</summary>
+    <p class="signal-opp">企业 SaaS 反强制 AI 工具：帮助公司锁定或限制 Microsoft 365 中特定 AI 功能的权限管理工具。付费方：IT 管理员 / 企业采购。也可以是纯 B2B 的 Office 365 策略管理 SaaS。</p>
+    <p class="signal-src"><a href="https://www.reddit.com/r/Accounting/" target="_blank">原文 [reddit_Accounting]</a></p>
+  </details>
 </div>
 <!-- ── /SIGNAL 1 ── -->
-
-<!-- ── SIGNAL 2: 企业员工盲目信任 AI 输出：sysadmin 现场目击 ── -->
-<div class="signal-card new" data-level="prev-today">
+<!-- ── SIGNAL 2: Meta 向 Heretic 发律师函：开源 LLaMA 生态的法律炸弹 ── -->
+<div class="signal-card new" data-level="HIGH">
   <div class="card-header">
-    <span class="signal-emoji">💡</span>
-    <span class="signal-title">企业员工盲目信任 AI 输出：sysadmin 现场目击</span>
-    <span class="badge badge-today">今日早扫</span>
+    <span class="signal-emoji">⚖️</span>
+    <span class="signal-title">Meta 向 Heretic 发律师函：开源 LLaMA 生态的法律炸弹</span>
+    <span class="badge" style="background:#74c0fc;color:#000">HIGH</span>
   </div>
-  <p class="signal-desc">（今日早先扫描中已记录）</p>
+  <p class="signal-desc">Meta 向开源项目 Heretic 发出法律通知，引发 LocalLLaMA 社区强烈反应。Heretic 是一个以 Meta 的 LLaMA 为基础做了深度修改的开源框架。这是 Meta 开始收紧「开源」LLaMA 授权的信号。</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 4/5: 有方案但极贵或只服务大企业"><span class="score-label">空白</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="付费 4/5: 行业有付费习惯，属核心工作流"><span class="score-label">付费</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="获客 4/5: 有清晰线上渠道，SEO/口碑驱动"><span class="score-label">获客</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="监管 3/5: 需行业资质或SOC2"><span class="score-label">监管</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="机会 4/5: HIGH — 强烈建议关注"><span class="score-label">机会</span><span class="score-num" style="background:#74c0fc">4</span></span></div>
+  <details>
+    <summary>机会切入点 →</summary>
+    <p class="signal-opp">开源 LLM 法律合规工具：帮助开发者和企业快速审查 AI 模型的授权条款、使用限制、商业化风险。也有机会做「Meta/OpenAI 替代」的真开源 LLM 基础设施。</p>
+    <p class="signal-src"><a href="https://www.reddit.com/r/LocalLLaMA/" target="_blank">原文 [reddit_LocalLLaMA]</a></p>
+  </details>
 </div>
 <!-- ── /SIGNAL 2 ── -->
-
-<!-- ── SIGNAL 3: Meta 向 Heretic 发律师函：开源 LLaMA 生态的法律炸弹 ── -->
-<div class="signal-card new" data-level="prev-today">
+<!-- ── SIGNAL 3: Plex 收紧政策：自托管媒体服务迁移潮 ── -->
+<div class="signal-card new" data-level="MEDIUM">
   <div class="card-header">
-    <span class="signal-emoji">💡</span>
-    <span class="signal-title">Meta 向 Heretic 发律师函：开源 LLaMA 生态的法律炸弹</span>
-    <span class="badge badge-today">今日早扫</span>
+    <span class="signal-emoji">📺</span>
+    <span class="signal-title">Plex 收紧政策：自托管媒体服务迁移潮</span>
+    <span class="badge" style="background:#ffd166;color:#000">MEDIUM</span>
   </div>
-  <p class="signal-desc">（今日早先扫描中已记录）</p>
+  <p class="signal-desc">Plex 上调终身订阅价格并收紧免费功能，r/selfhosted 出现大量迁移讨论。Jellyfin、Emby 等替代方案搜索量暴涨。</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 3/5: 有竞品但体验差"><span class="score-label">空白</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="付费 3/5: 有付费可能但需教育"><span class="score-label">付费</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="获客 5/5: 来源社区即目标客户，发帖可获客"><span class="score-label">获客</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="监管 5/5: 纯软件，无监管，全球可售"><span class="score-label">监管</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
+  <details>
+    <summary>机会切入点 →</summary>
+    <p class="signal-opp">「Plex 迁移助手」：一键将 Plex 库、播放记录、收藏迁移到 Jellyfin/Emby。门槛低但痛点真实。更大的机会：针对家庭媒体服务器的 All-in-one 自托管套件（含媒体+备份+家庭 NAS 管理）。</p>
+    <p class="signal-src"><a href="https://www.reddit.com/r/selfhosted/" target="_blank">原文 [reddit_selfhosted]</a></p>
+  </details>
 </div>
 <!-- ── /SIGNAL 3 ── -->
-
-<!-- ── SIGNAL 4: Plex 收紧政策：自托管媒体服务迁移潮 ── -->
-<div class="signal-card new" data-level="prev-today">
+<!-- ── SIGNAL 4: Deloitte 裁员审计师：大型会计事务所 AI 化提速 ── -->
+<div class="signal-card new" data-level="MEDIUM">
   <div class="card-header">
-    <span class="signal-emoji">💡</span>
-    <span class="signal-title">Plex 收紧政策：自托管媒体服务迁移潮</span>
-    <span class="badge badge-today">今日早扫</span>
+    <span class="signal-emoji">📉</span>
+    <span class="signal-title">Deloitte 裁员审计师：大型会计事务所 AI 化提速</span>
+    <span class="badge" style="background:#ffd166;color:#000">MEDIUM</span>
   </div>
-  <p class="signal-desc">（今日早先扫描中已记录）</p>
+  <p class="signal-desc">Deloitte 本周对审计部门进行裁员，多个 Reddit 帖子证实跨团队削减。四大会计师事务所开始用 AI 替代审计执行层。</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 3/5: 有竞品但体验差"><span class="score-label">空白</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="付费 4/5: 行业有付费习惯，属核心工作流"><span class="score-label">付费</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="获客 4/5: 有清晰线上渠道，SEO/口碑驱动"><span class="score-label">获客</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="监管 3/5: 需行业资质或SOC2"><span class="score-label">监管</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
+  <details>
+    <summary>机会切入点 →</summary>
+    <p class="signal-opp">面向被裁审计师的再就业/技能升级平台，或针对中小会计师事务所（暂时安全）的 AI 审计辅助工具——让小所用更少的人做四大的工作量。</p>
+    <p class="signal-src"><a href="https://www.reddit.com/r/Accounting/" target="_blank">原文 [reddit_Accounting]</a></p>
+  </details>
 </div>
 <!-- ── /SIGNAL 4 ── -->
-
-<!-- ── SIGNAL 5: Deloitte 裁员审计师：大型会计事务所 AI 化提速 ── -->
-<div class="signal-card new" data-level="prev-today">
+<!-- ── SIGNAL 5: 1/10 外科医生在 8 年内离开临床 ── -->
+<div class="signal-card new" data-level="MEDIUM">
   <div class="card-header">
-    <span class="signal-emoji">💡</span>
-    <span class="signal-title">Deloitte 裁员审计师：大型会计事务所 AI 化提速</span>
-    <span class="badge badge-today">今日早扫</span>
+    <span class="signal-emoji">🏥</span>
+    <span class="signal-title">1/10 外科医生在 8 年内离开临床</span>
+    <span class="badge" style="background:#ffd166;color:#000">MEDIUM</span>
   </div>
-  <p class="signal-desc">（今日早先扫描中已记录）</p>
+  <p class="signal-desc">新研究：近 10% 的外科医生在执业 8 年内放弃临床，口腔外科和整形外科流失率最高。医疗系统人力危机持续加剧。</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 4/5: 有方案但极贵或只服务大企业"><span class="score-label">空白</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="付费 4/5: 行业有付费习惯，属核心工作流"><span class="score-label">付费</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="获客 2/5: 需主动外呼"><span class="score-label">获客</span><span class="score-num" style="background:#ff9a3c">2</span></span><span class="score-chip" data-tip="监管 1/5: 医疗(HIPAA+FDA)或法律服务"><span class="score-label">监管</span><span class="score-num" style="background:#ff4d6d">1</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
+  <details>
+    <summary>机会切入点 →</summary>
+    <p class="signal-opp">外科医生职业过渡支持平台（医疗咨询/顾问转型）或减少行政负担的 OR 工作流工具——让外科医生把时间花在手术上，而不是文书上。</p>
+    <p class="signal-src"><a href="https://www.reddit.com/r/medicine/" target="_blank">原文 [reddit_medicine]</a></p>
+  </details>
 </div>
 <!-- ── /SIGNAL 5 ── -->
-
-<!-- ── SIGNAL 6: 医疗 AI 书记员的患者隐私危机 ── -->
-<div class="signal-card new" data-level="prev-today">
-  <div class="card-header">
-    <span class="signal-emoji">💡</span>
-    <span class="signal-title">医疗 AI 书记员的患者隐私危机</span>
-    <span class="badge badge-today">今日早扫</span>
-  </div>
-  <p class="signal-desc">（今日早先扫描中已记录）</p>
-</div>
-<!-- ── /SIGNAL 6 ── -->
-
-<!-- ── SIGNAL 7: 1/10 外科医生在8年内离开临床：医疗人力危机 ── -->
-<div class="signal-card new" data-level="prev-today">
-  <div class="card-header">
-    <span class="signal-emoji">💡</span>
-    <span class="signal-title">1/10 外科医生在8年内离开临床：医疗人力危机</span>
-    <span class="badge badge-today">今日早扫</span>
-  </div>
-  <p class="signal-desc">（今日早先扫描中已记录）</p>
-</div>
-<!-- ── /SIGNAL 7 ── -->
-
-<!-- ── SIGNAL 8: 快手全面封禁 Cursor：大厂 AI 合规浪潮 ── -->
+<!-- ── SIGNAL 6: 快手全面封禁 Cursor：大厂 AI 合规浪潮 ── -->
 <div class="signal-card new" data-level="HIGH">
   <div class="card-header">
     <span class="signal-emoji">🔐</span>
     <span class="signal-title">快手全面封禁 Cursor：大厂 AI 合规浪潮</span>
     <span class="badge" style="background:#74c0fc;color:#000">HIGH</span>
   </div>
-  <p class="signal-desc">快手研发线发布通知，收紧第三方 AI 编程工具权限，Cursor 在公司设备上直接闪退。这已是今年第三家以上级别大厂做出同样动作。</p>
-  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 5/5: 完全没有直接方案，用户靠人工凑合"><span class="score-label">空白</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="付费 5/5: 帖子里有「I'd pay $X」或已为劣质替代品付费"><span class="score-label">付费</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="获客 3/5: 需要销售动作，客户有搜索行为"><span class="score-label">获客</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="监管 3/5: 需行业资质或SOC2/ISO27001"><span class="score-label">监管</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="机会 4/5: HIGH — 强烈建议关注"><span class="score-label">机会</span><span class="score-num" style="background:#74c0fc">4</span></span></div>
+  <p class="signal-desc">快手研发线发布通知收紧第三方 AI 编程工具权限，Cursor 在公司设备上直接闪退。这已是今年第三家以上级别大厂做出同样动作。</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 5/5: 完全无方案，靠人工凑合"><span class="score-label">空白</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="付费 5/5: 帖子里有「I'd pay」或已为劣质替代品付费"><span class="score-label">付费</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="获客 3/5: 需销售动作"><span class="score-label">获客</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="监管 3/5: 需行业资质或SOC2"><span class="score-label">监管</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="机会 4/5: HIGH — 强烈建议关注"><span class="score-label">机会</span><span class="score-num" style="background:#74c0fc">4</span></span></div>
   <details>
     <summary>机会切入点 →</summary>
     <p class="signal-opp">企业级合规 AI 编程工具 + 私有化部署方案。竞争格局：快手/字节/国企都有需求，现有解决方案几乎空白。切入点：私有化 IDE AI 助手，对接内部代码仓库，满足数据不出域合规要求。</p>
     <p class="signal-src"><a href="https://juejin.cn/post/" target="_blank">原文 [juejin]</a></p>
   </details>
 </div>
-<!-- ── /SIGNAL 8 ── -->
-
-<!-- ── SIGNAL 9: DeepSeek 被偷偷内嵌到主流 AI 工具 ── -->
+<!-- ── /SIGNAL 6 ── -->
+<!-- ── SIGNAL 7: DeepSeek 被偷偷内嵌到主流 AI 工具 ── -->
 <div class="signal-card new" data-level="HIGH">
   <div class="card-header">
     <span class="signal-emoji">🕵️</span>
     <span class="signal-title">DeepSeek 被偷偷内嵌到主流 AI 工具</span>
     <span class="badge" style="background:#74c0fc;color:#000">HIGH</span>
   </div>
-  <p class="signal-desc">Dev.to 一篇文章揭示：HuggingChat 等主流 AI 工具后端悄悄跑着 DeepSeek，企业用户不知情地把数据发到了中国服务器。这是一个 AI 工具供应链透明度问题。</p>
-  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 5/5: 完全没有直接方案，用户靠人工凑合"><span class="score-label">空白</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="付费 5/5: 帖子里有「I'd pay $X」或已为劣质替代品付费"><span class="score-label">付费</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="获客 4/5: 有清晰线上渠道，SEO/口碑驱动"><span class="score-label">获客</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="监管 4/5: 数据隐私（GDPR/CCPA）要求但标准明确"><span class="score-label">监管</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="机会 4/5: HIGH — 强烈建议关注"><span class="score-label">机会</span><span class="score-num" style="background:#74c0fc">4</span></span></div>
+  <p class="signal-desc">Dev.to 文章揭示：HuggingChat 等主流 AI 工具后端悄悄跑着 DeepSeek，企业用户不知情地把数据发到了中国服务器。AI 工具供应链透明度问题。</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 5/5: 完全无方案，靠人工凑合"><span class="score-label">空白</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="付费 5/5: 帖子里有「I'd pay」或已为劣质替代品付费"><span class="score-label">付费</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="获客 4/5: 有清晰线上渠道，SEO/口碑驱动"><span class="score-label">获客</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="监管 4/5: 数据隐私（GDPR）要求但标准明确"><span class="score-label">监管</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="机会 4/5: HIGH — 强烈建议关注"><span class="score-label">机会</span><span class="score-num" style="background:#74c0fc">4</span></span></div>
   <details>
     <summary>机会切入点 →</summary>
-    <p class="signal-opp">AI 工具供应链审计/透明度 SaaS。帮助企业 CTO 实时知道他们的 AI 工具究竟在调用哪些模型、数据去了哪里。付费方：合规团队、法务、CISO。类比：软件依赖审计（Snyk）→ AI 模型依赖审计。</p>
+    <p class="signal-opp">AI 工具供应链审计 SaaS：帮助企业 CTO 实时知道他们的 AI 工具究竟在调用哪些模型、数据去了哪里。类比：软件依赖审计（Snyk）→ AI 模型依赖审计。</p>
     <p class="signal-src"><a href="https://dev.to/" target="_blank">原文 [devto]</a></p>
   </details>
 </div>
-<!-- ── /SIGNAL 9 ── -->
-
-<!-- ── SIGNAL 10: 扎克伯格提前告知员工：大规模 AI 裁员将至 ── -->
+<!-- ── /SIGNAL 7 ── -->
+<!-- ── SIGNAL 8: 扎克伯格提前告知员工：大规模 AI 裁员将至 ── -->
 <div class="signal-card new" data-level="MEDIUM">
   <div class="card-header">
-    <span class="signal-emoji">📉</span>
+    <span class="signal-emoji">📢</span>
     <span class="signal-title">扎克伯格提前告知员工：大规模 AI 裁员将至</span>
     <span class="badge" style="background:#ffd166;color:#000">MEDIUM</span>
   </div>
   <p class="signal-desc">泄露录音显示扎克伯格在内部会议上提前告知员工 Meta 将以 AI 替代大量岗位。这不是传言，是 CEO 级别的正式预告。</p>
-  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 3/5: 有竞品但功能不完整或体验差"><span class="score-label">空白</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="付费 3/5: 有付费可能但需教育"><span class="score-label">付费</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="获客 4/5: 有清晰线上渠道，SEO/口碑驱动"><span class="score-label">获客</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="监管 5/5: 纯软件工具，无行业监管，全球可售"><span class="score-label">监管</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 3/5: 有竞品但体验差"><span class="score-label">空白</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="付费 3/5: 有付费可能但需教育"><span class="score-label">付费</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="获客 4/5: 有清晰线上渠道，SEO/口碑驱动"><span class="score-label">获客</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="监管 5/5: 纯软件，无监管，全球可售"><span class="score-label">监管</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
   <details>
     <summary>机会切入点 →</summary>
-    <p class="signal-opp">AI 时代职业转型 / 技能再培训工具。现有的在线教育太慢太泛，真正的机会是：用 AI 帮知识工作者快速诊断「哪 30% 的工作会被替代」+「我需要学什么」，并给出 6 个月行动计划。付费场景：企业 HR 批量购买员工转型方案。</p>
+    <p class="signal-opp">AI 时代职业转型平台：用 AI 帮知识工作者诊断「哪 30% 的工作会被替代」并给出 6 个月行动计划。付费场景：企业 HR 批量采购员工转型方案。</p>
     <p class="signal-src"><a href="https://www.reddit.com/r/singularity/" target="_blank">原文 [reddit_singularity]</a></p>
   </details>
 </div>
-<!-- ── /SIGNAL 10 ── -->
-
-<!-- ── SIGNAL 11: Netlify 封锁用户访问自己的网站 ── -->
+<!-- ── /SIGNAL 8 ── -->
+<!-- ── SIGNAL 9: Netlify 封锁用户访问自己的网站 ── -->
 <div class="signal-card new" data-level="MEDIUM">
   <div class="card-header">
     <span class="signal-emoji">🔒</span>
     <span class="signal-title">Netlify 封锁用户访问自己的网站</span>
     <span class="badge" style="background:#ffd166;color:#000">MEDIUM</span>
   </div>
-  <p class="signal-desc">一名开发者的 Netlify 部署积分用完后，不仅无法继续部署，甚至被锁定无法访问自己项目的管理后台。r/webdev 高赞帖，评论区充斥着类似经历。</p>
-  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 3/5: 有竞品但功能不完整或体验差"><span class="score-label">空白</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="付费 3/5: 有付费可能但需教育"><span class="score-label">付费</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="获客 5/5: 来源社区即目标客户，发帖可获客"><span class="score-label">获客</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="监管 5/5: 纯软件工具，无行业监管，全球可售"><span class="score-label">监管</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
+  <p class="signal-desc">开发者 Netlify 积分用完后被锁定，无法访问自己项目的管理后台。r/webdev 高赞帖，评论区充斥类似经历。</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 3/5: 有竞品但体验差"><span class="score-label">空白</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="付费 3/5: 有付费可能但需教育"><span class="score-label">付费</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="获客 5/5: 来源社区即目标客户，发帖可获客"><span class="score-label">获客</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="监管 5/5: 纯软件，无监管，全球可售"><span class="score-label">监管</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
   <details>
     <summary>机会切入点 →</summary>
-    <p class="signal-opp">「不会把你锁在外面」的部署平台。真正的差异化不是功能，是产品理念：用户的数据和访问权永远属于用户。目标客群：被 Netlify/Vercel 吓到的中小开发者。可以是：开源优先的部署工具，或者「平台风险保险」——帮你自动备份、一键迁出。</p>
+    <p class="signal-opp">「不会把你锁在外面」的部署平台。差异化不是功能，是产品理念：用户的数据和访问权永远属于用户。或做「平台风险保险」——帮你自动备份、一键迁出。</p>
     <p class="signal-src"><a href="https://www.reddit.com/r/webdev/" target="_blank">原文 [reddit_webdev]</a></p>
   </details>
 </div>
-<!-- ── /SIGNAL 11 ── -->
-
-<!-- ── SIGNAL 12: AI 爬虫正在让运营 Wiki 变得难以为继 ── -->
+<!-- ── /SIGNAL 9 ── -->
+<!-- ── SIGNAL 10: AI 爬虫正在让运营 Wiki 变得难以为继 ── -->
 <div class="signal-card new" data-level="MEDIUM">
   <div class="card-header">
     <span class="signal-emoji">🕸️</span>
@@ -218,49 +213,61 @@ details[open] summary{margin-bottom:10px}
     <span class="badge" style="background:#ffd166;color:#000">MEDIUM</span>
   </div>
   <p class="signal-desc">Lobsters 热帖：大量 AI 训练爬虫对小型 wiki 发起无差别抓取，带宽费用暴增，正常用户体验下降，很多 wiki 管理员在考虑关站或转私有。</p>
-  <div class="score-row"><span class="score-chip" data-tip="痛点 3/5: 中赞100-500，问题存在但情绪平稳"><span class="score-label">痛点</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="空白 4/5: 有方案但极贵或只服务大企业"><span class="score-label">空白</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="付费 3/5: 有付费可能但需教育"><span class="score-label">付费</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="获客 3/5: 需要销售动作，客户有搜索行为"><span class="score-label">获客</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="监管 5/5: 纯软件工具，无行业监管，全球可售"><span class="score-label">监管</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 3/5: 中赞，问题存在但情绪平稳"><span class="score-label">痛点</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="空白 4/5: 有方案但极贵或只服务大企业"><span class="score-label">空白</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="付费 3/5: 有付费可能但需教育"><span class="score-label">付费</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="获客 3/5: 需销售动作"><span class="score-label">获客</span><span class="score-num" style="background:#ffd166">3</span></span><span class="score-chip" data-tip="监管 5/5: 纯软件，无监管，全球可售"><span class="score-label">监管</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
   <details>
     <summary>机会切入点 →</summary>
-    <p class="signal-opp">专为 wiki/内容社区设计的 AI 爬虫防护工具。现有方案（robots.txt、Cloudflare）对新型 AI 爬虫防护有限。机会：一个专门识别和管理 AI 爬虫的中间件，帮社区按需授权抓取（付费授权→收益分成）。</p>
+    <p class="signal-opp">专为 wiki/内容社区设计的 AI 爬虫防护工具。机会：一个专门识别和管理 AI 爬虫的中间件，帮社区按需授权抓取（付费授权→收益分成）。</p>
     <p class="signal-src"><a href="https://lobste.rs/" target="_blank">原文 [lobsters]</a></p>
   </details>
 </div>
-<!-- ── /SIGNAL 12 ── -->
-
-<!-- ── SIGNAL 13: 腾讯文档大规模裁员 ── -->
-<div class="signal-card repeated" data-level="repeated">
+<!-- ── /SIGNAL 10 ── -->
+<!-- ── SIGNAL 11: 企业员工盲目信任 AI 输出：sysadmin 现场目击 ── -->
+<div class="signal-card new" data-level="HIGH">
   <div class="card-header">
-    <span class="signal-emoji">🔁</span>
-    <span class="signal-title">腾讯文档大规模裁员</span>
-    <span class="badge tag-repeat" style="background:#f59e0b;color:#000">🔁 已追踪</span>
+    <span class="signal-emoji">⚠️</span>
+    <span class="signal-title">企业员工盲目信任 AI 输出：sysadmin 现场目击</span>
+    <span class="badge" style="background:#74c0fc;color:#000">HIGH</span>
   </div>
+  <p class="signal-desc">r/sysadmin 高赞帖：IT 工程师目击同事不经验证直接采纳 AI 给出的配置建议，导致生产事故。评论区大量类似经历。（本次抓取源失效，来自今日早扫）</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 4/5: 有方案但极贵或只服务大企业"><span class="score-label">空白</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="付费 4/5: 行业有付费习惯，属核心工作流"><span class="score-label">付费</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="获客 4/5: 有清晰线上渠道，SEO/口碑驱动"><span class="score-label">获客</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="监管 4/5: 数据隐私（GDPR）要求但标准明确"><span class="score-label">监管</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="机会 4/5: HIGH — 强烈建议关注"><span class="score-label">机会</span><span class="score-num" style="background:#74c0fc">4</span></span></div>
   <details>
-    <summary>追踪详情</summary>
-    <p class="signal-desc">持续出现，趋势强化中。</p>
-    <p class="signal-opp">与 Deloitte 裁员信号共同指向：大型企业服务机构加速用 AI 替代中层执行岗位。</p>
-    <span class="score-label" style="display:none">机会</span><span class="score-num" style="display:none">3</span>
+    <summary>机会切入点 →</summary>
+    <p class="signal-opp">企业 AI 输出审计/验证工具：在 AI 建议执行前插入一道验证层，记录谁用了什么 AI 输出做了什么决策。面向 IT/运维团队。</p>
+    <p class="signal-src"><a href="https://www.reddit.com/r/sysadmin/" target="_blank">原文 [reddit_sysadmin]</a></p>
   </details>
 </div>
-<!-- ── /SIGNAL 13 ── -->
-
+<!-- ── /SIGNAL 11 ── -->
+<!-- ── SIGNAL 12: 医疗 AI 书记员的患者隐私危机 ── -->
+<div class="signal-card new" data-level="MEDIUM">
+  <div class="card-header">
+    <span class="signal-emoji">🔐</span>
+    <span class="signal-title">医疗 AI 书记员的患者隐私危机</span>
+    <span class="badge" style="background:#ffd166;color:#000">MEDIUM</span>
+  </div>
+  <p class="signal-desc">医生讨论 AI 书记员工具（如 Nabla、Abridge）在诊室实时转录对话时的隐私边界问题：患者是否知情？数据存在哪？谁有访问权？</p>
+  <div class="score-row"><span class="score-chip" data-tip="痛点 4/5: 高赞500+，多人共鸣，痛苦具体"><span class="score-label">痛点</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="空白 4/5: 有方案但极贵或只服务大企业"><span class="score-label">空白</span><span class="score-num" style="background:#74c0fc">4</span></span><span class="score-chip" data-tip="付费 5/5: 帖子里有「I'd pay」或已为劣质替代品付费"><span class="score-label">付费</span><span class="score-num" style="background:#06d6a0">5</span></span><span class="score-chip" data-tip="获客 2/5: 需主动外呼"><span class="score-label">获客</span><span class="score-num" style="background:#ff9a3c">2</span></span><span class="score-chip" data-tip="监管 1/5: 医疗(HIPAA+FDA)或法律服务"><span class="score-label">监管</span><span class="score-num" style="background:#ff4d6d">1</span></span><span class="score-chip" data-tip="机会 3/5: MEDIUM — 值得追踪"><span class="score-label">机会</span><span class="score-num" style="background:#ffd166">3</span></span></div>
+  <details>
+    <summary>机会切入点 →</summary>
+    <p class="signal-opp">医疗 AI 工具隐私合规层：在医疗 AI 书记员和 EHR 系统之间插入一个透明、可审计的数据处理层，满足 HIPAA 要求。面向医院 IT 和合规团队。</p>
+    <p class="signal-src"><a href="https://www.reddit.com/r/medicine/" target="_blank">原文 [reddit_medicine]</a></p>
+  </details>
 </div>
-
+<!-- ── /SIGNAL 12 ── -->
+</div>
 <div class="extras-section">
   <h2>今日还值得关注</h2>
-  <div class="extra-item"><strong>Flipper One 硬件众筹</strong> <span class="extra-src">HN</span><br><span class="extra-note">安全研究硬件 Flipper 的下一代，社区高度期待，说明独立安全硬件有付费需求</span></div><div class="extra-item"><strong>内存短缺导致消费电子涨价</strong> <span class="extra-src">HN</span><br><span class="extra-note">硬件供应链收紧，嵌入式/边缘 AI 设备成本将上升，影响 on-device AI 产品定价策略</span></div><div class="extra-item"><strong>Google 测试 Search 新广告格式</strong> <span class="extra-src">HN</span><br><span class="extra-note">Search 生态变化，SEO 工具和内容营销赛道将持续震荡</span></div><div class="extra-item"><strong>豆包 9.9 元抢程序员市场</strong> <span class="extra-src">掘金</span><br><span class="extra-note">国内 AI 编程定价战打响，低价拉新策略下付费转化率成关键</span></div>
+  <div class="extra-item"><strong>腾讯文档大规模裁员</strong> <span class="extra-src">V2EX</span><br><span class="extra-note">与 Deloitte 信号共振：大型协作 SaaS 厂商正在用 AI 替代执行层，中小团队有窗口期</span></div><div class="extra-item"><strong>Flipper One 硬件众筹</strong> <span class="extra-src">HN</span><br><span class="extra-note">安全研究硬件 Flipper 下一代，社区付费意愿强，独立安全硬件赛道仍有机会</span></div><div class="extra-item"><strong>内存短缺导致消费电子涨价</strong> <span class="extra-src">HN</span><br><span class="extra-note">硬件供应链收紧，on-device AI 产品成本将上升，影响边缘 AI 设备定价策略</span></div><div class="extra-item"><strong>Google 测试 Search 新广告格式</strong> <span class="extra-src">HN</span><br><span class="extra-note">Search 生态持续变化，SEO 工具和内容营销赛道震荡加剧</span></div>
 </div>
-
 <script type="application/json" id="signal-extras">
-[{"title": "Flipper One 硬件众筹", "source": "HN", "note": "安全研究硬件 Flipper 的下一代，社区高度期待，说明独立安全硬件有付费需求"}, {"title": "内存短缺导致消费电子涨价", "source": "HN", "note": "硬件供应链收紧，嵌入式/边缘 AI 设备成本将上升，影响 on-device AI 产品定价策略"}, {"title": "Google 测试 Search 新广告格式", "source": "HN", "note": "Search 生态变化，SEO 工具和内容营销赛道将持续震荡"}, {"title": "豆包 9.9 元抢程序员市场", "source": "掘金", "note": "国内 AI 编程定价战打响，低价拉新策略下付费转化率成关键"}]
+[{"title": "腾讯文档大规模裁员", "source": "V2EX", "note": "与 Deloitte 信号共振：大型协作 SaaS 厂商正在用 AI 替代执行层，中小团队有窗口期"}, {"title": "Flipper One 硬件众筹", "source": "HN", "note": "安全研究硬件 Flipper 下一代，社区付费意愿强，独立安全硬件赛道仍有机会"}, {"title": "内存短缺导致消费电子涨价", "source": "HN", "note": "硬件供应链收紧，on-device AI 产品成本将上升，影响边缘 AI 设备定价策略"}, {"title": "Google 测试 Search 新广告格式", "source": "HN", "note": "Search 生态持续变化，SEO 工具和内容营销赛道震荡加剧"}]
 </script>
-
 <script>
-function filterCards(level) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  document.querySelectorAll('.signal-card').forEach(c => {
-    if (level === 'all') { c.style.display = ''; return; }
-    c.style.display = c.dataset.level === level ? '' : 'none';
+function filterCards(level,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(c=>{
+    if(level==='all'){c.style.display='';return;}
+    c.style.display=c.dataset.level===level?'':'none';
   });
 }
 </script>
