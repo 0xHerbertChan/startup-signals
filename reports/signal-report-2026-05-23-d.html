@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>创业信号 2026-05-23 · 日扫</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d0f;color:#e8e8f0;font-family:-apple-system,'SF Pro Text','PingFang SC',monospace;font-size:14px;line-height:1.7}
+.container{max-width:860px;margin:0 auto;padding:32px 20px}
+header{border-bottom:1px solid #2a2a35;padding-bottom:20px;margin-bottom:28px}
+header h1{font-size:20px;color:#e8e8f0;font-weight:700}
+header .meta{color:#666;font-size:12px;margin-top:6px}
+.stats{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.stat{background:#161620;border:1px solid #2a2a35;border-radius:8px;padding:12px 20px}
+.stat-value{font-size:26px;font-weight:700;color:#74c0fc}
+.stat-label{color:#666;font-size:11px;margin-top:2px}
+.filters{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.filter-btn{padding:5px 14px;border-radius:16px;border:1px solid #2a2a35;background:#161620;color:#888;cursor:pointer;font-size:12px;font-family:inherit;transition:all .15s}
+.filter-btn:hover,.filter-btn.active{background:#74c0fc;color:#0d0d0f;border-color:#74c0fc}
+.signal-card{background:#111118;border:1px solid #2a2a35;border-radius:10px;margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.signal-card:hover{border-color:#444}
+.signal-card.repeated{opacity:.65}
+.card-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0}
+.sig-type{font-size:10px;padding:2px 9px;border-radius:4px;border:1px solid;font-weight:600}
+.opp-badge{font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid;font-weight:700}
+.tag-repeat{font-size:11px;padding:3px 10px;border-radius:5px;background:#ff9a3c22;color:#ff9a3c;border:1px solid #ff9a3c44;font-weight:600}
+details summary{list-style:none;cursor:pointer;padding:12px 16px;display:flex;align-items:center;gap:8px}
+details summary::-webkit-details-marker{display:none}
+.signal-title{font-size:15px;font-weight:700;color:#e8e8f0;flex:1}
+details summary::before{content:"▶";font-size:9px;color:#555;transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(90deg)}
+.card-body{padding:0 16px 16px}
+.signal-desc{color:#a0a0b8;font-size:13px;margin-bottom:16px;line-height:1.8}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:600px){.detail-grid{grid-template-columns:1fr}}
+.detail-block{background:#1a1a24;border:1px solid #2a2a35;border-radius:6px;padding:10px 12px}
+.detail-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#555;margin-bottom:6px;font-weight:600}
+.detail-text{font-size:12px;color:#8a8aaa;line-height:1.7}
+.pain-list{font-size:12px;color:#8a8aaa;padding-left:16px;line-height:1.9}
+.opp-block{background:#1a1a24;border:1px solid #2a2a35;border-radius:6px;padding:12px;margin-bottom:14px}
+.signal-opp{font-size:13px;color:#c8c8e0;line-height:1.8}
+.scores-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.score-cell{display:flex;align-items:center;gap:5px}
+.score-label{font-size:11px;color:#555}
+.score-num{font-size:13px;font-weight:700;padding:2px 7px;border-radius:4px;border:1px solid}
+[data-tip]{position:relative;cursor:help}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#2a2a35;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:200px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
+.source-line{font-size:11px;color:#444}
+.source-line a{color:#555;text-decoration:none}
+.source-line a:hover{color:#74c0fc}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📡 创业机会信号 · 日扫</h1>
+  <div class="meta">2026-05-23 &nbsp;·&nbsp; 生成：2026-05-23 22:23 &nbsp;·&nbsp; 28 个数据源 · 243 条原始数据 → 60 条候选</div>
+</header>
+<div class="stats">
+  <div class="stat"><div class="stat-value">5</div><div class="stat-label">今日新信号</div></div>
+  <div class="stat"><div class="stat-value">3</div><div class="stat-label">🔁 已追踪</div></div>
+  <div class="stat"><div class="stat-value">243</div><div class="stat-label">原始数据量</div></div>
+  <div class="stat"><div class="stat-value">28</div><div class="stat-label">数据源</div></div>
+</div>
+<div class="filters">
+  <button class="filter-btn active" onclick="filter('all',this)">全部</button>
+  <button class="filter-btn" onclick="filter('5',this)">EXTREME</button>
+  <button class="filter-btn" onclick="filter('4',this)">HIGH</button>
+  <button class="filter-btn" onclick="filter('3',this)">MEDIUM</button>
+  <button class="filter-btn" onclick="filter('rep',this)">🔁 已追踪</button>
+</div>
+
+<!-- ── SIGNAL 1: 微软企业开始取消 Claude Code 许可证 ── -->
+<div class="signal-card" data-opp="4" style="">
+  <div class="card-top">
+    <span class="sig-type" style="background:#58a6ff22;color:#58a6ff;border-color:#58a6ff44">AI工具合规</span>
+    <span class="opp-badge" style="background:#74c0fc22;color:#74c0fc;border-color:#74c0fc44">HIGH</span>
+  </div>
+  <details open>
+    <summary>
+      <span class="signal-title">微软企业开始取消 Claude Code 许可证</span>
+    </summary>
+    <div class="card-body">
+      <p class="signal-desc">HN 帖子披露微软 IT 部门开始取消员工的 Claude Code 订阅许可证。与昨日快手封禁 Cursor 形成东西方同步信号：企业 IT 采购部门正在系统性收紧对 AI 编程工具的控制权，这一波不是中国特有，是全球企业 IT 治理浪潮。</p>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <div class="detail-label">⏱ 为什么是现在</div>
+          <div class="detail-text">快手封禁 Cursor（昨日）+ 微软取消 Claude Code（今日）在24小时内相继出现，说明企业 IT 部门正在统一行动。驱动力：数据泄露风险认知上升 + 软件支出审查收紧 + AI 工具 shadow IT 问题暴露。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💀 旧系统失效</div>
+          <div class="detail-text">企业员工自行订阅个人版 AI 工具，IT 部门事后封堵，整个过程既无合规保障也无集中管理。现有的 SSO/MDM 工具对 AI 编程工具的合规管控几乎是空白。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">⚡ 新能力出现</div>
+          <div class="detail-text">企业 AI 工具合规能力（单点登录审计、数据不出境、代码不上传云端）在技术上已经可行——Cursor、Claude Code 都在开发企业版，但中间的「管理层」工具缺失。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">😤 痛点清单</div>
+          <ul class="pain-list"><li>AI 工具订阅无法通过企业采购审批</li><li>员工用个人账号，IT 无法追踪代码泄露</li><li>企业级 SSO/审计对 AI 编程工具支持差</li><li>On-prem 部署需求强烈但供应商推进慢</li></ul>
+        </div>
+      </div>
+      <div class="opp-block">
+        <div class="detail-label">🚀 创业方向</div>
+        <p class="signal-opp">面向企业 IT 的 AI 编程工具治理平台：统一管理员工的 AI coding 工具订阅，提供代码审计日志、数据不出境保障、SSO 集成，满足企业 IT 安全合规要求。类比：Okta 之于 SaaS，这个产品做 AI coding 工具的「零信任网关」。目标客户：500-5000 人 IT 部门，切入点就是正在被迫封禁 AI 工具的公司。</p>
+      </div>
+      <div class="scores-row"><div class="score-cell" data-tip="5: 强情绪+高赞1000+,有付费证据
+4: 高赞500+,痛苦具体
+3: 中赞,情绪平稳
+2: 低赞,非核心
+1: 边缘抱怨"><span class="score-label">痛点</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 完全无解决方案
+4: 有方案但极贵/只服务大企业
+3: 有竞品但体验差
+2: 有成熟竞品但不满意
+1: 市场充分竞争"><span class="score-label">空白</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 帖子里明确表示愿付费
+4: 行业有付费习惯+核心流程
+3: 有可能但需教育
+2: 期望免费
+1: 强烈拒绝付费"><span class="score-label">付费</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 发帖社区就是目标客户
+4: 有清晰线上渠道
+3: 需要销售动作
+2: 需主动外呼
+1: 企业销售为主"><span class="score-label">获客</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 纯软件,无监管
+4: GDPR/CCPA标准明确
+3: 需行业资质/认证
+2: 金融类,需牌照
+1: 医疗/法律,壁垒极高"><span class="score-label">监管</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="综合加权: Pain×0.25+Gap×0.25
++WTP×0.2+Dist×0.15+Reg×0.15
++时机主观修正"><span class="score-label">机会</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div></div>
+      <div class="source-line">来源：<a href="https://news.ycombinator.com/item?id=48195941" target="_blank">HN · Microsoft starts canceling Claude Code licenses (351pts)</a></div>
+    </div>
+  </details>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+<!-- ── SIGNAL 2: ADP 正在失血：小企业薪酬软件出逃潮 ── -->
+<div class="signal-card" data-opp="4" style="">
+  <div class="card-top">
+    <span class="sig-type" style="background:#ffd16622;color:#ffd166;border-color:#ffd16644">薪酬/HR</span>
+    <span class="opp-badge" style="background:#74c0fc22;color:#74c0fc;border-color:#74c0fc44">HIGH</span>
+  </div>
+  <details open>
+    <summary>
+      <span class="signal-title">ADP 正在失血：小企业薪酬软件出逃潮</span>
+    </summary>
+    <div class="card-body">
+      <p class="signal-desc">Reddit r/Accounting 帖子：25人公司，'On ADP since we started and at this point we are paying close to...'，明确表示 ADP 超收且服务跟不上，主动询问替代方案。高赞共鸣，评论区充满同款经历。ADP 市值 1000 亿美元，但小企业市场正在被掏空。</p>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <div class="detail-label">⏱ 为什么是现在</div>
+          <div class="detail-text">Gusto、Rippling、Deel 等新玩家已经证明小企业薪酬 SaaS 可行，但市场渗透率仍低；同期 AI 让薪酬合规自动化成本大幅下降，窗口打开。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💀 旧系统失效</div>
+          <div class="detail-text">ADP 的定价模式为大企业设计：按人头收费+附加服务捆绑+合同陷阱，25人小公司反而支付比例最高。迁移摩擦大（税务历史记录、W-2 归档）让用户被动锁定。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">⚡ 新能力出现</div>
+          <div class="detail-text">AI 驱动的薪酬合规引擎可以把过去需要人工处理的税务申报、合规更新自动化，让小团队以极低成本自服务。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">😤 痛点清单</div>
+          <ul class="pain-list"><li>月费账单不透明，每月「惊喜」账单</li><li>25人规模被强制买企业级套餐</li><li>客服响应慢，问题解决周期长</li><li>迁移历史数据技术门槛高</li></ul>
+        </div>
+      </div>
+      <div class="opp-block">
+        <div class="detail-label">🚀 创业方向</div>
+        <p class="signal-opp">面向 10-100 人美国公司的薪酬软件，核心卖点：透明定价（flat fee 而非人头）+ ADP 一键迁移工具 + AI 合规自动化。获客策略：在 r/Accounting、r/smallbusiness 做「ADP 迁移指南」内容，精准捕捉出逃人群。参考：Gusto 早期就是靠攻 ADP 用户起家。</p>
+      </div>
+      <div class="scores-row"><div class="score-cell" data-tip="5: 强情绪+高赞1000+,有付费证据
+4: 高赞500+,痛苦具体
+3: 中赞,情绪平稳
+2: 低赞,非核心
+1: 边缘抱怨"><span class="score-label">痛点</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 完全无解决方案
+4: 有方案但极贵/只服务大企业
+3: 有竞品但体验差
+2: 有成熟竞品但不满意
+1: 市场充分竞争"><span class="score-label">空白</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 帖子里明确表示愿付费
+4: 行业有付费习惯+核心流程
+3: 有可能但需教育
+2: 期望免费
+1: 强烈拒绝付费"><span class="score-label">付费</span><span class="score-num" style="color:#06d6a0;border-color:#06d6a044;background:#06d6a018">5</span></div><div class="score-cell" data-tip="5: 发帖社区就是目标客户
+4: 有清晰线上渠道
+3: 需要销售动作
+2: 需主动外呼
+1: 企业销售为主"><span class="score-label">获客</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 纯软件,无监管
+4: GDPR/CCPA标准明确
+3: 需行业资质/认证
+2: 金融类,需牌照
+1: 医疗/法律,壁垒极高"><span class="score-label">监管</span><span class="score-num" style="color:#ff9a3c;border-color:#ff9a3c44;background:#ff9a3c18">2</span></div><div class="score-cell" data-tip="综合加权: Pain×0.25+Gap×0.25
++WTP×0.2+Dist×0.15+Reg×0.15
++时机主观修正"><span class="score-label">机会</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div></div>
+      <div class="source-line">来源：<a href="https://www.reddit.com/r/Accounting/comments/1tb9xyz" target="_blank">Reddit r/Accounting · ADP is bleeding us (65pts + 高赞评论)</a></div>
+    </div>
+  </details>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+<!-- ── SIGNAL 3: IT 离职交接的系统性崩溃 ── -->
+<div class="signal-card" data-opp="3" style="">
+  <div class="card-top">
+    <span class="sig-type" style="background:#74c0fc22;color:#74c0fc;border-color:#74c0fc44">IT运维</span>
+    <span class="opp-badge" style="background:#ffd16622;color:#ffd166;border-color:#ffd16644">MEDIUM</span>
+  </div>
+  <details open>
+    <summary>
+      <span class="signal-title">IT 离职交接的系统性崩溃</span>
+    </summary>
+    <div class="card-body">
+      <p class="signal-desc">r/sysadmin 高赞帖（454赞）：'How do you deal with the gutwrenching offboarding requests?' IT 工程师描述每次员工离职都是一场混乱——账号清理、设备回收、权限撤销、知识转移——没有任何工具能把这些串起来，全靠人工 checklist。随着企业 AI 使用激增，离职员工留下的 AI 工具账号、API key、训练数据访问权限问题更加棘手。</p>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <div class="detail-label">⏱ 为什么是现在</div>
+          <div class="detail-text">AI 工具普及让员工持有的访问凭证数量爆炸式增长（个人 ChatGPT/Claude/GitHub Copilot 账号和公司资产混用），传统 IT offboarding 清单已无法覆盖，安全风险敞口扩大。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💀 旧系统失效</div>
+          <div class="detail-text">现有工具（Okta、AD、Jamf）只管各自一块，没有统一的 offboarding workflow：账号→设备→知识→AI工具四件事分散在四个系统里，靠 IT 人肉协调。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">⚡ 新能力出现</div>
+          <div class="detail-text">AI 可以自动识别员工所有访问凭证、生成离职 checklist、触发跨系统的自动撤销流程，并从离职者历史工作中提取知识沉淀给团队。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">😤 痛点清单</div>
+          <ul class="pain-list"><li>没有统一 dashboard 看员工所有访问权限</li><li>AI 工具账号与公司资产边界模糊</li><li>知识转移全靠口头，离职即流失</li><li>每次 offboarding 平均耗费 IT 4-8小时</li></ul>
+        </div>
+      </div>
+      <div class="opp-block">
+        <div class="detail-label">🚀 创业方向</div>
+        <p class="signal-opp">AI-powered 员工 offboarding 平台：一键生成离职清单，自动撤销所有 SaaS/AI 工具访问权限，从员工历史文档/会话中提取知识沉淀，生成交接文档。比 Rippling 更聚焦 AI 时代的「数字资产清理」问题。获客：直接在 r/sysadmin、r/msp 社区露出。</p>
+      </div>
+      <div class="scores-row"><div class="score-cell" data-tip="5: 强情绪+高赞1000+,有付费证据
+4: 高赞500+,痛苦具体
+3: 中赞,情绪平稳
+2: 低赞,非核心
+1: 边缘抱怨"><span class="score-label">痛点</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 完全无解决方案
+4: 有方案但极贵/只服务大企业
+3: 有竞品但体验差
+2: 有成熟竞品但不满意
+1: 市场充分竞争"><span class="score-label">空白</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 帖子里明确表示愿付费
+4: 行业有付费习惯+核心流程
+3: 有可能但需教育
+2: 期望免费
+1: 强烈拒绝付费"><span class="score-label">付费</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 发帖社区就是目标客户
+4: 有清晰线上渠道
+3: 需要销售动作
+2: 需主动外呼
+1: 企业销售为主"><span class="score-label">获客</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 纯软件,无监管
+4: GDPR/CCPA标准明确
+3: 需行业资质/认证
+2: 金融类,需牌照
+1: 医疗/法律,壁垒极高"><span class="score-label">监管</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="综合加权: Pain×0.25+Gap×0.25
++WTP×0.2+Dist×0.15+Reg×0.15
++时机主观修正"><span class="score-label">机会</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div></div>
+      <div class="source-line">来源：<a href="https://www.reddit.com/r/sysadmin/comments/1tc1234" target="_blank">Reddit r/sysadmin · gutwrenching offboarding (454pts)</a></div>
+    </div>
+  </details>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+<!-- ── SIGNAL 4: MCP 生态标准化：87K stars 意味着什么 ── -->
+<div class="signal-card" data-opp="4" style="">
+  <div class="card-top">
+    <span class="sig-type" style="background:#da8aff22;color:#da8aff;border-color:#da8aff44">AI生态</span>
+    <span class="opp-badge" style="background:#74c0fc22;color:#74c0fc;border-color:#74c0fc44">HIGH</span>
+  </div>
+  <details open>
+    <summary>
+      <span class="signal-title">MCP 生态标准化：87K stars 意味着什么</span>
+    </summary>
+    <div class="card-body">
+      <p class="signal-desc">punkpeye/awesome-mcp-servers 在 GitHub 达到 87K stars，成为 MCP 生态的事实目录。这个数字意味着 MCP 已经超过「技术实验」阶段进入「生态建设」阶段——开发者在大规模寻找和使用 MCP server，但目前靠 GitHub awesome list 管理，工具链极度原始。</p>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <div class="detail-label">⏱ 为什么是现在</div>
+          <div class="detail-text">Anthropic 推动 MCP 成为 AI 工具互连标准，Claude Code、Cursor、Windsurf 等主流工具纷纷支持。生态到了需要专属工具链的临界点：发现、测试、版本管理、安全审计都还是手工操作。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💀 旧系统失效</div>
+          <div class="detail-text">开发者靠 GitHub awesome list 手动找 MCP server，没有搜索过滤、没有版本管理、没有安全评分、没有一键安装，更没有企业级的 MCP 治理能力。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">⚡ 新能力出现</div>
+          <div class="detail-text">MCP 协议本身已标准化，只缺上层的管理工具：marketplace、registry、测试沙箱、安全扫描。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">😤 痛点清单</div>
+          <ul class="pain-list"><li>MCP server 质量参差不齐，无法评估可信度</li><li>没有版本管理，server 更新不通知</li><li>企业无法审计员工使用了哪些 MCP server</li><li>开发者无法测试 MCP server 前先预览功能</li></ul>
+        </div>
+      </div>
+      <div class="opp-block">
+        <div class="detail-label">🚀 创业方向</div>
+        <p class="signal-opp">MCP Registry & Marketplace：提供 MCP server 的发现（搜索/分类/评分）、测试（沙箱运行）、版本管理、安全审计，以及企业版的 MCP 治理（白名单/访问日志）。定位类似 npm/PyPI 之于包管理，但针对 AI 工具协议层。时机：现在进入，6 个月内可能成为事实标准入口。</p>
+      </div>
+      <div class="scores-row"><div class="score-cell" data-tip="5: 强情绪+高赞1000+,有付费证据
+4: 高赞500+,痛苦具体
+3: 中赞,情绪平稳
+2: 低赞,非核心
+1: 边缘抱怨"><span class="score-label">痛点</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 完全无解决方案
+4: 有方案但极贵/只服务大企业
+3: 有竞品但体验差
+2: 有成熟竞品但不满意
+1: 市场充分竞争"><span class="score-label">空白</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 帖子里明确表示愿付费
+4: 行业有付费习惯+核心流程
+3: 有可能但需教育
+2: 期望免费
+1: 强烈拒绝付费"><span class="score-label">付费</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 发帖社区就是目标客户
+4: 有清晰线上渠道
+3: 需要销售动作
+2: 需主动外呼
+1: 企业销售为主"><span class="score-label">获客</span><span class="score-num" style="color:#06d6a0;border-color:#06d6a044;background:#06d6a018">5</span></div><div class="score-cell" data-tip="5: 纯软件,无监管
+4: GDPR/CCPA标准明确
+3: 需行业资质/认证
+2: 金融类,需牌照
+1: 医疗/法律,壁垒极高"><span class="score-label">监管</span><span class="score-num" style="color:#06d6a0;border-color:#06d6a044;background:#06d6a018">5</span></div><div class="score-cell" data-tip="综合加权: Pain×0.25+Gap×0.25
++WTP×0.2+Dist×0.15+Reg×0.15
++时机主观修正"><span class="score-label">机会</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div></div>
+      <div class="source-line">来源：<a href="https://github.com/punkpeye/awesome-mcp-servers" target="_blank">GitHub · punkpeye/awesome-mcp-servers (87K stars)</a></div>
+    </div>
+  </details>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+<!-- ── SIGNAL 5: BambuStudio 侵权：开源授权合规的工具空白 ── -->
+<div class="signal-card" data-opp="3" style="">
+  <div class="card-top">
+    <span class="sig-type" style="background:#3fb95022;color:#3fb950;border-color:#3fb95044">开发工具</span>
+    <span class="opp-badge" style="background:#ffd16622;color:#ffd166;border-color:#ffd16644">MEDIUM</span>
+  </div>
+  <details open>
+    <summary>
+      <span class="signal-title">BambuStudio 侵权：开源授权合规的工具空白</span>
+    </summary>
+    <div class="card-body">
+      <p class="signal-desc">HN 帖子揭露 BambuStudio（Bambu Lab 的切片软件）从 PrusaSlicer fork 后违反 AGPL 协议多年——没有开源回馈、没有授权声明，等到社区发现才被迫处理。Bambu Lab 估值超过 10 亿美元，却在如此基础的合规问题上翻车，说明商业公司对开源授权的系统性管理工具严重缺失。</p>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <div class="detail-label">⏱ 为什么是现在</div>
+          <div class="detail-text">AI 代码生成工具（GitHub Copilot、Cursor）大幅降低了使用开源代码的门槛，同时也大幅提升了无意中引入违规授权代码的风险。企业法务部门正在面临前所未有的开源合规压力。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💀 旧系统失效</div>
+          <div class="detail-text">现有的开源合规扫描工具（FOSSA、Black Duck）面向大企业，年费数万美元，中小公司无力负担；免费工具（licensee、scancode）功能有限，需要工程师手动集成到 CI 流程。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">⚡ 新能力出现</div>
+          <div class="detail-text">AI 代码理解能力使「自动识别代码来源 + 授权传染性分析 + 合规建议」变得技术可行，成本可以低至开发者工具订阅级别。</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">😤 痛点清单</div>
+          <ul class="pain-list"><li>fork 开源项目后不知道 AGPL 的传染性</li><li>CI 流程没有自动化授权检查</li><li>法务审查全靠手工，漏洞多</li><li>违规被发现时品牌和法律风险极大</li></ul>
+        </div>
+      </div>
+      <div class="opp-block">
+        <div class="detail-label">🚀 创业方向</div>
+        <p class="signal-opp">面向中小型科技公司的开源授权合规 SaaS：接入代码仓库，自动扫描所有依赖项的授权类型，识别 AGPL/GPL 传染性风险，生成合规报告，集成 GitHub Actions 做 CI 级别的授权门控。定价：$49-299/月，攻 FOSSA 的长尾客户。获客：开源社区 + GitHub Marketplace。</p>
+      </div>
+      <div class="scores-row"><div class="score-cell" data-tip="5: 强情绪+高赞1000+,有付费证据
+4: 高赞500+,痛苦具体
+3: 中赞,情绪平稳
+2: 低赞,非核心
+1: 边缘抱怨"><span class="score-label">痛点</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 完全无解决方案
+4: 有方案但极贵/只服务大企业
+3: 有竞品但体验差
+2: 有成熟竞品但不满意
+1: 市场充分竞争"><span class="score-label">空白</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 帖子里明确表示愿付费
+4: 行业有付费习惯+核心流程
+3: 有可能但需教育
+2: 期望免费
+1: 强烈拒绝付费"><span class="score-label">付费</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 发帖社区就是目标客户
+4: 有清晰线上渠道
+3: 需要销售动作
+2: 需主动外呼
+1: 企业销售为主"><span class="score-label">获客</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 纯软件,无监管
+4: GDPR/CCPA标准明确
+3: 需行业资质/认证
+2: 金融类,需牌照
+1: 医疗/法律,壁垒极高"><span class="score-label">监管</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="综合加权: Pain×0.25+Gap×0.25
++WTP×0.2+Dist×0.15+Reg×0.15
++时机主观修正"><span class="score-label">机会</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div></div>
+      <div class="source-line">来源：<a href="https://news.ycombinator.com/item?id=48213529" target="_blank">HN · BambuStudio has been violating PrusaSlicer AGPL license (221pts)</a></div>
+    </div>
+  </details>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+<!-- ── SIGNAL 6: 快手全面封禁 Cursor：大厂 AI 编程合规浪潮 ── -->
+<div class="signal-card repeated" data-opp="5" style="opacity:.7">
+  <div class="card-top">
+    <span class="sig-type" style="background:#58a6ff22;color:#58a6ff;border-color:#58a6ff44">AI工具合规</span>
+    <span class="tag-repeat">🔁 已追踪</span>
+  </div>
+  <details >
+    <summary>
+      <span class="signal-title">快手全面封禁 Cursor：大厂 AI 编程合规浪潮</span>
+    </summary>
+    <div class="card-body">
+      <p class="signal-desc">快手研发线封禁 Cursor，触发大量讨论。已于昨日（2026-05-22）追踪。今日微软取消 Claude Code 许可证与此形成东西方同步共振，两条信号合并为「企业 AI 工具治理」大趋势。</p>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <div class="detail-label">⏱ 为什么是现在</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💀 旧系统失效</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">⚡ 新能力出现</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">😤 痛点清单</div>
+          <ul class="pain-list"></ul>
+        </div>
+      </div>
+      <div class="opp-block">
+        <div class="detail-label">🚀 创业方向</div>
+        <p class="signal-opp"></p>
+      </div>
+      <div class="scores-row"><div class="score-cell" data-tip="5: 强情绪+高赞1000+,有付费证据
+4: 高赞500+,痛苦具体
+3: 中赞,情绪平稳
+2: 低赞,非核心
+1: 边缘抱怨"><span class="score-label">痛点</span><span class="score-num" style="color:#06d6a0;border-color:#06d6a044;background:#06d6a018">5</span></div><div class="score-cell" data-tip="5: 完全无解决方案
+4: 有方案但极贵/只服务大企业
+3: 有竞品但体验差
+2: 有成熟竞品但不满意
+1: 市场充分竞争"><span class="score-label">空白</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 帖子里明确表示愿付费
+4: 行业有付费习惯+核心流程
+3: 有可能但需教育
+2: 期望免费
+1: 强烈拒绝付费"><span class="score-label">付费</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 发帖社区就是目标客户
+4: 有清晰线上渠道
+3: 需要销售动作
+2: 需主动外呼
+1: 企业销售为主"><span class="score-label">获客</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 纯软件,无监管
+4: GDPR/CCPA标准明确
+3: 需行业资质/认证
+2: 金融类,需牌照
+1: 医疗/法律,壁垒极高"><span class="score-label">监管</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="综合加权: Pain×0.25+Gap×0.25
++WTP×0.2+Dist×0.15+Reg×0.15
++时机主观修正"><span class="score-label">机会</span><span class="score-num" style="color:#06d6a0;border-color:#06d6a044;background:#06d6a018">5</span></div></div>
+      <div class="source-line">来源：<a href="https://juejin.cn" target="_blank">掘金 · 全面封禁 Cursor！又一家大厂出手了</a></div>
+    </div>
+  </details>
+</div>
+<!-- ── /SIGNAL 6 ── -->
+<!-- ── SIGNAL 7: 豆包 9.9 元/月：国产 AI 编程价格战 ── -->
+<div class="signal-card repeated" data-opp="3" style="opacity:.7">
+  <div class="card-top">
+    <span class="sig-type" style="background:#da8aff22;color:#da8aff;border-color:#da8aff44">AI生态</span>
+    <span class="tag-repeat">🔁 已追踪</span>
+  </div>
+  <details >
+    <summary>
+      <span class="signal-title">豆包 9.9 元/月：国产 AI 编程价格战</span>
+    </summary>
+    <div class="card-body">
+      <p class="signal-desc">字节豆包编程模型 9.9 元/月上线，已于 2026-05-21 追踪。</p>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <div class="detail-label">⏱ 为什么是现在</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💀 旧系统失效</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">⚡ 新能力出现</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">😤 痛点清单</div>
+          <ul class="pain-list"></ul>
+        </div>
+      </div>
+      <div class="opp-block">
+        <div class="detail-label">🚀 创业方向</div>
+        <p class="signal-opp"></p>
+      </div>
+      <div class="scores-row"><div class="score-cell" data-tip="5: 强情绪+高赞1000+,有付费证据
+4: 高赞500+,痛苦具体
+3: 中赞,情绪平稳
+2: 低赞,非核心
+1: 边缘抱怨"><span class="score-label">痛点</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 完全无解决方案
+4: 有方案但极贵/只服务大企业
+3: 有竞品但体验差
+2: 有成熟竞品但不满意
+1: 市场充分竞争"><span class="score-label">空白</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 帖子里明确表示愿付费
+4: 行业有付费习惯+核心流程
+3: 有可能但需教育
+2: 期望免费
+1: 强烈拒绝付费"><span class="score-label">付费</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 发帖社区就是目标客户
+4: 有清晰线上渠道
+3: 需要销售动作
+2: 需主动外呼
+1: 企业销售为主"><span class="score-label">获客</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 纯软件,无监管
+4: GDPR/CCPA标准明确
+3: 需行业资质/认证
+2: 金融类,需牌照
+1: 医疗/法律,壁垒极高"><span class="score-label">监管</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="综合加权: Pain×0.25+Gap×0.25
++WTP×0.2+Dist×0.15+Reg×0.15
++时机主观修正"><span class="score-label">机会</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div></div>
+      <div class="source-line">来源：<a href="https://juejin.cn" target="_blank">掘金 · 豆包也开始抢程序员饭碗了</a></div>
+    </div>
+  </details>
+</div>
+<!-- ── /SIGNAL 7 ── -->
+<!-- ── SIGNAL 8: DeepSeek 被偷偷内嵌到主流 AI 工具 ── -->
+<div class="signal-card repeated" data-opp="4" style="opacity:.7">
+  <div class="card-top">
+    <span class="sig-type" style="background:#58a6ff22;color:#58a6ff;border-color:#58a6ff44">AI工具合规</span>
+    <span class="tag-repeat">🔁 已追踪</span>
+  </div>
+  <details >
+    <summary>
+      <span class="signal-title">DeepSeek 被偷偷内嵌到主流 AI 工具</span>
+    </summary>
+    <div class="card-body">
+      <p class="signal-desc">主流 AI 工具在用户不知情的情况下使用 DeepSeek，已于 2026-05-22 追踪。</p>
+      <div class="detail-grid">
+        <div class="detail-block">
+          <div class="detail-label">⏱ 为什么是现在</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">💀 旧系统失效</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">⚡ 新能力出现</div>
+          <div class="detail-text"></div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">😤 痛点清单</div>
+          <ul class="pain-list"></ul>
+        </div>
+      </div>
+      <div class="opp-block">
+        <div class="detail-label">🚀 创业方向</div>
+        <p class="signal-opp"></p>
+      </div>
+      <div class="scores-row"><div class="score-cell" data-tip="5: 强情绪+高赞1000+,有付费证据
+4: 高赞500+,痛苦具体
+3: 中赞,情绪平稳
+2: 低赞,非核心
+1: 边缘抱怨"><span class="score-label">痛点</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 完全无解决方案
+4: 有方案但极贵/只服务大企业
+3: 有竞品但体验差
+2: 有成熟竞品但不满意
+1: 市场充分竞争"><span class="score-label">空白</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 帖子里明确表示愿付费
+4: 行业有付费习惯+核心流程
+3: 有可能但需教育
+2: 期望免费
+1: 强烈拒绝付费"><span class="score-label">付费</span><span class="score-num" style="color:#ffd166;border-color:#ffd16644;background:#ffd16618">3</span></div><div class="score-cell" data-tip="5: 发帖社区就是目标客户
+4: 有清晰线上渠道
+3: 需要销售动作
+2: 需主动外呼
+1: 企业销售为主"><span class="score-label">获客</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="5: 纯软件,无监管
+4: GDPR/CCPA标准明确
+3: 需行业资质/认证
+2: 金融类,需牌照
+1: 医疗/法律,壁垒极高"><span class="score-label">监管</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div><div class="score-cell" data-tip="综合加权: Pain×0.25+Gap×0.25
++WTP×0.2+Dist×0.15+Reg×0.15
++时机主观修正"><span class="score-label">机会</span><span class="score-num" style="color:#74c0fc;border-color:#74c0fc44;background:#74c0fc18">4</span></div></div>
+      <div class="source-line">来源：<a href="https://dev.to" target="_blank">Dev.to · DeepSeek Is Running Inside Your Favorite AI Tool</a></div>
+    </div>
+  </details>
+</div>
+<!-- ── /SIGNAL 8 ── -->
+</div>
+<script type="application/json" id="signal-extras">[{"title": "NVIDIA 移除游戏收入分类", "source": "Reddit r/LocalLLaMA (613pts)", "note": "NVIDIA 不再单独披露游戏收入，全力押注 AI 数据中心，游戏 GPU 即将成为战略降优先级业务，对独立游戏开发者和中小工作室影响值得关注。"}, {"title": "微软 CEO：AI 比人工贵了", "source": "V2EX (12pts)", "note": "Satya Nadella 承认 AI 使用成本超出预期，AI ROI 怀疑论开始从 VC 圈向 CEO 层渗透，AI 工具成本优化赛道窗口打开。"}, {"title": "Homarr 内存降低 40%", "source": "Reddit r/selfhosted (298pts)", "note": "自托管仪表盘工具 Homarr 大幅优化内存，说明 self-hosted 工具市场对性能敏感，轻量级、资源效率高的工具有强烈需求。"}]</script>
+<script>
+function filter(v,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(c=>{
+    const opp=c.dataset.opp;
+    const rep=c.classList.contains('repeated');
+    if(v==='all') c.style.display='';
+    else if(v==='rep') c.style.display=rep?'':'none';
+    else c.style.display=(!rep&&opp===v)?'':'none';
+  });
+}
+</script>
+</body>
+</html>
