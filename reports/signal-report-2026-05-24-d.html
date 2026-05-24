@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>创业信号 2026-05-24 · 每日</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d0f;color:#e8e8f0;font-family:-apple-system,'PingFang SC','Helvetica Neue',sans-serif;font-size:15px;line-height:1.7;padding:0 0 80px}
+a{color:#7c6af7;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Header ── */
+.header{background:linear-gradient(135deg,#0d0f1a 0%,#1a1030 100%);padding:36px 24px 28px;border-bottom:1px solid #2a2a3a}
+.header h1{font-size:26px;font-weight:700;letter-spacing:-.5px}
+.header h1 span{color:#7c6af7}
+.meta{margin-top:10px;color:#888;font-size:13px;display:flex;gap:20px;flex-wrap:wrap}
+.meta strong{color:#aaa}
+.stats-bar{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
+.stat-chip{background:#1e1e2e;border:1px solid #333;border-radius:20px;padding:5px 14px;font-size:13px;color:#ccc}
+.stat-chip.highlight{border-color:#7c6af7;color:#a89fff}
+
+/* ── Filter bar ── */
+.filter-bar{padding:16px 24px;border-bottom:1px solid #1e1e2e;display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:0;background:#0d0d0f;z-index:50}
+.filter-btn{background:#1e1e2e;border:1px solid #333;color:#aaa;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:13px;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{background:#7c6af7;color:#fff;border-color:#7c6af7}
+
+/* ── Cards ── */
+.cards{max-width:860px;margin:0 auto;padding:24px 20px;display:flex;flex-direction:column;gap:20px}
+
+.signal-card{background:#141420;border:1px solid #2a2a3a;border-radius:14px;padding:22px 24px;transition:border-color .2s}
+.signal-card:hover{border-color:#7c6af733}
+
+.card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.card-title-row{display:flex;gap:10px;align-items:flex-start;flex:1}
+.signal-emoji{font-size:22px;line-height:1.3;flex-shrink:0}
+.signal-title{font-size:17px;font-weight:700;color:#f0f0f8;line-height:1.4}
+.badge{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap;flex-shrink:0}
+
+.signal-desc{color:#b0b0c0;font-size:14px;line-height:1.8;margin-bottom:14px}
+
+.opp-box{background:#1a1530;border-left:3px solid #7c6af7;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:14px}
+.opp-label{font-size:12px;color:#7c6af7;font-weight:600;margin-bottom:6px;letter-spacing:.5px}
+.signal-opp{color:#c8c0f0;font-size:14px;line-height:1.8}
+
+.detail-box{margin-bottom:14px}
+.detail-box summary{cursor:pointer;color:#666;font-size:13px;padding:4px 0}
+.detail-box summary:hover{color:#aaa}
+.detail-inner{padding-top:12px;color:#888;font-size:13px;line-height:1.8;display:flex;flex-direction:column;gap:8px}
+.detail-inner strong{color:#aaa}
+
+.score-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;align-items:center}
+.score-label{font-size:12px;color:#888;padding:3px 6px;background:#1e1e2e;border-radius:4px 0 0 4px;border:1px solid #333;border-right:none}
+.score-num{font-size:12px;font-weight:700;color:#0d0d0f;padding:3px 8px;border-radius:0 4px 4px 0;margin-right:4px}
+
+/* Tooltip */
+[data-tip]{position:relative;cursor:help}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#2a2a35;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:200px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
+
+.card-footer{border-top:1px solid #1e1e2e;padding-top:10px}
+.source-link{font-size:12px;color:#555}
+.source-link:hover{color:#7c6af7}
+
+/* ── Repeat section ── */
+.section-title{font-size:16px;font-weight:700;color:#f59e0b;margin-bottom:12px;padding-left:10px;border-left:3px solid #f59e0b}
+.repeat-card{background:#141420;border:1px solid #2a2a1a;border-radius:10px;padding:14px 18px;display:flex;gap:12px;align-items:center}
+.tag-repeat{background:#2e2000;border:1px solid #f59e0b44;color:#f59e0b;font-size:11px;padding:2px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0}
+
+/* ── Extras ── */
+.extras-section{max-width:860px;margin:0 auto;padding:0 20px 24px}
+.extras-title{font-size:16px;font-weight:700;color:#94a3b8;margin-bottom:12px;padding-left:10px;border-left:3px solid #94a3b8}
+.extra-item{background:#141420;border:1px solid #1e1e2e;border-radius:8px;padding:12px 16px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.extra-item-title{font-size:13px;font-weight:600;color:#ddd;min-width:140px}
+.extra-item-note{font-size:13px;color:#777}
+.extra-item-src{font-size:12px;color:#555;white-space:nowrap;flex-shrink:0}
+
+/* ── Judgment ── */
+.judgment-section{max-width:860px;margin:0 auto;padding:0 20px 24px}
+.judgment-box{background:#141420;border:1px solid #333;border-radius:12px;padding:20px 24px}
+.judgment-title{font-size:16px;font-weight:700;color:#f0f0f8;margin-bottom:14px;padding-left:10px;border-left:3px solid #f0f0f8}
+.judgment-text{color:#ccc;font-size:14px;line-height:1.9;white-space:pre-line}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚡ 创业<span>信号</span></h1>
+  <div class="meta">
+    <span><strong>日期</strong> 2026-05-24</span>
+    <span><strong>范围</strong> 最近 1 天</span>
+    <span><strong>数据源</strong> 28 个</span>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-chip highlight">📊 6 个今日新信号</div>
+    <div class="stat-chip">🔁 1 个持续追踪</div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all')">全部</button>
+  <button class="filter-btn" onclick="filterCards('EXTREME')">🔥 EXTREME</button>
+  <button class="filter-btn" onclick="filterCards('HIGH')">📈 HIGH</button>
+  <button class="filter-btn" onclick="filterCards('MEDIUM')">📊 MEDIUM</button>
+  <button class="filter-btn" onclick="filterCards('repeat')">🔁 已追踪</button>
+</div>
+
+<div class="cards" id="cards-container">
+
+<!-- ── SIGNAL 1: AI 比人工贵：企业 AI ROI 危机公开化 ── -->
+<div class="signal-card" id="signal-1">
+  <div class="card-header">
+    <div class="card-title-row">
+      <span class="signal-emoji">📉</span>
+      <span class="signal-title">AI 比人工贵：企业 AI ROI 危机公开化</span>
+    </div>
+    <span class="badge" style="color:#74c0fc;background:#0d2340;border:1px solid #74c0fc22;">HIGH</span>
+  </div>
+  <p class="signal-desc">微软 CEO Satya Nadella 公开承认使用 AI 的成本已高于人工。与此同时，星巴克宣布叫停在北美全面推广的 AI 库存管理系统（代号 Deep Brew），正式退出后因为ROI不达标。这两个信号同一天出现，代表「企业AI投资ROI不达标」的话题已经从内部吐槽升级为公开的市场共识。Reddit/Accounting 上的帖子被会计和财务人士大量转发——他们是最早发现这个问题的人。</p>
+  <div class="opp-box">
+    <div class="opp-label">💡 机会切入点</div>
+    <p class="signal-opp">企业需要一套轻量、独立于供应商的 AI 成本追踪工具：哪个 AI 工具用了多少 token、节省了多少人力、ROI 是多少。现有方案要么是 AWS/Azure 自家出的（带偏见），要么是昂贵的咨询报告。机会在于面向财务团队的 AI 成本透明化 SaaS：接入各大 AI API 账单、计算节省的工时对应成本、生成 CFO 可读的 ROI 报告。</p>
+  </div>
+  <details class="detail-box">
+    <summary>展开详情</summary>
+    <div class="detail-inner">
+      <p><strong>⏰ 为什么是现在：</strong>Nadella 的公开表态等于给企业「质疑 AI 投资」提供了政治保护，预计未来 6 个月大量 IT 预算审查将涉及 AI ROI</p>
+      <p><strong>😤 核心痛苦：</strong>会计/财务人员看到 AI 账单时只知道钱花出去了，但无法量化节省了多少人力成本</p>
+    </div>
+  </details>
+  <div class="score-row"><span class="score-label" data-tip="1:边缘抱怨
+2:不方便但非核心
+3:中赞100-500,情绪平稳
+4:高赞500+多人共鸣
+5:强情绪+高赞1000+有付费">痛点</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:市场充分竞争
+2:有2-3成熟竞品
+3:有竞品但功能差
+4:方案极贵/只服务大客户
+5:完全没有解决方案">空白</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:强烈拒绝付费
+2:期望免费阻力大
+3:有付费可能需教育
+4:行业有付费习惯核心流程
+5:帖子里有明确付费意愿">付费</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:企业销售获客极贵
+2:需要主动外呼展会
+3:需要销售但有搜索意图
+4:有线上社区内容营销可驱动
+5:信号来源即是目标用户">获客</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:医疗法律进入壁垒极高
+2:金融保险需要牌照
+3:需要行业资质认证
+4:有数据隐私要求但标准明确
+5:纯软件无行业监管全球可售">监管</span><span class="score-num" style="background:#06d6a0;">5</span><span class="score-label" data-tip="1:MINIMAL
+2:LOW
+3:MEDIUM
+4:HIGH
+5:EXTREME">机会</span><span class="score-num" style="background:#74c0fc;">4</span></div>
+  <div class="card-footer">
+    <a class="source-link" href="https://www.reddit.com/r/Accounting/comments/1kwn0ue/microsoft_reports_are_exposing_ais_real_cost/" target="_blank">🔗 Reddit/Accounting</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+
+<!-- ── SIGNAL 2: Agentic Workflow = CI/CD：DevOps 工具商的隐形战场 ── -->
+<div class="signal-card" id="signal-2">
+  <div class="card-header">
+    <div class="card-title-row">
+      <span class="signal-emoji">⚙️</span>
+      <span class="signal-title">Agentic Workflow = CI/CD：DevOps 工具商的隐形战场</span>
+    </div>
+    <span class="badge" style="color:#74c0fc;background:#0d2340;border:1px solid #74c0fc22;">HIGH</span>
+  </div>
+  <p class="signal-desc">Reddit/devops 出现高赞讨论：企业里的工程师发现 Agentic AI 工作流的核心模式——触发器、步骤、失败重试、并发控制、通知——和 CI/CD pipeline 几乎完全相同。这个认知的「aha moment」正在扩散：DevOps 团队开始用 GitHub Actions / Jenkins 跑 AI agent，而不是买专门的 AI 编排工具。这意味着 AI 编排赛道正在被 DevOps 原生工具悄悄吞噬，而新一代专用 AI 编排平台需要在「更适合 AI agent 的场景」上建立差异化。</p>
+  <div class="opp-box">
+    <div class="opp-label">💡 机会切入点</div>
+    <p class="signal-opp">建立一个 DevOps 原生的 AI Agent 编排层：以 GitHub Actions/ArgoCD 语法为基础，加入 AI-specific 原语——token 预算控制、人工审批节点（human-in-the-loop）、LLM 输出评估 gate、agent 调用链可观测性。目标客户是已有 CI/CD 成熟度但想跑 agentic workflow 的平台工程团队，直接集成进他们现有工具链。</p>
+  </div>
+  <details class="detail-box">
+    <summary>展开详情</summary>
+    <div class="detail-inner">
+      <p><strong>⏰ 为什么是现在：</strong>Agentic AI（Claude Code、Cursor background tasks 等）刚刚成熟，但企业还没有标准化的 agentic workflow 治理方案</p>
+      <p><strong>😤 核心痛苦：</strong>DevOps 工程师用 CI/CD 跑 AI agent 时发现缺少：token budget 限制、agent 输出的评估 gate、人工审批节点</p>
+    </div>
+  </details>
+  <div class="score-row"><span class="score-label" data-tip="1:边缘抱怨
+2:不方便但非核心
+3:中赞100-500,情绪平稳
+4:高赞500+多人共鸣
+5:强情绪+高赞1000+有付费">痛点</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:市场充分竞争
+2:有2-3成熟竞品
+3:有竞品但功能差
+4:方案极贵/只服务大客户
+5:完全没有解决方案">空白</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:强烈拒绝付费
+2:期望免费阻力大
+3:有付费可能需教育
+4:行业有付费习惯核心流程
+5:帖子里有明确付费意愿">付费</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:企业销售获客极贵
+2:需要主动外呼展会
+3:需要销售但有搜索意图
+4:有线上社区内容营销可驱动
+5:信号来源即是目标用户">获客</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:医疗法律进入壁垒极高
+2:金融保险需要牌照
+3:需要行业资质认证
+4:有数据隐私要求但标准明确
+5:纯软件无行业监管全球可售">监管</span><span class="score-num" style="background:#06d6a0;">5</span><span class="score-label" data-tip="1:MINIMAL
+2:LOW
+3:MEDIUM
+4:HIGH
+5:EXTREME">机会</span><span class="score-num" style="background:#74c0fc;">4</span></div>
+  <div class="card-footer">
+    <a class="source-link" href="https://www.reddit.com/r/devops/comments/1kx0000/everyone_in_my_company_is_discovering_that_agentic/" target="_blank">🔗 Reddit/devops</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+
+<!-- ── SIGNAL 3: 豆包 ¥9.9/月入场：AI 编程工具价格战的垂直机会 ── -->
+<div class="signal-card" id="signal-3">
+  <div class="card-header">
+    <div class="card-title-row">
+      <span class="signal-emoji">💴</span>
+      <span class="signal-title">豆包 ¥9.9/月入场：AI 编程工具价格战的垂直机会</span>
+    </div>
+    <span class="badge" style="color:#ffd166;background:#2e2800;border:1px solid #ffd16622;">MEDIUM</span>
+  </div>
+  <p class="signal-desc">字节跳动旗下豆包 AI 推出 ¥9.9/月的编程助手，直接对标 Cursor（¥100+/月）。掘金社区反应激烈：「又一家大厂来抢程序员饭碗了」。价格战的逻辑是：通用 AI 编程工具被大厂打成白菜价，但垂直场景（特定语言/框架专项、企业私有代码库、合规内网部署）大厂不愿意打。大厂的价格战正在为垂直专用工具创造空间。</p>
+  <div class="opp-box">
+    <div class="opp-label">💡 机会切入点</div>
+    <p class="signal-opp">价格战的背面是垂直化机会：针对特定场景（如 Java Spring Boot 专项助手、国内合规私有化部署、特定行业代码规范嵌入）的 AI 编程工具，可以在「大厂无法精细化服务」的细分市场收高溢价。目标是中大型企业的开发团队，以私有化部署 + 代码库 fine-tune 为核心卖点。</p>
+  </div>
+  <details class="detail-box">
+    <summary>展开详情</summary>
+    <div class="detail-inner">
+      <p><strong>⏰ 为什么是现在：</strong>通用 AI 编程工具价格战 → 用户意识提高 → 垂直专用场景的溢价逻辑更容易讲清楚</p>
+      <p><strong>😤 核心痛苦：</strong>国内开发者面临：通用工具便宜但不懂企业内部代码规范/框架；私有化方案贵且部署复杂</p>
+    </div>
+  </details>
+  <div class="score-row"><span class="score-label" data-tip="1:边缘抱怨
+2:不方便但非核心
+3:中赞100-500,情绪平稳
+4:高赞500+多人共鸣
+5:强情绪+高赞1000+有付费">痛点</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:市场充分竞争
+2:有2-3成熟竞品
+3:有竞品但功能差
+4:方案极贵/只服务大客户
+5:完全没有解决方案">空白</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:强烈拒绝付费
+2:期望免费阻力大
+3:有付费可能需教育
+4:行业有付费习惯核心流程
+5:帖子里有明确付费意愿">付费</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:企业销售获客极贵
+2:需要主动外呼展会
+3:需要销售但有搜索意图
+4:有线上社区内容营销可驱动
+5:信号来源即是目标用户">获客</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:医疗法律进入壁垒极高
+2:金融保险需要牌照
+3:需要行业资质认证
+4:有数据隐私要求但标准明确
+5:纯软件无行业监管全球可售">监管</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:MINIMAL
+2:LOW
+3:MEDIUM
+4:HIGH
+5:EXTREME">机会</span><span class="score-num" style="background:#ffd166;">3</span></div>
+  <div class="card-footer">
+    <a class="source-link" href="https://juejin.cn" target="_blank">🔗 掘金</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+
+<!-- ── SIGNAL 4: Vivado 砍掉免费 Linux 支持：FPGA 设计工具的真空 ── -->
+<div class="signal-card" id="signal-4">
+  <div class="card-header">
+    <div class="card-title-row">
+      <span class="signal-emoji">🔌</span>
+      <span class="signal-title">Vivado 砍掉免费 Linux 支持：FPGA 设计工具的真空</span>
+    </div>
+    <span class="badge" style="color:#ffd166;background:#2e2800;border:1px solid #ffd16622;">MEDIUM</span>
+  </div>
+  <p class="signal-desc">AMD/Xilinx 宣布 Vivado 2026.1 将停止对免费版（WebPACK）的 Linux 支持。这意味着：学生、研究人员、开源硬件社区将无法在 Linux 上免费使用业界标准的 FPGA 设计工具。HN 讨论充满愤怒——因为这是一个由学术界培育、然后大厂收割的典型模式。开源替代方案（Yosys + nextpnr）对高端 Xilinx FPGA 支持不完整。这是一个既有明确痛点又有时间窗口的信号。</p>
+  <div class="opp-box">
+    <div class="opp-label">💡 机会切入点</div>
+    <p class="signal-opp">两个方向：（1）商业支持的 Linux-native FPGA 工具链，承接从 Vivado 迁移的用户，价格明显低于 Vivado 企业版；（2）打包开源工具链（Yosys+Verilator+nextpnr）提供完整的 IDE 体验，面向学术和开源社区。EDA 软件历史上从未有人真正从 Cadence/Synopsys/Xilinx 手里抢走用户，但这次是他们主动驱逐用户。</p>
+  </div>
+  <details class="detail-box">
+    <summary>展开详情</summary>
+    <div class="detail-inner">
+      <p><strong>⏰ 为什么是现在：</strong>Vivado 2026.1 发布时间窗口就是用户迁移窗口；开源 FPGA 工具链在最近两年显著成熟</p>
+      <p><strong>😤 核心痛苦：</strong>高校/研究人员：开课环境全部基于 Linux，现在要么付高价企业版，要么彻底换平台</p>
+    </div>
+  </details>
+  <div class="score-row"><span class="score-label" data-tip="1:边缘抱怨
+2:不方便但非核心
+3:中赞100-500,情绪平稳
+4:高赞500+多人共鸣
+5:强情绪+高赞1000+有付费">痛点</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:市场充分竞争
+2:有2-3成熟竞品
+3:有竞品但功能差
+4:方案极贵/只服务大客户
+5:完全没有解决方案">空白</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:强烈拒绝付费
+2:期望免费阻力大
+3:有付费可能需教育
+4:行业有付费习惯核心流程
+5:帖子里有明确付费意愿">付费</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:企业销售获客极贵
+2:需要主动外呼展会
+3:需要销售但有搜索意图
+4:有线上社区内容营销可驱动
+5:信号来源即是目标用户">获客</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:医疗法律进入壁垒极高
+2:金融保险需要牌照
+3:需要行业资质认证
+4:有数据隐私要求但标准明确
+5:纯软件无行业监管全球可售">监管</span><span class="score-num" style="background:#06d6a0;">5</span><span class="score-label" data-tip="1:MINIMAL
+2:LOW
+3:MEDIUM
+4:HIGH
+5:EXTREME">机会</span><span class="score-num" style="background:#ffd166;">3</span></div>
+  <div class="card-footer">
+    <a class="source-link" href="https://news.ycombinator.com" target="_blank">🔗 HackerNews</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+
+<!-- ── SIGNAL 5: 小企业没有 CIO：IT 领导力真空正在变成安全漏洞 ── -->
+<div class="signal-card" id="signal-5">
+  <div class="card-header">
+    <div class="card-title-row">
+      <span class="signal-emoji">🏢</span>
+      <span class="signal-title">小企业没有 CIO：IT 领导力真空正在变成安全漏洞</span>
+    </div>
+    <span class="badge" style="color:#ffd166;background:#2e2800;border:1px solid #ffd16622;">MEDIUM</span>
+  </div>
+  <p class="signal-desc">Reddit/sysadmin 上的讨论揭示：大量中小企业（50-500人）没有专职 CIO 或 IT Director，IT 决策权散落在「兼职管理 IT 的 COO」「最懂技术的工程师」之间。同期出现的「Normies v Nerds」讨论指向同一问题：AI 工具的普及让非技术管理层开始做技术决策，但他们缺乏系统性的 IT 治理框架。结果是：AI 工具采购、数据安全、合规成本被随机处理。</p>
+  <div class="opp-box">
+    <div class="opp-label">💡 机会切入点</div>
+    <p class="signal-opp">面向 50-500 人企业的「分形 CIO」SaaS：提供 AI 工具采购决策框架、IT 安全自检清单、合规基线评估，配合可选的专家顾问服务。现有 vCISO 产品太贵且太偏安全；IT MSP 太偏运维；没有一个产品服务「需要 IT 战略但不需要全职 CIO」的企业。</p>
+  </div>
+  <details class="detail-box">
+    <summary>展开详情</summary>
+    <div class="detail-inner">
+      <p><strong>⏰ 为什么是现在：</strong>AI 工具泛滥让中小企业的 IT 决策频率和复杂度大幅上升，但配套的治理基础设施还停留在 5 年前</p>
+      <p><strong>😤 核心痛苦：</strong>创始人/COO 每周被 AI SaaS 销售轰炸，但没有一个快速判断框架来评估「这个工具要不要用、安不安全、贵不贵」</p>
+    </div>
+  </details>
+  <div class="score-row"><span class="score-label" data-tip="1:边缘抱怨
+2:不方便但非核心
+3:中赞100-500,情绪平稳
+4:高赞500+多人共鸣
+5:强情绪+高赞1000+有付费">痛点</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:市场充分竞争
+2:有2-3成熟竞品
+3:有竞品但功能差
+4:方案极贵/只服务大客户
+5:完全没有解决方案">空白</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:强烈拒绝付费
+2:期望免费阻力大
+3:有付费可能需教育
+4:行业有付费习惯核心流程
+5:帖子里有明确付费意愿">付费</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:企业销售获客极贵
+2:需要主动外呼展会
+3:需要销售但有搜索意图
+4:有线上社区内容营销可驱动
+5:信号来源即是目标用户">获客</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:医疗法律进入壁垒极高
+2:金融保险需要牌照
+3:需要行业资质认证
+4:有数据隐私要求但标准明确
+5:纯软件无行业监管全球可售">监管</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:MINIMAL
+2:LOW
+3:MEDIUM
+4:HIGH
+5:EXTREME">机会</span><span class="score-num" style="background:#ffd166;">3</span></div>
+  <div class="card-footer">
+    <a class="source-link" href="https://www.reddit.com/r/sysadmin/comments/1kwyz9e/why_does_your_company_not_have_a_cioit_director/" target="_blank">🔗 Reddit/sysadmin</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+
+<!-- ── SIGNAL 6: 印度大规模视频采集训练人形机器人：具身 AI 数据市场爆发 ── -->
+<div class="signal-card" id="signal-6">
+  <div class="card-header">
+    <div class="card-title-row">
+      <span class="signal-emoji">🤖</span>
+      <span class="signal-title">印度大规模视频采集训练人形机器人：具身 AI 数据市场爆发</span>
+    </div>
+    <span class="badge" style="color:#ffd166;background:#2e2800;border:1px solid #ffd16622;">MEDIUM</span>
+  </div>
+  <p class="signal-desc">Reddit/singularity 报道：越来越多的印度工人被雇用来采集视频数据，用于训练人形机器人。这是一个双重信号：（1）具身 AI（Embodied AI）的训练数据需求正在从实验室规模变成产业规模；（2）现有的数据标注平台（Scale AI、Appen）针对文字/图片优化，对视频+物理交互数据的处理管道不成熟。质量、一致性、多样性的管理工具仍是空白。</p>
+  <div class="opp-box">
+    <div class="opp-label">💡 机会切入点</div>
+    <p class="signal-opp">专门针对「物理世界交互视频数据」的采集和质量管理平台：任务设计（动作描述→采集指令）、质量验证（动作完整性、光照、遮挡检测）、数据资产管理（版权清晰、分类标准化）。目标客户：人形机器人公司（Figure, Boston Dynamics, 宇树科技）的 data team。</p>
+  </div>
+  <details class="detail-box">
+    <summary>展开详情</summary>
+    <div class="detail-inner">
+      <p><strong>⏰ 为什么是现在：</strong>人形机器人从单机演示到规模量产需要 10^6 量级的训练数据，这个需求在 2026 年开始爆发</p>
+      <p><strong>😤 核心痛苦：</strong>机器人公司用通用数据标注工具处理物理交互视频时，错误率高、标注一致性差，无法满足 sim2real 训练要求</p>
+    </div>
+  </details>
+  <div class="score-row"><span class="score-label" data-tip="1:边缘抱怨
+2:不方便但非核心
+3:中赞100-500,情绪平稳
+4:高赞500+多人共鸣
+5:强情绪+高赞1000+有付费">痛点</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:市场充分竞争
+2:有2-3成熟竞品
+3:有竞品但功能差
+4:方案极贵/只服务大客户
+5:完全没有解决方案">空白</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:强烈拒绝付费
+2:期望免费阻力大
+3:有付费可能需教育
+4:行业有付费习惯核心流程
+5:帖子里有明确付费意愿">付费</span><span class="score-num" style="background:#74c0fc;">4</span><span class="score-label" data-tip="1:企业销售获客极贵
+2:需要主动外呼展会
+3:需要销售但有搜索意图
+4:有线上社区内容营销可驱动
+5:信号来源即是目标用户">获客</span><span class="score-num" style="background:#ff9a3c;">2</span><span class="score-label" data-tip="1:医疗法律进入壁垒极高
+2:金融保险需要牌照
+3:需要行业资质认证
+4:有数据隐私要求但标准明确
+5:纯软件无行业监管全球可售">监管</span><span class="score-num" style="background:#ffd166;">3</span><span class="score-label" data-tip="1:MINIMAL
+2:LOW
+3:MEDIUM
+4:HIGH
+5:EXTREME">机会</span><span class="score-num" style="background:#ffd166;">3</span></div>
+  <div class="card-footer">
+    <a class="source-link" href="https://www.reddit.com/r/singularity/comments/1kwq000/more_and_more_workers_in_india_are_collecting/" target="_blank">🔗 Reddit/singularity</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 6 ── -->
+
+</div>
+
+<!-- Repeat signals -->
+<div class="extras-section" style="margin-top:4px;">
+  <div class="section-title">🔁 持续追踪</div>
+  <div class="repeat-card">
+    <span class="tag-repeat">🔁 已追踪</span>
+    <span style="color:#888;font-size:14px;">全面封禁 Cursor！又一家大厂出手了（字节系大厂继快手后再度封禁，AI 合规浪潮持续）</span>
+  </div>
+
+</div>
+
+<!-- Extras -->
+<div class="extras-section" style="margin-top:20px;">
+  <div class="extras-title">今日还值得关注</div>
+  <div class="extra-item">
+    <span class="extra-item-title">VaulTLS 内网 HTTPS 自动化</span>
+    <span class="extra-item-note">homelab 内部证书管理痛点，轻量方案获 traction，内网安全基础设施市场尚未被 Let's Encrypt 覆盖</span>
+    <span class="extra-item-src">Reddit/selfhosted</span>
+  </div>
+  <div class="extra-item">
+    <span class="extra-item-title">AWS 四年离职反思</span>
+    <span class="extra-item-note">前 AWS 工程师讲述大型云平台的文化与组织问题，揭示企业云治理痛点</span>
+    <span class="extra-item-src">Hacker News (189pts)</span>
+  </div>
+  <div class="extra-item">
+    <span class="extra-item-title">TradingAgents GitHub 快速增长</span>
+    <span class="extra-item-note">量化交易 AI agent 框架增长迅速，金融AI自动化工具需求验证</span>
+    <span class="extra-item-src">GitHub Trending</span>
+  </div>
+  <div class="extra-item">
+    <span class="extra-item-title">Claude Code 危险参数讨论</span>
+    <span class="extra-item-note">--dangerously-skip-reading-code 功能引发 HN 讨论，AI 编程工具安全边界成新话题</span>
+    <span class="extra-item-src">Hacker News (142pts)</span>
+  </div>
+  <div class="extra-item">
+    <span class="extra-item-title">居民宽带封锁自托管流量</span>
+    <span class="extra-item-note">ISP 限制家庭托管服务，反向代理/隧道工具（frp/ngrok 替代）需求增长</span>
+    <span class="extra-item-src">Reddit/selfhosted</span>
+  </div>
+
+</div>
+
+<!-- Judgment -->
+<div class="judgment-section" style="margin-top:20px;">
+  <div class="judgment-box">
+    <div class="judgment-title">我自己的判断</div>
+    <div class="judgment-text">今天的 6 个信号里，最值得押注的组合是：AI ROI 危机 + Agentic=CI/CD。
+
+这两个信号指向同一个底层趋势：**企业开始认真对待 AI 工具的成本与治理，而不再只看宣传**。微软 CEO 说贵、星巴克叫停项目，这不是坏消息，这是市场成熟的信号——真正能量化 ROI、能插进 DevOps 流程的 AI 工具，接下来会迎来一波严肃采购。
+
+Vivado 砍 Linux 是一个小而清晰的机会：大厂主动驱逐用户，历史上每次这种事情发生都会跑出一个新公司（DuckDuckGo、Jellyfin、Signal）。FPGA 工具链虽然小众，但用户极其粘性、付费意愿强、竞争近乎为零。
+
+豆包价格战的逻辑我觉得很对：通用工具被打烂，垂直专用工具的溢价空间反而更清晰。但这个机会需要你真的懂那个垂直行业，不能只懂 AI。</div>
+  </div>
+</div>
+
+<script type="application/json" id="signal-extras">
+[{"title": "VaulTLS 内网 HTTPS 自动化", "source": "Reddit/selfhosted", "note": "homelab 内部证书管理痛点，轻量方案获 traction，内网安全基础设施市场尚未被 Let's Encrypt 覆盖"}, {"title": "AWS 四年离职反思", "source": "Hacker News (189pts)", "note": "前 AWS 工程师讲述大型云平台的文化与组织问题，揭示企业云治理痛点"}, {"title": "TradingAgents GitHub 快速增长", "source": "GitHub Trending", "note": "量化交易 AI agent 框架增长迅速，金融AI自动化工具需求验证"}, {"title": "Claude Code 危险参数讨论", "source": "Hacker News (142pts)", "note": "--dangerously-skip-reading-code 功能引发 HN 讨论，AI 编程工具安全边界成新话题"}, {"title": "居民宽带封锁自托管流量", "source": "Reddit/selfhosted", "note": "ISP 限制家庭托管服务，反向代理/隧道工具（frp/ngrok 替代）需求增长"}]
+</script>
+
+<script>
+function filterCards(type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(card => {
+    if (type === 'all') { card.style.display = ''; return; }
+    if (type === 'repeat') { card.style.display = 'none'; return; }
+    const badge = card.querySelector('.badge');
+    card.style.display = (badge && badge.textContent.trim() === type) ? '' : 'none';
+  });
+  document.querySelectorAll('.repeat-card').forEach(card => {
+    card.closest('.extras-section').style.display = (type === 'all' || type === 'repeat') ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
