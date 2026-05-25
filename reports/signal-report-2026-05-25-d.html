@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创业信号 · 2026-05-25</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0d0d0f; color: #e8e8f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.6; }
+.header { background: linear-gradient(135deg, #13131a 0%, #1a1a2e 100%); border-bottom: 1px solid #2a2a3e; padding: 28px 32px; }
+.header h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.header .meta { color: #888; font-size: 13px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+.meta-badge { background: #1e3a5f; color: #74c0fc; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.stats { display: flex; gap: 24px; flex-wrap: wrap; }
+.stat { background: #1a1a2a; border: 1px solid #2a2a3e; border-radius: 8px; padding: 8px 16px; text-align: center; }
+.stat-num { font-size: 24px; font-weight: 700; color: #06d6a0; }
+.stat-label { font-size: 11px; color: #666; margin-top: 2px; }
+.filters { padding: 16px 32px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid #1e1e2e; background: #0f0f17; }
+.filter-btn { background: #1a1a2a; border: 1px solid #2a2a3e; color: #aaa; padding: 5px 14px; border-radius: 20px; cursor: pointer; font-size: 12px; transition: all 0.2s; }
+.filter-btn:hover, .filter-btn.active { background: #2a2a4a; color: #fff; border-color: #4a4a7a; }
+.container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+.section-title { font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 2px; margin: 24px 0 12px; padding-left: 4px; }
+
+/* Signal Cards */
+.signal-card { background: #13131c; border: 1px solid #2a2a3e; border-radius: 12px; margin-bottom: 16px; overflow: hidden; transition: border-color 0.2s; }
+.signal-card:hover { border-color: #3a3a5e; }
+.card-header { padding: 16px 20px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
+.card-header:hover { background: #161620; }
+.type-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; margin-top: 2px; flex-shrink: 0; }
+.type-旧系统 { background: #2d1b1b; color: #ff9a3c; }
+.type-新能力 { background: #1b2d1b; color: #06d6a0; }
+.type-市场空白 { background: #1b1b2d; color: #74c0fc; }
+.type-安全威胁 { background: #2d1b2d; color: #c77dff; }
+.type-平台风险 { background: #2d2d1b; color: #ffd166; }
+.type-AI工具 { background: #1b2a2d; color: #48cae4; }
+.card-main { flex: 1; min-width: 0; }
+.signal-title { font-size: 15px; font-weight: 600; color: #fff; line-height: 1.4; display: block; margin-bottom: 4px; }
+.signal-source { font-size: 11px; color: #555; }
+.card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.opp-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
+.opp-EXTREME { background: #1a3320; color: #06d6a0; border: 1px solid #06d6a0; }
+.opp-HIGH    { background: #1a2a40; color: #74c0fc; border: 1px solid #74c0fc; }
+.opp-MEDIUM  { background: #2d2a10; color: #ffd166; border: 1px solid #ffd166; }
+.opp-LOW     { background: #2a1515; color: #ff4d6d; border: 1px solid #ff4d6d; }
+.tag-repeat  { font-size: 10px; background: #2d1f0a; color: #ff9a3c; padding: 2px 8px; border-radius: 10px; border: 1px solid #ff9a3c; }
+.chevron { color: #555; font-size: 12px; transition: transform 0.2s; margin-top: 4px; }
+.card-body { display: none; padding: 0 20px 20px; border-top: 1px solid #1e1e2e; }
+.card-body.open { display: block; }
+.signal-desc { color: #bbb; margin: 14px 0 10px; font-size: 13px; line-height: 1.7; }
+.signal-opp { color: #ccc; font-size: 13px; line-height: 1.7; margin-bottom: 14px; }
+
+/* Score grid */
+.score-grid { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0; }
+.score-cell { display: flex; flex-direction: column; align-items: center; background: #1a1a28; border-radius: 8px; padding: 6px 10px; min-width: 52px; position: relative; cursor: help; }
+[data-tip] { position: relative; cursor: help; }
+[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+  background: #2a2a35; color: #e8e8f0; font-size: 11px; padding: 6px 10px;
+  border-radius: 6px; white-space: pre-line; width: 200px; z-index: 100;
+  border: 1px solid #444; line-height: 1.5; pointer-events: none;
+}
+.score-label { font-size: 10px; color: #666; margin-bottom: 3px; }
+.score-num { font-size: 18px; font-weight: 700; line-height: 1; }
+.s5 { color: #06d6a0; }
+.s4 { color: #74c0fc; }
+.s3 { color: #ffd166; }
+.s2 { color: #ff9a3c; }
+.s1 { color: #ff4d6d; }
+
+/* Details */
+.detail-section { margin-top: 14px; }
+.detail-section h4 { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.detail-section ul { list-style: none; padding: 0; }
+.detail-section ul li { padding: 3px 0 3px 16px; color: #aaa; font-size: 12px; position: relative; }
+.detail-section ul li::before { content: "›"; position: absolute; left: 0; color: #555; }
+.source-link { display: inline-block; margin-top: 14px; color: #4a9eff; text-decoration: none; font-size: 12px; }
+.source-link:hover { text-decoration: underline; }
+
+/* Repeated card */
+.signal-card.repeated { opacity: 0.7; border-color: #1e1e2e; }
+.signal-card.repeated .card-header { background: #0f0f15; }
+
+/* Extras */
+.extras-card { background: #0f0f17; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 18px; margin-bottom: 8px; display: flex; gap: 12px; }
+.extra-src { font-size: 11px; color: #555; white-space: nowrap; padding-top: 1px; }
+.extra-title { font-size: 13px; font-weight: 600; color: #ccc; margin-bottom: 3px; }
+.extra-note { font-size: 12px; color: #777; }
+
+@media (max-width: 600px) {
+  .header { padding: 20px 16px; }
+  .filters { padding: 12px 16px; }
+  .score-grid { gap: 4px; }
+  .score-cell { min-width: 44px; padding: 5px 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>创业信号雷达</h1>
+  <div class="meta">
+    <span>2026-05-25</span>
+    <span class="meta-badge">每日扫描</span>
+    <span>最近 1 天</span>
+    <span>235 原始条目 → 60 候选</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">今日新信号</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">已追踪信号</div></div>
+    <div class="stat"><div class="stat-num">27</div><div class="stat-label">激活数据源</div></div>
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterCards('all',this)">全部</button>
+  <button class="filter-btn" onclick="filterCards('EXTREME',this)">EXTREME</button>
+  <button class="filter-btn" onclick="filterCards('HIGH',this)">HIGH</button>
+  <button class="filter-btn" onclick="filterCards('MEDIUM',this)">MEDIUM</button>
+  <button class="filter-btn" onclick="filterCards('repeat',this)">🔁 已追踪</button>
+</div>
+
+<div class="container">
+<div class="section-title">今日新信号</div>
+
+<!-- ── SIGNAL 1: 会计师2026年仍手动录入PDF银行对账单 ── -->
+<div class="signal-card" data-opp="HIGH" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-旧系统">旧系统失效</span>
+    <div class="card-main">
+      <span class="signal-title">会计师2026年仍手动录入PDF银行对账单</span>
+      <span class="signal-source">r/Accounting · score 53 · kw 5.0</span>
+    </div>
+    <div class="card-right">
+      <span class="opp-badge opp-HIGH">HIGH</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body open">
+    <p class="signal-desc">Reddit r/Accounting 上一名兼职学生发帖：所在小型会计事务所有300+客户，每天仍在人工将PDF银行对账单逐行录入系统。评论区涌现大量共鸣——许多小型会计事务所根本没有采购专业对账单解析工具，或依赖的工具无法处理国内/小银行的非标格式PDF。</p>
+    <p class="signal-opp">创业切入点：面向中小型会计事务所（1-20人）的PDF银行对账单自动解析SaaS。重点解决"非标格式"——银行导出的PDF千差万别，现有OCR方案准确率差。配合LLM可做智能对账分类。定价$30-80/月，对账单数量计费，瞄准这批被大型ERP忽略的长尾用户。</p>
+    <div class="score-grid">
+      <div class="score-cell" data-tip="5: 帖子高共鸣，2026年仍手动，强烈情绪&#10;4: 500+赞，具体痛苦可描述&#10;3: 中赞，问题存在&#10;2: 低赞&#10;1: 边缘抱怨">
+        <span class="score-label">痛点</span><span class="score-num s5">5</span>
+      </div>
+      <div class="score-cell" data-tip="5: 完全没有直接解决方案&#10;4: 有方案但贵或只服务大企业&#10;3: 有竞品但不完整&#10;2: 有2-3个成熟竞品&#10;1: 市场充分竞争">
+        <span class="score-label">空白</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 有明确付费意愿证据&#10;4: 行业有付费习惯，核心工作流&#10;3: 需教育，nice-to-have&#10;2: 期望免费&#10;1: 强烈拒绝付费">
+        <span class="score-label">付费</span><span class="score-num s5">5</span>
+      </div>
+      <div class="score-cell" data-tip="5: 信号来源社区就是目标客户&#10;4: 有清晰线上渠道&#10;3: 需要销售动作&#10;2: 需要主动外呼&#10;1: 企业销售为主">
+        <span class="score-label">获客</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 纯软件，无行业监管&#10;4: GDPR/CCPA但标准明确&#10;3: 需要行业资质&#10;2: 需要牌照&#10;1: 医疗/法律，壁垒极高">
+        <span class="score-label">监管</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="EXTREME(5)=顶级机会&#10;HIGH(4)=强信号&#10;MEDIUM(3)=值得跟进&#10;LOW(2)=观察即可">
+        <span class="score-label">机会</span><span class="score-num s4">4</span>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h4>为什么是现在</h4>
+      <ul>
+        <li>LLM在文档解析上已到实用级别，准确率从60%提升至95%+</li>
+        <li>小型会计事务所在疫情后大量线上化，但工具采购仍停留在老一套</li>
+        <li>QuickBooks/Xero等主流工具对接主要银行，但对非标PDF无能为力</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>痛点列表</h4>
+      <ul>
+        <li>人工录入：每张对账单10-30分钟，错误率高</li>
+        <li>非标格式：各银行PDF排版不一，OCR规则维护成本极高</li>
+        <li>大工具不适配：Plaid/Yodlee主攻大中型客户，小事务所买不起或用不上</li>
+      </ul>
+    </div>
+    <a class="source-link" href="https://www.reddit.com/r/Accounting/comments/1tmrvtm/are_we_the_only_firm_still_manually_inputting/" target="_blank">→ 查看原帖 r/Accounting</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+
+<!-- ── SIGNAL 2: LLM Agent后端代码约束衰减：生产可靠性危机 ── -->
+<div class="signal-card" data-opp="HIGH" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-新能力">新能力副作用</span>
+    <div class="card-main">
+      <span class="signal-title">LLM Agent后端代码约束衰减：生产可靠性危机</span>
+      <span class="signal-source">Hacker News · arxiv:2605.06445 · score 241</span>
+    </div>
+    <div class="card-right">
+      <span class="opp-badge opp-HIGH">HIGH</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body open">
+    <p class="signal-desc">arXiv新论文"Constraint Decay"揭示：LLM Agent在生成后端代码时，随着交互轮次增加，早期设定的架构约束（安全规则、API边界、数据验证逻辑）会系统性"遗忘"。多个测试场景中，10轮对话后约束遵从率下降40-70%。企业在用Agent写Terraform、K8s配置、API端点时，这是真实的生产事故来源。</p>
+    <p class="signal-opp">创业切入点：面向DevOps/平台工程团队的"Agent输出合规验证层"——类似代码的单元测试，但专门针对AI生成的基础设施代码，自动检测是否违反架构约束（合规策略、安全规则、组织规范）。可作为CI/CD插件落地，定价按检查次数或席位。</p>
+    <div class="score-grid">
+      <div class="score-cell" data-tip="5: 帖子高共鸣，强烈情绪，有付费意愿&#10;4: 高赞500+，多人共鸣，痛苦具体&#10;3: 中赞100-500&#10;2: 低赞&#10;1: 边缘抱怨">
+        <span class="score-label">痛点</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 完全没有直接解决方案&#10;4: 有方案但贵或只服务大企业&#10;3: 有竞品但不完整&#10;2: 有2-3个成熟竞品&#10;1: 市场充分竞争">
+        <span class="score-label">空白</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 有明确付费意愿证据&#10;4: 行业有付费习惯，核心工作流&#10;3: 需教育，nice-to-have&#10;2: 期望免费&#10;1: 强烈拒绝付费">
+        <span class="score-label">付费</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 信号来源社区就是目标客户&#10;4: 有清晰线上渠道&#10;3: 需要销售动作&#10;2: 需要主动外呼&#10;1: 企业销售为主">
+        <span class="score-label">获客</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="5: 纯软件，无行业监管&#10;4: GDPR/CCPA但标准明确&#10;3: 需要行业资质&#10;2: 需要牌照&#10;1: 医疗/法律，壁垒极高">
+        <span class="score-label">监管</span><span class="score-num s5">5</span>
+      </div>
+      <div class="score-cell" data-tip="EXTREME(5)=顶级机会&#10;HIGH(4)=强信号&#10;MEDIUM(3)=值得跟进&#10;LOW(2)=观察即可">
+        <span class="score-label">机会</span><span class="score-num s4">4</span>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h4>为什么是现在</h4>
+      <ul>
+        <li>企业开始大规模使用AI Agent写生产代码，但缺乏验证机制</li>
+        <li>此论文发表即刻在HN引发热议，说明该问题已被广泛感受到</li>
+        <li>CI/CD工具已有Checkov/OPA等，但针对"AI生成代码的约束漂移"仍是空白</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>创业方向</h4>
+      <ul>
+        <li>AI代码合规检查器：嵌入GitHub Actions/GitLab CI，检测Agent输出</li>
+        <li>约束记忆层：给Agent提供持久化的架构上下文，防止遗忘</li>
+        <li>AI代码审计SaaS：人工智能生成代码的安全扫描专项服务</li>
+      </ul>
+    </div>
+    <a class="source-link" href="https://arxiv.org/abs/2605.06445" target="_blank">→ 查看论文 arxiv:2605.06445</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+
+<!-- ── SIGNAL 3: B2B假咨询发票欺诈：会计事务所成重灾区 ── -->
+<div class="signal-card" data-opp="HIGH" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-安全威胁">安全威胁</span>
+    <div class="card-main">
+      <span class="signal-title">B2B假咨询发票欺诈：会计事务所成重灾区</span>
+      <span class="signal-source">r/Accounting · score 93 · kw 2.0</span>
+    </div>
+    <div class="card-right">
+      <span class="opp-badge opp-HIGH">HIGH</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body open">
+    <p class="signal-desc">r/Accounting上有经验的会计师提醒：一种新型B2B发票欺诈正在蔓延——诈骗者伪造CEO邮件链，夹带看似真实的咨询服务发票，利用企业AP流程的信任漏洞套款。已在多家客户中发现两次实际尝试。AI降低了伪造成本，攻击频率正在上升。</p>
+    <p class="signal-opp">创业切入点：面向中小企业AP（应付账款）部门的发票真实性验证SaaS。核心功能：自动检测发票异常（新供应商突然大额付款、域名相似但不同的邮件、发票号规律异常），邮件链分析，与已知欺诈模式库比对。年费$1200-3600，精准瞄准在会计社区活跃的中小企业CFO。</p>
+    <div class="score-grid">
+      <div class="score-cell" data-tip="5: 强烈情绪，高赞1000+，有付费意愿&#10;4: 高赞500+，多人共鸣，痛苦具体&#10;3: 中赞100-500&#10;2: 低赞&#10;1: 边缘抱怨">
+        <span class="score-label">痛点</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 完全没有直接解决方案&#10;4: 有方案但贵或只服务大企业&#10;3: 有竞品但不完整&#10;2: 有2-3个成熟竞品&#10;1: 市场充分竞争">
+        <span class="score-label">空白</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 有明确付费意愿证据&#10;4: 行业有付费习惯，核心工作流&#10;3: 需教育，nice-to-have&#10;2: 期望免费&#10;1: 强烈拒绝付费">
+        <span class="score-label">付费</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 信号来源社区就是目标客户&#10;4: 有清晰线上渠道&#10;3: 需要销售动作&#10;2: 需要主动外呼&#10;1: 企业销售为主">
+        <span class="score-label">获客</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="5: 纯软件，无行业监管&#10;4: GDPR/CCPA但标准明确&#10;3: 需要行业资质&#10;2: 需要牌照&#10;1: 医疗/法律，壁垒极高">
+        <span class="score-label">监管</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="EXTREME(5)=顶级机会&#10;HIGH(4)=强信号&#10;MEDIUM(3)=值得跟进&#10;LOW(2)=观察即可">
+        <span class="score-label">机会</span><span class="score-num s4">4</span>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h4>为什么是现在</h4>
+      <ul>
+        <li>GPT-4o/Claude 3.5使伪造邮件链成本从数小时降至数分钟</li>
+        <li>远程办公使CEO确认流程更难，邮件欺诈成功率上升</li>
+        <li>中小企业AP数字化提速但安全工具未跟上</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>痛点列表</h4>
+      <ul>
+        <li>现有反欺诈工具（如Proofpoint）价格昂贵，针对大企业</li>
+        <li>会计事务所需要保护大量客户，单一工具难以覆盖</li>
+        <li>AP人员缺乏识别技巧，培训效果有限</li>
+      </ul>
+    </div>
+    <a class="source-link" href="https://www.reddit.com/r/Accounting/comments/1tm9z42/reminder_fraud_is_out_there_with_fake_consulting/" target="_blank">→ 查看原帖 r/Accounting</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+
+<!-- ── SIGNAL 4: DeepSeek Reasonix：原生低成本编程Agent ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-新能力">新能力出现</span>
+    <div class="card-main">
+      <span class="signal-title">DeepSeek Reasonix：原生低成本编程 Agent</span>
+      <span class="signal-source">Hacker News · score 564</span>
+    </div>
+    <div class="card-right">
+      <span class="opp-badge opp-MEDIUM">MEDIUM</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">HN头条：DeepSeek Reasonix是一个基于DeepSeek原生模型的编程Agent，通过大量KV缓存优化，将推理成本降低至Claude/GPT的1/10以下。关键差异：专为长上下文代码任务设计，延迟更低，成本可控。HN上开发者反应热烈，认为这正在重塑"编程AI工具"的定价预期。</p>
+    <p class="signal-opp">创业切入点：基于低成本推理的垂直编程Agent（如专注Legacy代码迁移、数据库Schema重构、测试用例批量生成），用成本优势切入企业客户。不与Cursor/Copilot正面竞争，而是做"批处理"场景——大量代码的自动化处理，成本敏感型客户的首选。</p>
+    <div class="score-grid">
+      <div class="score-cell" data-tip="5: 强烈情绪，高赞1000+&#10;4: 高赞500+&#10;3: 中赞100-500&#10;2: 低赞&#10;1: 边缘">
+        <span class="score-label">痛点</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="5: 完全没有解决方案&#10;4: 有方案但贵&#10;3: 有竞品但不完整&#10;2: 成熟竞品&#10;1: 充分竞争">
+        <span class="score-label">空白</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="5: 明确付费意愿&#10;4: 行业有付费习惯&#10;3: 需教育&#10;2: 期望免费&#10;1: 拒绝付费">
+        <span class="score-label">付费</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 来源社区就是目标客户&#10;4: 有清晰渠道&#10;3: 需销售动作&#10;2: 主动外呼&#10;1: 企业销售">
+        <span class="score-label">获客</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 纯软件&#10;4: GDPR可执行&#10;3: 需资质&#10;2: 需牌照&#10;1: 壁垒极高">
+        <span class="score-label">监管</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="EXTREME=顶级机会&#10;HIGH=强信号&#10;MEDIUM=值得跟进&#10;LOW=观察即可">
+        <span class="score-label">机会</span><span class="score-num s3">3</span>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h4>为什么是现在</h4>
+      <ul>
+        <li>DeepSeek R2等模型实力已与GPT-4o相当，但价格低一个数量级</li>
+        <li>KV缓存技术成熟，长上下文编程任务首次具备经济可行性</li>
+        <li>企业AI预算压力下，成本成为核心考量</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>注意风险</h4>
+      <ul>
+        <li>DeepSeek的中国背景在部分企业客户中存在数据合规顾虑</li>
+        <li>与现有AI编程工具的差异化叙事需要清晰</li>
+      </ul>
+    </div>
+    <a class="source-link" href="https://esengine.github.io/DeepSeek-Reasonix/" target="_blank">→ 查看项目页</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+
+<!-- ── SIGNAL 5: "永恒的AI滥造季"：AI内容正在吞噬互联网 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-市场空白">市场空白</span>
+    <div class="card-main">
+      <span class="signal-title">"永恒的AI滥造季"：AI内容正在吞噬互联网</span>
+      <span class="signal-source">Hacker News · geohot博客 · score 327</span>
+    </div>
+    <div class="card-right">
+      <span class="opp-badge opp-MEDIUM">MEDIUM</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">Comma.ai创始人George Hotz（geohot）发文"The Eternal Sloptember"：AI生成内容正在以指数级速度污染互联网，搜索结果质量急剧下降。他将这一时代命名为"永恒的九月"（Eternal September）的AI版——大量低质AI内容涌入，稀释并破坏了有价值的内容生态。HN社区热烈讨论，认为"内容信任危机"是下一代互联网的核心挑战。</p>
+    <p class="signal-opp">创业切入点：① 内容真实性认证工具（C2PA标准实施）— 为人工创作内容颁发可验证证书；② 高信噪比信息聚合器——专门为专业用户筛选去AI滥造的高质量内容源；③ 垂直领域内容质量评分API——帮助平台方自动识别并降权AI滥造内容。</p>
+    <div class="score-grid">
+      <div class="score-cell" data-tip="5: 强烈情绪，高赞1000+&#10;4: 高赞500+&#10;3: 中赞100-500&#10;2: 低赞&#10;1: 边缘">
+        <span class="score-label">痛点</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 完全没有解决方案&#10;4: 有方案但贵&#10;3: 有竞品但不完整&#10;2: 成熟竞品&#10;1: 充分竞争">
+        <span class="score-label">空白</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="5: 明确付费意愿&#10;4: 行业有付费习惯&#10;3: 需教育&#10;2: 期望免费&#10;1: 拒绝付费">
+        <span class="score-label">付费</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="5: 来源社区就是目标客户&#10;4: 有清晰渠道&#10;3: 需销售动作&#10;2: 主动外呼&#10;1: 企业销售">
+        <span class="score-label">获客</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 纯软件&#10;4: GDPR可执行&#10;3: 需资质&#10;2: 需牌照&#10;1: 壁垒极高">
+        <span class="score-label">监管</span><span class="score-num s5">5</span>
+      </div>
+      <div class="score-cell" data-tip="EXTREME=顶级机会&#10;HIGH=强信号&#10;MEDIUM=值得跟进&#10;LOW=观察即可">
+        <span class="score-label">机会</span><span class="score-num s3">3</span>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h4>为什么是现在</h4>
+      <ul>
+        <li>GPT-4o/Gemini使生成一篇文章的成本接近零，内容农场大规模AI化</li>
+        <li>Google搜索质量在2025年内多次出现争议性下降</li>
+        <li>C2PA（内容来源和真实性联盟）标准刚刚开始被主流平台采纳</li>
+      </ul>
+    </div>
+    <a class="source-link" href="https://geohot.github.io//blog/jekyll/update/2026/05/24/the-eternal-sloptember.html" target="_blank">→ 查看原文</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+
+<!-- ── SIGNAL 6: NVIDIA不再是唯一选择：本地LLM硬件多元化窗口 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-新能力">新能力出现</span>
+    <div class="card-main">
+      <span class="signal-title">NVIDIA不再是唯一选择：本地LLM硬件多元化窗口</span>
+      <span class="signal-source">r/LocalLLaMA · score 347</span>
+    </div>
+    <div class="card-right">
+      <span class="opp-badge opp-MEDIUM">MEDIUM</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">r/LocalLLaMA高赞帖：2026年还是NVIDIA的天下吗？评论区出现明显分裂——AMD ROCm在过去6个月软件大幅改善，Apple Silicon（M3/M4 Ultra）在量化模型上已可媲美3090，Intel Arc也有社区维护的驱动。越来越多用户开始成功在非NVIDIA硬件上跑主流LLM，社区从"仅NVIDIA"转向"多硬件生态"。</p>
+    <p class="signal-opp">创业切入点：① 硬件兼容性测试SaaS——让企业在购买本地LLM硬件前做基准测试，报告性价比；② 多后端LLM运行时优化层——自动选择最优推理后端（llama.cpp/ROCm/MLX），对开发者透明；③ 二手AI硬件流通平台——企业升级后的A100/3090有明确买卖需求。</p>
+    <div class="score-grid">
+      <div class="score-cell" data-tip="5: 强烈情绪，高赞1000+&#10;4: 高赞500+&#10;3: 中赞100-500&#10;2: 低赞&#10;1: 边缘">
+        <span class="score-label">痛点</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="5: 完全没有解决方案&#10;4: 有方案但贵&#10;3: 有竞品但不完整&#10;2: 成熟竞品&#10;1: 充分竞争">
+        <span class="score-label">空白</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 明确付费意愿&#10;4: 行业有付费习惯&#10;3: 需教育&#10;2: 期望免费&#10;1: 拒绝付费">
+        <span class="score-label">付费</span><span class="score-num s4">4</span>
+      </div>
+      <div class="score-cell" data-tip="5: 来源社区就是目标客户&#10;4: 有清晰渠道&#10;3: 需销售动作&#10;2: 主动外呼&#10;1: 企业销售">
+        <span class="score-label">获客</span><span class="score-num s3">3</span>
+      </div>
+      <div class="score-cell" data-tip="5: 纯软件&#10;4: GDPR可执行&#10;3: 需资质&#10;2: 需牌照&#10;1: 壁垒极高">
+        <span class="score-label">监管</span><span class="score-num s5">5</span>
+      </div>
+      <div class="score-cell" data-tip="EXTREME=顶级机会&#10;HIGH=强信号&#10;MEDIUM=值得跟进&#10;LOW=观察即可">
+        <span class="score-label">机会</span><span class="score-num s3">3</span>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h4>为什么是现在</h4>
+      <ul>
+        <li>AMD ROCm 6.x大幅改善，量化支持和速度接近CUDA</li>
+        <li>Apple M4 Ultra内存带宽创新高，70B模型流畅运行</li>
+        <li>NVIDIA GPU因AI需求供货紧张，企业开始评估替代方案</li>
+      </ul>
+    </div>
+    <a class="source-link" href="https://www.reddit.com/r/LocalLLaMA/comments/1tmkaua/is_nvidia_still_the_default_best_choice_for_local/" target="_blank">→ 查看原帖 r/LocalLLaMA</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 6 ── -->
+
+<!-- Repeated signals -->
+<div class="section-title">已追踪信号（3 条）</div>
+
+<!-- ── SIGNAL 7: 全面封禁Cursor又一大厂 ── -->
+<div class="signal-card repeated" data-opp="HIGH" data-repeat="true">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-AI工具">AI工具合规</span>
+    <div class="card-main">
+      <span class="signal-title">全面封禁 Cursor！又一家大厂出手了</span>
+      <span class="signal-source">掘金 · score 621</span>
+    </div>
+    <div class="card-right">
+      <span class="tag-repeat">🔁 已追踪</span>
+      <span class="opp-badge opp-HIGH">HIGH</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">快手研发线通知收紧第三方编程软件权限，Cursor在办公电脑直接闪退无法使用。继此前多家大厂封禁后，趋势仍在延续。</p>
+    <p class="signal-opp">此信号已于 2026-05-21/22 多次追踪。封禁持续，国产合规AI编程替代方案窗口仍在扩大。</p>
+    <div class="score-grid">
+      <div class="score-cell"><span class="score-label">痛点</span><span class="score-num s5">5</span></div>
+      <div class="score-cell"><span class="score-label">空白</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">付费</span><span class="score-num s5">5</span></div>
+      <div class="score-cell"><span class="score-label">获客</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">监管</span><span class="score-num s3">3</span></div>
+      <div class="score-cell"><span class="score-label">机会</span><span class="score-num s4">4</span></div>
+    </div>
+    <a class="source-link" href="https://juejin.cn/post/7584110439933100078" target="_blank">→ 查看原文</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 7 ── -->
+
+<!-- ── SIGNAL 8: DeepSeek内嵌AI工具无人知晓 ── -->
+<div class="signal-card repeated" data-opp="HIGH" data-repeat="true">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-安全威胁">供应链风险</span>
+    <div class="card-main">
+      <span class="signal-title">DeepSeek内嵌你常用的AI工具，但没人告诉你</span>
+      <span class="signal-source">Dev.to · score 64</span>
+    </div>
+    <div class="card-right">
+      <span class="tag-repeat">🔁 已追踪</span>
+      <span class="opp-badge opp-HIGH">HIGH</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">Dev.to文章揭示：HuggingChat等主流AI工具在用户不知情的情况下调用了DeepSeek后端，引发数据流向透明度担忧。</p>
+    <p class="signal-opp">此信号已于 2026-05-22 追踪（"DeepSeek 被偷偷内嵌到主流 AI 工具"）。AI工具供应链透明度需求持续。</p>
+    <div class="score-grid">
+      <div class="score-cell"><span class="score-label">痛点</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">空白</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">付费</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">获客</span><span class="score-num s3">3</span></div>
+      <div class="score-cell"><span class="score-label">监管</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">机会</span><span class="score-num s4">4</span></div>
+    </div>
+    <a class="source-link" href="https://dev.to/harsh2644/deepseek-is-running-inside-your-favorite-ai-tool-and-nobody-told-you-5g47" target="_blank">→ 查看原文</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 8 ── -->
+
+<!-- ── SIGNAL 9: 豆包9.9元AI编程价格战 ── -->
+<div class="signal-card repeated" data-opp="MEDIUM" data-repeat="true">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="type-badge type-AI工具">价格战</span>
+    <div class="card-main">
+      <span class="signal-title">豆包也开始抢程序员饭碗，一个月只要9块9</span>
+      <span class="signal-source">掘金 · score 327</span>
+    </div>
+    <div class="card-right">
+      <span class="tag-repeat">🔁 已追踪</span>
+      <span class="opp-badge opp-MEDIUM">MEDIUM</span>
+      <span class="chevron">▼</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">字节豆包Seed-Code以¥9.9/月入场AI编程市场，国内首个支持视觉理解+256K上下文的编程模型。</p>
+    <p class="signal-opp">此信号已于 2026-05-24 追踪（"豆包 ¥9.9/月入场：AI 编程工具价格战"）。价格战持续压缩利润空间，垂直场景机会在高端扩大。</p>
+    <div class="score-grid">
+      <div class="score-cell"><span class="score-label">痛点</span><span class="score-num s3">3</span></div>
+      <div class="score-cell"><span class="score-label">空白</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">付费</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">获客</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">监管</span><span class="score-num s4">4</span></div>
+      <div class="score-cell"><span class="score-label">机会</span><span class="score-num s3">3</span></div>
+    </div>
+    <a class="source-link" href="https://juejin.cn/post/7572020278387261474" target="_blank">→ 查看原文</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 9 ── -->
+
+<!-- Extras section -->
+<div class="section-title">周边信号（值得关注）</div>
+
+<div class="extras-card">
+  <span class="extra-src">HN + Lobsters</span>
+  <div>
+    <div class="extra-title">Jira Is Turing-Complete</div>
+    <div class="extra-note">Jira规则引擎复杂到图灵完备——印证PM工具过度工程化，轻量替代方案有市场。</div>
+  </div>
+</div>
+
+<div class="extras-card">
+  <span class="extra-src">GitHub</span>
+  <div>
+    <div class="extra-title">TauricResearch/TradingAgents（79K stars）</div>
+    <div class="extra-note">AI交易Agent框架快速获得关注，量化交易AI工具市场正在形成，值得持续观察。</div>
+  </div>
+</div>
+
+<div class="extras-card">
+  <span class="extra-src">GitHub</span>
+  <div>
+    <div class="extra-title">farion1231/cc-switch（80K stars）</div>
+    <div class="extra-note">疑似Claude Code工作流切换工具，高star数说明开发者对AI编程工具的配置需求强烈。</div>
+  </div>
+</div>
+
+<div class="extras-card">
+  <span class="extra-src">r/selfhosted</span>
+  <div>
+    <div class="extra-title">自托管ebook2audiobook：语音克隆+1158种语言</div>
+    <div class="extra-note">开源有声书转换工具加入语音克隆功能，个人内容消费工具的自托管趋势持续增强。</div>
+  </div>
+</div>
+
+<div class="extras-card">
+  <span class="extra-src">掘金</span>
+  <div>
+    <div class="extra-title">我为什么最终还是回归了Cursor（254赞）</div>
+    <div class="extra-note">尽管被大厂封禁，开发者个人层面仍强烈依赖Cursor，说明工具粘性极高、替代产品机会与挑战并存。</div>
+  </div>
+</div>
+
+<div style="margin-top: 40px; padding: 20px; background: #0a0a12; border-radius: 8px; color: #444; font-size: 11px; text-align: center;">
+  生成时间：2026-05-25 · 数据源 27 个 · 扫描周期：最近 1 天
+</div>
+</div>
+
+<script type="application/json" id="signal-extras">
+[
+  {"title":"Jira Is Turing-Complete","source":"Hacker News + Lobsters","note":"Jira规则引擎复杂到图灵完备——印证PM工具过度工程化，轻量替代方案有市场"},
+  {"title":"TauricResearch/TradingAgents（79K stars）","source":"GitHub","note":"AI交易Agent框架快速获得关注，量化交易AI工具市场正在形成"},
+  {"title":"farion1231/cc-switch（80K stars）","source":"GitHub","note":"疑似Claude Code工作流切换工具，开发者对AI编程工具配置需求强烈"},
+  {"title":"自托管ebook2audiobook（语音克隆+1158语言）","source":"r/selfhosted","note":"个人内容消费工具自托管趋势持续增强"},
+  {"title":"我为什么最终还是回归了Cursor","source":"掘金 · 254赞","note":"工具粘性极高，开发者个人层面强烈依赖Cursor，替代产品机会与挑战并存"}
+]
+</script>
+
+<script>
+function toggleCard(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  body.classList.toggle('open');
+  chevron.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+
+function filterCards(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(card => {
+    if (type === 'all') { card.style.display = ''; return; }
+    if (type === 'repeat') {
+      card.style.display = card.dataset.repeat === 'true' ? '' : 'none';
+    } else {
+      card.style.display = (card.dataset.opp === type && card.dataset.repeat !== 'true') ? '' : 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
