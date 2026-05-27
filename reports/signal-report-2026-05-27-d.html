@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创业信号 · 2026-05-27</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d0d0f; color: #e8e8f0; font-family: -apple-system, 'PingFang SC', BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 32px 24px 24px; border-bottom: 1px solid #2a2a45; }
+  .header-top { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+  .logo { font-size: 22px; font-weight: 700; color: #e8e8f0; letter-spacing: -0.5px; }
+  .date-tag { background: #1e1e35; border: 1px solid #3a3a5c; color: #a0a0c0; font-size: 12px; padding: 4px 10px; border-radius: 20px; }
+  .range-tag { background: #06d6a040; border: 1px solid #06d6a0; color: #06d6a0; font-size: 12px; padding: 4px 10px; border-radius: 20px; }
+  .stats { display: flex; gap: 20px; flex-wrap: wrap; }
+  .stat-item { display: flex; flex-direction: column; }
+  .stat-num { font-size: 28px; font-weight: 700; color: #74c0fc; }
+  .stat-label { font-size: 11px; color: #666; margin-top: 2px; }
+  .filters { padding: 16px 24px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid #1e1e2e; background: #0f0f18; }
+  .filter-btn { background: #1a1a2e; border: 1px solid #2a2a45; color: #a0a0c0; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+  .filter-btn:hover, .filter-btn.active { background: #2a2a45; color: #e8e8f0; border-color: #4a4a7a; }
+  .filter-btn[data-filter="EXTREME"].active { background: #4d0026; border-color: #ff4d6d; color: #ff4d6d; }
+  .filter-btn[data-filter="HIGH"].active { background: #002b4d; border-color: #74c0fc; color: #74c0fc; }
+  .filter-btn[data-filter="MEDIUM"].active { background: #4d3900; border-color: #ffd166; color: #ffd166; }
+  .filter-btn[data-filter="repeat"].active { background: #4d2500; border-color: #ff9a3c; color: #ff9a3c; }
+  .main { padding: 20px 24px; max-width: 900px; margin: 0 auto; }
+  .section-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 12px; }
+
+  /* Signal Card */
+  .signal-card { background: #13131f; border: 1px solid #2a2a3e; border-radius: 12px; margin-bottom: 16px; overflow: hidden; transition: border-color 0.2s; }
+  .signal-card:hover { border-color: #4a4a6a; }
+  .signal-card.collapsed .card-body { display: none; }
+  .card-header { padding: 16px 20px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
+  .signal-type-tag { font-size: 10px; padding: 2px 8px; border-radius: 12px; white-space: nowrap; margin-top: 2px; flex-shrink: 0; }
+  .tag-pain { background: #3d1a1a; color: #ff8888; border: 1px solid #5d2a2a; }
+  .tag-market { background: #1a2d3d; color: #74c0fc; border: 1px solid #2a4d6d; }
+  .tag-platform { background: #1a3d2d; color: #06d6a0; border: 1px solid #2a6d4d; }
+  .tag-security { background: #3d2a1a; color: #ff9a3c; border: 1px solid #6d4a2a; }
+  .tag-enterprise { background: #2a1a3d; color: #cc88ff; border: 1px solid #4a2a6d; }
+  .tag-repeat-badge { font-size: 10px; padding: 2px 8px; border-radius: 12px; background: #4d2500; color: #ff9a3c; border: 1px solid #7a4500; white-space: nowrap; flex-shrink: 0; }
+  .header-content { flex: 1; }
+  .signal-title { font-size: 15px; font-weight: 600; color: #e8e8f0; line-height: 1.4; }
+  .signal-meta { font-size: 11px; color: #555; margin-top: 4px; }
+  .badge-opp { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; flex-shrink: 0; align-self: flex-start; }
+  .badge-EXTREME { background: #4d0026; color: #ff4d6d; border: 1px solid #ff4d6d; }
+  .badge-HIGH { background: #002b4d; color: #74c0fc; border: 1px solid #74c0fc; }
+  .badge-MEDIUM { background: #4d3900; color: #ffd166; border: 1px solid #ffd166; }
+  .badge-LOW { background: #2a2a2a; color: #888; border: 1px solid #555; }
+  .expand-icon { color: #555; font-size: 12px; margin-top: 2px; }
+
+  .card-body { padding: 0 20px 20px; }
+  .signal-desc { font-size: 13px; color: #a0a0b8; line-height: 1.6; margin-bottom: 14px; }
+  .detail-section { margin-bottom: 14px; }
+  .detail-label { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .detail-content { font-size: 13px; color: #c0c0d8; line-height: 1.6; }
+  .pain-list { list-style: none; }
+  .pain-list li { padding: 4px 0; color: #c0c0d8; font-size: 13px; line-height: 1.5; }
+  .pain-list li::before { content: "▸ "; color: #ff9a3c; }
+  .signal-opp { font-size: 13px; color: #c0c0d8; line-height: 1.6; border-left: 2px solid #06d6a0; padding-left: 12px; background: #06d6a008; padding: 10px 12px; border-radius: 0 6px 6px 0; margin-bottom: 14px; }
+
+  /* Scores */
+  .scores-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .score-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  [data-tip] { position: relative; cursor: help; }
+  [data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+    background: #2a2a35; color: #e8e8f0; font-size: 11px; padding: 6px 10px;
+    border-radius: 6px; white-space: pre-line; width: 200px; z-index: 100;
+    border: 1px solid #444; line-height: 1.5; pointer-events: none;
+  }
+  .score-label { font-size: 10px; color: #666; }
+  .score-num { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; border: 1px solid transparent; }
+  .score-5 { background: #06d6a020; color: #06d6a0; border-color: #06d6a060; }
+  .score-4 { background: #74c0fc20; color: #74c0fc; border-color: #74c0fc60; }
+  .score-3 { background: #ffd16620; color: #ffd166; border-color: #ffd16660; }
+  .score-2 { background: #ff9a3c20; color: #ff9a3c; border-color: #ff9a3c60; }
+  .score-1 { background: #ff4d6d20; color: #ff4d6d; border-color: #ff4d6d60; }
+  .source-link { font-size: 11px; color: #4a4a7a; text-decoration: none; border-top: 1px solid #1e1e2e; padding-top: 10px; display: block; }
+  .source-link:hover { color: #74c0fc; }
+
+  /* Extras */
+  .extras-section { margin-top: 24px; padding: 16px 20px; background: #0f0f18; border: 1px solid #1e1e2e; border-radius: 12px; }
+  .extras-title { font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  .extra-item { padding: 8px 0; border-bottom: 1px solid #1e1e2e; }
+  .extra-item:last-child { border-bottom: none; }
+  .extra-title { font-size: 13px; color: #c0c0d8; font-weight: 500; }
+  .extra-note { font-size: 11px; color: #666; margin-top: 3px; }
+  .extra-source { font-size: 10px; color: #444; margin-top: 2px; }
+
+  /* hidden */
+  .signal-card.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <span class="logo">📡 创业信号雷达</span>
+    <span class="date-tag">2026-05-27</span>
+    <span class="range-tag">⏱ 最近1天</span>
+  </div>
+  <div class="stats">
+    <div class="stat-item">
+      <span class="stat-num">5</span>
+      <span class="stat-label">今日新信号</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">1</span>
+      <span class="stat-label">已追踪</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">162</span>
+      <span class="stat-label">原始抓取</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">17</span>
+      <span class="stat-label">活跃数据源</span>
+    </div>
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all" onclick="filterCards('all')">全部</button>
+  <button class="filter-btn" data-filter="EXTREME" onclick="filterCards('EXTREME')">🔥 EXTREME</button>
+  <button class="filter-btn" data-filter="HIGH" onclick="filterCards('HIGH')">⚡ HIGH</button>
+  <button class="filter-btn" data-filter="MEDIUM" onclick="filterCards('MEDIUM')">📊 MEDIUM</button>
+  <button class="filter-btn" data-filter="repeat" onclick="filterCards('repeat')">🔁 已追踪</button>
+</div>
+
+<div class="main">
+
+<!-- ── SIGNAL 1: SaaS 退订恶意设计：取消服务耗时1小时 ── -->
+<div class="signal-card" data-opp="HIGH" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="signal-type-tag tag-pain">用户痛苦</span>
+    <div class="header-content">
+      <div class="signal-title">SaaS 退订恶意设计：取消服务耗时1小时</div>
+      <div class="signal-meta">r/sysadmin · 582 upvotes · 2026-05-27</div>
+    </div>
+    <span class="badge-opp badge-HIGH">HIGH</span>
+    <span class="expand-icon">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">一名 sysadmin 分享了取消 RingCentral 服务的噩梦：客服转接5次、每次被迫等待、使用留客话术拖延，前后花费超过1小时。评论区大量共鸣，其他人也分享了 Comcast、HubSpot、Salesforce 等的类似"取消地狱"经历。</p>
+
+    <div class="detail-section">
+      <div class="detail-label">为什么是现在</div>
+      <div class="detail-content">SaaS 订阅模式大爆发后，企业开始用客服摩擦留住客户。FTC 的"Click-to-Cancel"规则（2024年通过）意味着监管合规压力正在上升，但执行尚不完善，留出了工具层机会。中小企业每月管理20+个 SaaS 订阅，但没有一个集中管理+取消代理工具。</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-label">旧系统失效</div>
+      <div class="detail-content">企业采购 SaaS 有成熟的管理工具（Torii、Zylo、Blissfully），但专注于"退出/取消"端的几乎没有。当前解法：公司内部专人负责 + 信用卡止付 → 都不优雅。</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-label">痛点列表</div>
+      <ul class="pain-list">
+        <li>取消流程完全不透明，无固定步骤</li>
+        <li>客服刻意转接疲惫用户放弃取消</li>
+        <li>B2B 合同条款复杂，不知何时可终止</li>
+        <li>被忘记取消的 SaaS 每月自动续费</li>
+        <li>信用卡止付后供应商拒绝退款并威胁起诉</li>
+      </ul>
+    </div>
+
+    <p class="signal-opp">创业切入：① B2B SaaS 取消代理服务——帮企业谈判退出合同（收佣金）；② "公平取消" SaaS 品牌定位——用"一键取消"作为差异化卖点对比 RingCentral；③ 订阅监控 + 自动取消提醒 + 合同到期预警一体化工具，目标客户：中小企业 IT 负责人和 CFO。</p>
+
+    <div class="scores-row">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <span class="score-num score-4" data-tip="4: 582高赞，强烈愤怒情绪，评论区多人共鸣，实际金钱损失">
+          <span class="score-label" style="display:none">痛点</span>4
+        </span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <span class="score-num score-4" data-tip="4: 采购端工具成熟（Torii），退出端几乎空白，无直接竞品">4</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <span class="score-num score-4" data-tip="4: 企业有成熟SaaS管理预算，取消节省的费用即为价值">4</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <span class="score-num score-4" data-tip="4: 信号来源社区(r/sysadmin)即目标客户，SEO可驱动">4</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <span class="score-num score-5" data-tip="5: 纯软件，FTC规则实际上是顺风，无其他监管风险">5</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <span class="score-num score-4" data-tip="综合 HIGH: 真实痛苦+空白市场+SaaS付费习惯，时机好">4</span>
+      </div>
+    </div>
+    <a class="source-link" href="https://www.reddit.com/r/sysadmin/comments/1todfk7/cancelling_ringcentral_took_over_an_hour_and_felt" target="_blank">↗ 原帖：r/sysadmin · Cancelling RingCentral Took Over an Hour</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+
+<!-- ── SIGNAL 2: 开发者寻找 Postman/XShell/Navicat 替代品 ── -->
+<div class="signal-card" data-opp="HIGH" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="signal-type-tag tag-market">市场空白</span>
+    <div class="header-content">
+      <div class="signal-title">开发者寻找 Postman/XShell/Navicat 替代品</div>
+      <div class="signal-meta">V2EX · 83 回复 · 2026-05-27</div>
+    </div>
+    <span class="badge-opp badge-HIGH">HIGH</span>
+    <span class="expand-icon">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">V2EX 帖子询问 Postman、XShell、Navicat 三大开发工具的替代软件，83个回复涵盖大量推荐。这反映一个持续的市场信号：这三款工具定价高、UI老旧、跨平台体验差，但没有一款工具把三者整合。</p>
+
+    <div class="detail-section">
+      <div class="detail-label">为什么是现在</div>
+      <div class="detail-content">Postman 近年持续涨价并删除免费功能；XShell 仅支持 Windows；Navicat 订阅制每年 $200+。AI 原生重构机会正在出现——现有替代品（Insomnia、DBeaver、TablePlus）各自为政，没有一个统一的"开发者工作台"。</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-label">旧系统失效</div>
+      <div class="detail-content">Postman 免费层删除协作功能 → 中小团队被迫付费或寻找替代；XShell 只能 Windows → Mac/Linux 开发者痛苦；Navicat 每年订阅 → 开发者开始用 DBeaver 但 UI 差。三个痛点同时存在，没有一站式解决方案。</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-label">痛点列表</div>
+      <ul class="pain-list">
+        <li>API 测试、SSH 连接、数据库管理三个工具来回切换</li>
+        <li>Postman 团队版 $29/月/人，中小团队难以承受</li>
+        <li>XShell 不支持 macOS，Apple Silicon 开发者无法使用</li>
+        <li>Navicat 授权模式复杂，无法跨设备使用</li>
+        <li>现有开源替代品各有缺陷，学习成本高</li>
+      </ul>
+    </div>
+
+    <p class="signal-opp">创业切入：① 一体化开发工作台（API+SSH+DB 三合一）——目标中小团队和独立开发者；② 专注单点突破，如"专为 Mac 设计的 SSH 客户端"或"AI 原生 API 测试工具"；③ 中国市场特供版（国产私有化部署，解决数据安全顾虑）。Hoppscotch（GitHub 80K stars）、TablePlus 已验证付费意愿。</p>
+
+    <div class="scores-row">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <span class="score-num score-3" data-tip="3: 83回复活跃，但非强情绪词，属便利性痛点">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <span class="score-num score-3" data-tip="3: 有替代品但无一统江湖，整合机会存在">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <span class="score-num score-4" data-tip="4: 开发者有付费工具习惯，TablePlus/Paw均已验证">4</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <span class="score-num score-5" data-tip="5: 信号来源社区即目标客户，SEO+Product Hunt驱动">5</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <span class="score-num score-5" data-tip="5: 纯开发工具，无监管风险">5</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <span class="score-num score-4" data-tip="综合 HIGH: 持续需求+付费意愿强+分发清晰，切入点多">4</span>
+      </div>
+    </div>
+    <a class="source-link" href="https://www.v2ex.com/t/1215798" target="_blank">↗ 原帖：V2EX · 寻找 postman、xshell、navicat 的替代软件</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+
+<!-- ── SIGNAL 3: Google 限制 Android 侧载：自托管生态生存危机 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="signal-type-tag tag-platform">平台风险</span>
+    <div class="header-content">
+      <div class="signal-title">Google 限制 Android 侧载：自托管生态生存危机</div>
+      <div class="signal-meta">r/selfhosted · 165 upvotes · 2026-05-27</div>
+    </div>
+    <span class="badge-opp badge-MEDIUM">MEDIUM</span>
+    <span class="expand-icon">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">Google 即将修改 Android 应用侧载政策，将大幅限制非 Play Store 应用的安装，威胁整个自托管应用生态。F-Droid、Obtainium 等工具面临存亡危机，Bitwarden、Nextcloud、Jellyfin 等应用的用户被迫回到 Play Store。</p>
+
+    <div class="detail-section">
+      <div class="detail-label">为什么是现在</div>
+      <div class="detail-content">Google 对 Android 的控制权正在"苹果化"——安全理由+商业动机双驱动。此前 Railway 被 GCP 封锁、Netlify 封禁用户等事件显示平台依赖风险日益突出。自托管社区已历经多次平台打压，但这次攻击的是底层安装机制，危害更根本。</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-label">痛点列表</div>
+      <ul class="pain-list">
+        <li>F-Droid 等开源应用商店无法通过 Play Store 分发</li>
+        <li>企业内部应用分发（MDM bypass）面临合规风险</li>
+        <li>隐私敏感用户被迫使用 Google 监控的应用商店</li>
+        <li>自托管服务的 Android 客户端面临分发渠道危机</li>
+      </ul>
+    </div>
+
+    <p class="signal-opp">创业切入：① 企业 MDM 合规应用分发平台（绕过 Play Store 的合法替代）；② iOS 优先的自托管应用客户端（Android 环境恶化 → 机会转移）；③ PWA-first 策略咨询——帮助自托管服务商迁移到 Progressive Web App 规避平台风险。</p>
+
+    <div class="scores-row">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <span class="score-num score-4" data-tip="4: 社区高度焦虑，生态存亡威胁，强情绪">4</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <span class="score-num score-3" data-tip="3: MDM分发有企业解决方案，但消费者侧确实空白">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <span class="score-num score-3" data-tip="3: 自托管社区付费意愿参差，企业客户WTP高">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <span class="score-num score-4" data-tip="4: 自托管社区是清晰目标群体，SEO+社区驱动">4</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <span class="score-num score-3" data-tip="3: 企业应用分发可能需要MDM认证，有一定门槛">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <span class="score-num score-3" data-tip="综合 MEDIUM: 有真实威胁但变现路径需要找准切口">3</span>
+      </div>
+    </div>
+    <a class="source-link" href="https://www.reddit.com/r/selfhosted/comments/1toysos/googles_coming_change_to_app_sideloading_is/" target="_blank">↗ 原帖：r/selfhosted · Google's coming change to app sideloading</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+
+<!-- ── SIGNAL 4: 微软补丁破坏企业打印功能：Windows 补丁测试危机 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="signal-type-tag tag-enterprise">企业IT</span>
+    <div class="header-content">
+      <div class="signal-title">微软补丁破坏企业打印功能：Windows 补丁质量危机</div>
+      <div class="signal-meta">r/sysadmin · 63 upvotes · 2026-05-27</div>
+    </div>
+    <span class="badge-opp badge-MEDIUM">MEDIUM</span>
+    <span class="expand-icon">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">5月 2026 hotpatch (KB5087424) 破坏 Windows Server 2022 上的32位打印功能，导致 Azure 上的 RDS 主机无法打印。一名 sysadmin 自述被这个未经充分测试的补丁浪费了6小时，强调这是 Microsoft 补丁质量系统性崩溃的又一案例。</p>
+
+    <div class="detail-section">
+      <div class="detail-label">为什么是现在</div>
+      <div class="detail-content">微软加快 hotpatch 推送频率（Azure 每月多次）但测试环境覆盖降低。企业 IT 团队缺乏自动验证工具——"打补丁 → 测功能"这个循环仍然高度手动。随着企业上云，本地测试环境减少，验证成本更高。</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-label">痛点列表</div>
+      <ul class="pain-list">
+        <li>补丁安装后无自动化测试覆盖关键业务功能</li>
+        <li>打印服务、VPN、RDP 等功能最容易被补丁破坏</li>
+        <li>Azure hotpatch 更新频率高，测试窗口缩短</li>
+        <li>回滚补丁耗时且风险大，往往等微软修复更难</li>
+        <li>MSP 同时管理数十客户，补丁风险被放大</li>
+      </ul>
+    </div>
+
+    <p class="signal-opp">创业切入：① Windows 补丁自动化烟雾测试平台——在非生产环境自动验证关键功能后再推广；② MSP 专用的补丁风险评分 + 延迟推送决策工具；③ Azure 补丁影响监控 SaaS——整合社区反馈（Reddit/论坛）+ 自动告警。</p>
+
+    <div class="scores-row">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <span class="score-num score-4" data-tip="4: 强情绪（6小时浪费），系统性问题，评论区大量共鸣">4</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <span class="score-num score-3" data-tip="3: 企业级测试工具有（Ivanti），但中小企业/MSP层面空白">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <span class="score-num score-3" data-tip="3: IT预算有限，但补丁破坏的损失可量化，WTP中等">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <span class="score-num score-3" data-tip="3: 目标客户明确(MSP/sysadmin)，但需要销售触达">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <span class="score-num score-5" data-tip="5: 纯软件，无监管风险">5</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <span class="score-num score-3" data-tip="综合 MEDIUM: 真实痛苦+递减，需找到规模化路径">3</span>
+      </div>
+    </div>
+    <a class="source-link" href="https://www.reddit.com/r/sysadmin/comments/1toxb77/psa_another_broken_microsoft_patch_kb5087424_may/" target="_blank">↗ 原帖：r/sysadmin · PSA KB5087424 breaks 32-bit printing</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+
+<!-- ── SIGNAL 5: 安全团队 vs 工程团队：SecDevOps 协作工具空白 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="signal-type-tag tag-security">安全</span>
+    <div class="header-content">
+      <div class="signal-title">安全团队 vs 工程团队：SecDevOps 协作工具空白</div>
+      <div class="signal-meta">r/sysadmin · 55 upvotes · 2026-05-27</div>
+    </div>
+    <span class="badge-opp badge-MEDIUM">MEDIUM</span>
+    <span class="expand-icon">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">一名平台工程师分享了5年来对安全团队的积怨：安全团队阻塞功能上线、审批流程不透明、提出无法执行的要求、与工程团队完全脱节。评论区激烈讨论揭示：安全-工程摩擦是企业 IT 中最普遍却最缺少工具解决的问题之一。</p>
+
+    <div class="detail-section">
+      <div class="detail-label">为什么是现在</div>
+      <div class="detail-content">AI 加速软件开发节奏后，安全审查成为新的瓶颈。DevSecOps 理念虽然提出多年，但落地工具仍以大型企业（Veracode、Snyk Enterprise）为主，中小企业/成长期团队缺乏轻量协作工具。CISOs 压力增大 → 安全团队加强管控 → 工程团队摩擦上升。</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-label">痛点列表</div>
+      <ul class="pain-list">
+        <li>安全审批流程不透明，工程师不知道等什么</li>
+        <li>安全团队无法量化审批拖延对业务的影响</li>
+        <li>"Policy as Code"工具对中小团队门槛过高</li>
+        <li>安全要求变化时工程团队无法及时知晓并适配</li>
+        <li>安全漏洞责任归属不清，两个团队互相推诿</li>
+      </ul>
+    </div>
+
+    <p class="signal-opp">创业切入：① 安全-工程协作平台——将安全要求翻译成工程语言，提供透明审批进度；② "安全护栏自动化"——在 CI/CD 中嵌入安全检查，减少人工审批摩擦；③ 安全债务可视化工具——量化安全团队阻塞成本，帮助两边对话。目标：中型科技公司（50-500人）。</p>
+
+    <div class="scores-row">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <span class="score-label" style="display:none">痛点</span>
+        <span class="score-num score-3" data-tip="3: 55赞，情绪强烈但样本量有限，属职场抱怨">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <span class="score-num score-3" data-tip="3: 大企业有Jira Security等，中型团队空白较多">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <span class="score-num score-3" data-tip="3: 安全工具预算存在，但这个问题的WTP需要教育">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <span class="score-num score-3" data-tip="3: 需要同时说服CISO和工程VP，销售复杂">3</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <span class="score-num score-5" data-tip="5: 纯软件协作工具，无监管风险">5</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <span class="score-num score-3" data-tip="综合 MEDIUM: 真实痛苦但变现路径复杂，需要更多验证">3</span>
+      </div>
+    </div>
+    <a class="source-link" href="https://www.reddit.com/r/sysadmin/comments/1tp0rc8/genuinely_hate_cyber_security_teams/" target="_blank">↗ 原帖：r/sysadmin · Genuinely hate cyber security teams</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+
+<!-- ── SIGNAL 6: 快手全面封禁 Cursor（续）── -->
+<div class="signal-card collapsed" data-opp="repeat" data-repeat="true">
+  <div class="card-header" onclick="toggleCard(this)">
+    <span class="signal-type-tag tag-enterprise">企业合规</span>
+    <div class="header-content">
+      <div class="signal-title">快手全面封禁 Cursor（续）：大厂 AI 合规浪潮持续</div>
+      <div class="signal-meta">掘金 · 628 点赞 · 2026-05-27</div>
+    </div>
+    <span class="tag-repeat-badge">🔁 已追踪</span>
+    <span class="expand-icon">▶</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">快手研发线发布通知，封禁 Cursor 等第三方 AI 编程工具，在公司办公电脑上一旦打开 Cursor 立即闪退。这是继大厂全面封禁浪潮后的又一确认数据点，企业 AI 编程合规需求持续累积。</p>
+    <p class="signal-opp">此信号已于 2026-05-21、2026-05-22 追踪，核心机会仍为：私有化部署 AI 编程助手、数据不出境的企业级 Coding Agent。</p>
+    <div class="scores-row">
+      <div class="score-item"><span class="score-label">痛点</span><span class="score-num score-4">4</span></div>
+      <div class="score-item"><span class="score-label">空白</span><span class="score-num score-4">4</span></div>
+      <div class="score-item"><span class="score-label">付费</span><span class="score-num score-4">4</span></div>
+      <div class="score-item"><span class="score-label">获客</span><span class="score-num score-3">3</span></div>
+      <div class="score-item"><span class="score-label">监管</span><span class="score-num score-3">3</span></div>
+      <div class="score-item"><span class="score-label">机会</span><span class="score-num score-4">4</span></div>
+    </div>
+    <a class="source-link" href="https://juejin.cn/post/7584110439933100078" target="_blank">↗ 原帖：掘金 · 全面封禁 Cursor！又一家大厂出手了</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 6 ── -->
+
+<!-- Extras -->
+<div class="extras-section">
+  <div class="extras-title">📎 值得关注（额外条目）</div>
+  <div class="extra-item">
+    <div class="extra-title">Dropbox CEO Drew Houston 辞职</div>
+    <div class="extra-note">CEO 交接期用户往往重新评估工具选择，潜在迁移窗口。Dropbox 多年被 Google Drive 挤压，用户基础松动。</div>
+    <div class="extra-source">HN · 352 pts · cnbc.com</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">AI 视频 SaaS 关停复盘：1078美元广告0留存</div>
+    <div class="extra-note">创始人坦诚复盘失败原因：B2C AI视频工具竞争过激、分发成本高、差异化不足。反面教材价值高。</div>
+    <div class="extra-source">r/SaaS · 63 pts</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">LeafWiki：自托管 wiki 单 Go 二进制</div>
+    <div class="extra-note">v0.10.0 发布，单文件部署，SQLite+Markdown，轻量替代 Confluence。indie dev 方向的市场验证。</div>
+    <div class="extra-source">r/selfhosted · 156 pts</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">V2EX 技术人才移民新加坡讨论热</div>
+    <div class="extra-note">83回复，中国开发者出海意愿强，相关的移民申请工具、海外社保/税务合规工具机会值得关注。</div>
+    <div class="extra-source">V2EX · 225 pts</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">AI 写代码"慢而好"的悖论</div>
+    <div class="extra-note">Lobsters 热文：AI让开发者写更少但更高质量的代码，重新定义编程效率指标。工程管理工具的新维度。</div>
+    <div class="extra-source">Lobsters · 77 pts</div>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<script type="application/json" id="signal-extras">
+[
+  {"title":"Dropbox CEO辞职迁移窗口","source":"HN · cnbc.com","note":"CEO交接期用户重新评估工具选择，Dropbox用户基础松动，迁移工具机会"},
+  {"title":"AI视频SaaS关停复盘","source":"r/SaaS","note":"坦诚失败：B2C AI视频竞争过激，分发成本高，差异化不足，反面教材"},
+  {"title":"LeafWiki自托管wiki","source":"r/selfhosted","note":"单Go二进制部署，SQLite+Markdown，轻量Confluence替代品，indie验证"},
+  {"title":"V2EX技术人才移民新加坡","source":"V2EX","note":"开发者出海意愿强，移民申请工具和海外合规工具机会"},
+  {"title":"AI写代码慢而质高悖论","source":"Lobsters","note":"重新定义编程效率指标，工程管理工具的新维度"}
+]
+</script>
+
+<script>
+function toggleCard(header) {
+  const card = header.closest('.signal-card');
+  const icon = header.querySelector('.expand-icon');
+  card.classList.toggle('collapsed');
+  icon.textContent = card.classList.contains('collapsed') ? '▶' : '▼';
+}
+
+function filterCards(filter) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+  
+  document.querySelectorAll('.signal-card').forEach(card => {
+    if (filter === 'all') {
+      card.classList.remove('hidden');
+    } else if (filter === 'repeat') {
+      card.classList.toggle('hidden', card.dataset.repeat !== 'true');
+    } else {
+      card.classList.toggle('hidden', card.dataset.opp !== filter);
+    }
+  });
+}
+</script>
+</body>
+</html>
