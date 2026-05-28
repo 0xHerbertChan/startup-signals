@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创业信号 2026-05-28</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d0d0f; color: #e8e8f0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 24px; max-width: 900px; margin: 0 auto; }
+  .header { margin-bottom: 24px; }
+  .header h1 { font-size: 22px; color: #fff; margin-bottom: 6px; }
+  .header .meta { color: #888; font-size: 13px; }
+  .header .stats { display: flex; gap: 16px; margin-top: 10px; }
+  .stat { background: #1a1a24; border-radius: 8px; padding: 8px 14px; font-size: 13px; }
+  .stat .num { font-size: 22px; font-weight: 700; color: #74c0fc; }
+  .filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .filter-btn { background: #1a1a24; border: 1px solid #333; color: #aaa; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+  .filter-btn.active, .filter-btn:hover { background: #2a2a3d; border-color: #555; color: #e8e8f0; }
+  .signal-card { background: #111118; border: 1px solid #222; border-radius: 12px; padding: 20px; margin-bottom: 14px; cursor: pointer; transition: border-color 0.2s; }
+  .signal-card:hover { border-color: #444; }
+  .signal-card.opp-extreme { border-left: 3px solid #ff4d6d; }
+  .signal-card.opp-high { border-left: 3px solid #74c0fc; }
+  .signal-card.opp-medium { border-left: 3px solid #ffd166; }
+  .signal-card.opp-repeat { border-left: 3px solid #ff9a3c; opacity: 0.75; }
+  .signal-card.collapsed .signal-desc, .signal-card.collapsed .signal-opp,
+  .signal-card.collapsed .scores, .signal-card.collapsed .detail,
+  .signal-card.collapsed .source-link { display: none; }
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .left { flex: 1; }
+  .badge-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .badge { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: #000; }
+  .score-raw { color: #555; font-size: 12px; }
+  .signal-title { font-size: 16px; font-weight: 600; color: #fff; line-height: 1.4; display: block; margin-top: 6px; }
+  .tag { background: #1e1e2e; color: #888; padding: 3px 8px; border-radius: 4px; font-size: 11px; margin-right: 4px; }
+  .signal-desc { color: #c0c0d0; font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
+  .signal-opp { color: #e8e8f0; font-size: 14px; line-height: 1.6; margin-bottom: 14px; background: #1a1a2e; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #ffd166; }
+  .scores { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .score-label { font-size: 11px; color: #666; position: relative; cursor: help; }
+  .score-label[data-tip]:hover::after { content: attr(data-tip); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #2a2a35; color: #e8e8f0; font-size: 11px; padding: 6px 10px; border-radius: 6px; white-space: pre-line; width: 200px; z-index: 100; border: 1px solid #444; line-height: 1.5; pointer-events: none; }
+  .score-num { display: inline-block; width: 24px; height: 24px; border-radius: 6px; text-align: center; line-height: 24px; font-size: 13px; font-weight: 700; color: #000; margin-left: 4px; margin-right: 8px; }
+  .detail { background: #0d0d18; border-radius: 8px; padding: 14px; margin-top: 12px; }
+  .detail-section { margin-bottom: 10px; }
+  .detail-section strong { color: #74c0fc; font-size: 13px; }
+  .detail-section p, .detail-section li { color: #aaa; font-size: 13px; line-height: 1.6; margin-top: 4px; }
+  .detail-section ul { padding-left: 18px; }
+  .source-link { margin-top: 10px; }
+  .source-link a { color: #555; font-size: 12px; text-decoration: none; }
+  .source-link a:hover { color: #888; }
+  .extras { margin-top: 30px; }
+  .extras h3 { color: #888; font-size: 14px; margin-bottom: 12px; }
+  .extra-item { background: #111118; border: 1px solid #1e1e2e; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; }
+  .extra-item .e-title { color: #ccc; font-size: 14px; font-weight: 600; }
+  .extra-item .e-source { color: #555; font-size: 11px; margin: 3px 0; }
+  .extra-item .e-note { color: #888; font-size: 13px; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🔭 创业信号雷达 · 2026-05-28</h1>
+  <div class="meta">时间范围：最近 1 天 · 17 个数据源 · 169 条原始数据 → 60 条候选</div>
+  <div class="stats">
+    <div class="stat"><div class="num">5</div><div>今日新信号</div></div>
+    <div class="stat"><div class="num">3</div><div>已追踪</div></div>
+    <div class="stat"><div class="num">5</div><div>extras 观察</div></div>
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterCards('all', this)">全部</button>
+  <button class="filter-btn" onclick="filterCards('HIGH', this)">🔵 HIGH</button>
+  <button class="filter-btn" onclick="filterCards('MEDIUM', this)">🟡 MEDIUM</button>
+  <button class="filter-btn" onclick="filterCards('repeat', this)">🔁 已追踪</button>
+</div>
+
+
+<!-- ── SIGNAL 1: CTO 禁用未授权远程访问工具：合规远控市场空白 ── -->
+<div class="signal-card opp-high " data-opp="HIGH" onclick="toggleCard(this)">
+  
+  <div class="card-header">
+    <div class="left">
+      <span class="tag">企业安全</span><span class="tag">远程访问</span><span class="tag">合规</span>
+      <div class="signal-title-wrap"><span class="signal-title">CTO 禁用未授权远程访问工具：合规远控市场空白</span></div>
+    </div>
+    <div class="badge-wrap">
+      <span class="badge" style="background:#74c0fc">HIGH</span>
+      <span class="score-raw">↑499</span>
+    </div>
+  </div>
+  <p class="signal-desc">r/sysadmin 一位管理员分享：CTO 宣布全面禁用 TeamViewer、AnyDesk 等远程访问工具，理由是合规审计压力。IT 团队突然需要在一周内找到替代方案，而市场上的合规替代品不是 $10 万级的企业产品（CyberArk、BeyondTrust），就是同样不合规的消费级工具。</p>
+  <p class="signal-opp"><strong>💡 创业方向：</strong>面向中小企业的 SOC2/ISO27001 合规远程访问 SaaS：内置会话录像、审计日志、MFA、临时权限。对标 BeyondTrust 但定价在 $50-150/user/年区间。</p>
+  <div class="scores"><span class="score-label" data-tip="5: 强情绪+赞1000+有付费意愿
+4: 赞500+多人共鸣
+3: 赞100-500
+2: 低赞便利性
+1: 边缘抱怨">痛点</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 完全空白靠人工凑合
+4: 方案极贵仅服务大企业
+3: 竞品体验差
+2: 有2-3成熟竞品
+1: 已有巨头">空白</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 明确愿付$X
+4: 行业有付费习惯+核心工作流
+3: 需教育/nice-to-have
+2: 期望免费
+1: 强烈拒付">付费</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 信号社区即目标客户
+4: 清晰线上渠道
+3: 需销售但有搜索行为
+2: 需主动外呼
+1: 企业销售/医院">获客</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 纯软件无监管
+4: GDPR/CCPA标准明确
+3: 需SOC2/ISO27001
+2: 需金融牌照
+1: 医疗HIPAA+FDA">监管</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: EXTREME
+4: HIGH
+3: MEDIUM
+2: LOW
+1: MINIMAL">机会</span><span class="score-num" style="background:#74c0fc">4</span></div>
+  
+        <div class="detail">
+          <div class="detail-section"><strong>⏰ 为什么是现在</strong><p>企业安全审计压力在 2026 年正在从大型企业向中小企业快速下沉，SOC2、ISO27001 认证要求开始强制审查所有远程访问通道。</p></div>
+          <div class="detail-section"><strong>🔧 旧系统失效</strong><p>IT 团队用 TeamViewer/AnyDesk 做远程支持，方便但合规性差；正规替代品仅对财富 500 强有成本优势。</p></div>
+          <div class="detail-section"><strong>⚡ 新能力出现</strong><p>零信任网络访问（ZTNA）技术成本已大幅下降，可以用 SaaS 模式提供企业级审计日志和访问控制。</p></div>
+          <div class="detail-section"><strong>😤 痛点列表</strong><ul><li>远程访问工具被禁后，IT 支持效率骤降</li><li>PAM 方案价格对 SMB 不可接受</li><li>审计日志和录像存储缺失</li></ul></div>
+        </div>
+  <div class="source-link"><a href="https://www.reddit.com/r/sysadmin/" target="_blank">📎 r/sysadmin</a></div>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+
+<!-- ── SIGNAL 2: Doctronic AI 处方平台拒绝透露安全数据：医疗 AI 合规黑箱 ── -->
+<div class="signal-card opp-medium " data-opp="MEDIUM" onclick="toggleCard(this)">
+  
+  <div class="card-header">
+    <div class="left">
+      <span class="tag">医疗AI</span><span class="tag">合规</span><span class="tag">透明度</span>
+      <div class="signal-title-wrap"><span class="signal-title">Doctronic AI 处方平台拒绝透露安全数据：医疗 AI 合规黑箱</span></div>
+    </div>
+    <div class="badge-wrap">
+      <span class="badge" style="background:#ffd166">MEDIUM</span>
+      <span class="score-raw">↑114</span>
+    </div>
+  </div>
+  <p class="signal-desc">r/medicine 社区：多位医生要求 AI 处方辅助系统 Doctronic 提供安全性验证数据，平台以 NDA 为由拒绝。这意味着临床医生在使用一个无法审计、无法验证决策逻辑的 AI 系统直接影响用药建议。</p>
+  <p class="signal-opp"><strong>💡 创业方向：</strong>第三方医疗 AI 审计 SaaS：对接医院已部署的 AI 系统，提供决策路径追踪、安全性评估报告、合规文件生成。类比金融领域的算法审计服务。</p>
+  <div class="scores"><span class="score-label" data-tip="5: 强情绪+赞1000+有付费意愿
+4: 赞500+多人共鸣
+3: 赞100-500
+2: 低赞便利性
+1: 边缘抱怨">痛点</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 完全空白靠人工凑合
+4: 方案极贵仅服务大企业
+3: 竞品体验差
+2: 有2-3成熟竞品
+1: 已有巨头">空白</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 明确愿付$X
+4: 行业有付费习惯+核心工作流
+3: 需教育/nice-to-have
+2: 期望免费
+1: 强烈拒付">付费</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 信号社区即目标客户
+4: 清晰线上渠道
+3: 需销售但有搜索行为
+2: 需主动外呼
+1: 企业销售/医院">获客</span><span class="score-num" style="background:#ff9a3c">2</span><span class="score-label" data-tip="5: 纯软件无监管
+4: GDPR/CCPA标准明确
+3: 需SOC2/ISO27001
+2: 需金融牌照
+1: 医疗HIPAA+FDA">监管</span><span class="score-num" style="background:#ff4d6d">1</span><span class="score-label" data-tip="5: EXTREME
+4: HIGH
+3: MEDIUM
+2: LOW
+1: MINIMAL">机会</span><span class="score-num" style="background:#ffd166">3</span></div>
+  
+        <div class="detail">
+          <div class="detail-section"><strong>⏰ 为什么是现在</strong><p>FDA 已开始要求 AI 医疗设备的 510(k) 申报路径，医疗机构法律风险意识骤升；AI 处方辅助工具大规模落地但监管框架还没跟上。</p></div>
+          <div class="detail-section"><strong>🔧 旧系统失效</strong><p>医生依赖自身判断和传统药品数据库（Epocrates、Micromedex），AI 系统进入后缺乏等效的透明度机制。</p></div>
+          <div class="detail-section"><strong>⚡ 新能力出现</strong><p>LLM 可解释性技术（如 LIME、SHAP）已可商用；医疗 AI 审计 API 技术上可行。</p></div>
+          <div class="detail-section"><strong>😤 痛点列表</strong><ul><li>无法验证 AI 处方建议的依据</li><li>NDA 阻止医院做内部安全评估</li><li>出现医疗事故时责任归属不清</li></ul></div>
+        </div>
+  <div class="source-link"><a href="https://www.reddit.com/r/medicine/" target="_blank">📎 r/medicine</a></div>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+
+<!-- ── SIGNAL 3: Google AI 策略反噬：DuckDuckGo 访问量单日暴涨 28% ── -->
+<div class="signal-card opp-medium " data-opp="MEDIUM" onclick="toggleCard(this)">
+  
+  <div class="card-header">
+    <div class="left">
+      <span class="tag">搜索市场</span><span class="tag">AI内容</span><span class="tag">用户逃离</span>
+      <div class="signal-title-wrap"><span class="signal-title">Google AI 策略反噬：DuckDuckGo 访问量单日暴涨 28%</span></div>
+    </div>
+    <div class="badge-wrap">
+      <span class="badge" style="background:#ffd166">MEDIUM</span>
+      <span class="score-raw">↑848</span>
+    </div>
+  </div>
+  <p class="signal-desc">HN 热帖：在 Google CEO 公开宣称「用户喜欢 AI Overviews」的同一天，DuckDuckGo 公布访问量同比增长 28%。这是用户对 AI 生成内容替代搜索结果的直接投票——用脚离开。</p>
+  <p class="signal-opp"><strong>💡 创业方向：</strong>垂直领域付费搜索：面向特定专业群体（开发者、医生、律师、研究员）的高质量、无广告、无 AI 生成内容的搜索引擎。对标 Kagi 但更垂直。</p>
+  <div class="scores"><span class="score-label" data-tip="5: 强情绪+赞1000+有付费意愿
+4: 赞500+多人共鸣
+3: 赞100-500
+2: 低赞便利性
+1: 边缘抱怨">痛点</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 完全空白靠人工凑合
+4: 方案极贵仅服务大企业
+3: 竞品体验差
+2: 有2-3成熟竞品
+1: 已有巨头">空白</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 明确愿付$X
+4: 行业有付费习惯+核心工作流
+3: 需教育/nice-to-have
+2: 期望免费
+1: 强烈拒付">付费</span><span class="score-num" style="background:#ff9a3c">2</span><span class="score-label" data-tip="5: 信号社区即目标客户
+4: 清晰线上渠道
+3: 需销售但有搜索行为
+2: 需主动外呼
+1: 企业销售/医院">获客</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 纯软件无监管
+4: GDPR/CCPA标准明确
+3: 需SOC2/ISO27001
+2: 需金融牌照
+1: 医疗HIPAA+FDA">监管</span><span class="score-num" style="background:#06d6a0">5</span><span class="score-label" data-tip="5: EXTREME
+4: HIGH
+3: MEDIUM
+2: LOW
+1: MINIMAL">机会</span><span class="score-num" style="background:#ffd166">3</span></div>
+  
+        <div class="detail">
+          <div class="detail-section"><strong>⏰ 为什么是现在</strong><p>Google AI Overviews 在 2025 年底正式全量推出后，搜索结果质量投诉持续攀升；Kagi 等付费搜索月活用户破 50 万，证明 WTP 存在。</p></div>
+          <div class="detail-section"><strong>🔧 旧系统失效</strong><p>Google 垄断搜索入口 20 年，广告模式和 SEO 生态围绕它建立。AI 内容将 Google 搜索结果质量拉低，用户开始真正考虑替代品。</p></div>
+          <div class="detail-section"><strong>⚡ 新能力出现</strong><p>向量搜索 + 小型精选索引技术使高质量垂直搜索成本大幅降低；Kagi 模式验证了用户愿意为无广告搜索付费。</p></div>
+          <div class="detail-section"><strong>😤 痛点列表</strong><ul><li>AI 概览回答经常错误但排在最前面</li><li>SEO 垃圾内容泛滥使搜索结果信噪比恶化</li><li>隐私敏感型用户不愿意被追踪</li></ul></div>
+        </div>
+  <div class="source-link"><a href="https://news.ycombinator.com/" target="_blank">📎 Hacker News</a></div>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+
+<!-- ── SIGNAL 4: 「Agent 之后」：SaaS 创始人开始怀疑自己的产品还有没有必要存在 ── -->
+<div class="signal-card opp-medium " data-opp="MEDIUM" onclick="toggleCard(this)">
+  
+  <div class="card-header">
+    <div class="left">
+      <span class="tag">SaaS转型</span><span class="tag">AI Agent</span><span class="tag">产品定位</span>
+      <div class="signal-title-wrap"><span class="signal-title">「Agent 之后」：SaaS 创始人开始怀疑自己的产品还有没有必要存在</span></div>
+    </div>
+    <div class="badge-wrap">
+      <span class="badge" style="background:#ffd166">MEDIUM</span>
+      <span class="score-raw">↑163</span>
+    </div>
+  </div>
+  <p class="signal-desc">r/SaaS 一篇题为「life after agents」的帖子引发热议，SaaS 创始人们开始讨论：当 AI Agent 能直接调用 API 完成用户原本在 UI 里做的事情，自己的产品 UI 层还有没有价值？另一帖：「刚和一个 200+ 人的公司打了个让我重新思考一切的电话」——这家公司正在评估用 AI Agent 替代他们用了 5 年的 SaaS 工具。</p>
+  <p class="signal-opp"><strong>💡 创业方向：</strong>SaaS Agent 适配层咨询 + 工具：帮助现有 SaaS 公司快速暴露标准 MCP 接口、设计 Agent 友好的 API 层、分析哪些功能值得保留 UI。类比当年 Mobile First 转型咨询。</p>
+  <div class="scores"><span class="score-label" data-tip="5: 强情绪+赞1000+有付费意愿
+4: 赞500+多人共鸣
+3: 赞100-500
+2: 低赞便利性
+1: 边缘抱怨">痛点</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 完全空白靠人工凑合
+4: 方案极贵仅服务大企业
+3: 竞品体验差
+2: 有2-3成熟竞品
+1: 已有巨头">空白</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 明确愿付$X
+4: 行业有付费习惯+核心工作流
+3: 需教育/nice-to-have
+2: 期望免费
+1: 强烈拒付">付费</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 信号社区即目标客户
+4: 清晰线上渠道
+3: 需销售但有搜索行为
+2: 需主动外呼
+1: 企业销售/医院">获客</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 纯软件无监管
+4: GDPR/CCPA标准明确
+3: 需SOC2/ISO27001
+2: 需金融牌照
+1: 医疗HIPAA+FDA">监管</span><span class="score-num" style="background:#06d6a0">5</span><span class="score-label" data-tip="5: EXTREME
+4: HIGH
+3: MEDIUM
+2: LOW
+1: MINIMAL">机会</span><span class="score-num" style="background:#ffd166">3</span></div>
+  
+        <div class="detail">
+          <div class="detail-section"><strong>⏰ 为什么是现在</strong><p>MCP 协议标准化后，AI Agent 直接操作 SaaS API 成为常态；越来越多的企业开始把 SaaS 订阅从「必需品」变成「可优化项」。</p></div>
+          <div class="detail-section"><strong>🔧 旧系统失效</strong><p>SaaS 靠 UI/UX 护城河锁住用户，用户通过界面操作完成工作流。Agent 时代，界面本身正在被绕开。</p></div>
+          <div class="detail-section"><strong>⚡ 新能力出现</strong><p>LLM Function Calling + MCP 让 AI 可以直接调用任何 SaaS 的后端接口，无需人类手动操作 UI。</p></div>
+          <div class="detail-section"><strong>😤 痛点列表</strong><ul><li>SaaS 产品 UI 层价值被 Agent 架空</li><li>用户续费意愿降低：「Agent 帮我做了一切，我为什么还要用你的界面？」</li><li>SaaS 公司不知道如何转型为 Agent-native</li></ul></div>
+        </div>
+  <div class="source-link"><a href="https://www.reddit.com/r/SaaS/" target="_blank">📎 r/SaaS</a></div>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+
+<!-- ── SIGNAL 5: 社区自发屏蔽 AI SEO 垃圾：内容真实性验证工具需求浮现 ── -->
+<div class="signal-card opp-medium " data-opp="MEDIUM" onclick="toggleCard(this)">
+  
+  <div class="card-header">
+    <div class="left">
+      <span class="tag">AI内容</span><span class="tag">SEO垃圾</span><span class="tag">内容验证</span>
+      <div class="signal-title-wrap"><span class="signal-title">社区自发屏蔽 AI SEO 垃圾：内容真实性验证工具需求浮现</span></div>
+    </div>
+    <div class="badge-wrap">
+      <span class="badge" style="background:#ffd166">MEDIUM</span>
+      <span class="score-raw">↑1015</span>
+    </div>
+  </div>
+  <p class="signal-desc">r/selfhosted 一篇「找到了 AI SEO 垃圾内容发布者的克星」获得 1015 赞，评论区充斥着各种「终于」「我也在忍这个很久了」。技术社区已经开始自发构建工具对抗 AI 生成的低质量 SEO 内容。</p>
+  <p class="signal-opp"><strong>💡 创业方向：</strong>面向内容平台和社区的 AI 内容质量过滤 SaaS：实时检测、标注、过滤 AI 生成低质量内容。面向 Discord 社区、论坛、媒体平台售卖订阅。</p>
+  <div class="scores"><span class="score-label" data-tip="5: 强情绪+赞1000+有付费意愿
+4: 赞500+多人共鸣
+3: 赞100-500
+2: 低赞便利性
+1: 边缘抱怨">痛点</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 完全空白靠人工凑合
+4: 方案极贵仅服务大企业
+3: 竞品体验差
+2: 有2-3成熟竞品
+1: 已有巨头">空白</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 明确愿付$X
+4: 行业有付费习惯+核心工作流
+3: 需教育/nice-to-have
+2: 期望免费
+1: 强烈拒付">付费</span><span class="score-num" style="background:#ff9a3c">2</span><span class="score-label" data-tip="5: 信号社区即目标客户
+4: 清晰线上渠道
+3: 需销售但有搜索行为
+2: 需主动外呼
+1: 企业销售/医院">获客</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 纯软件无监管
+4: GDPR/CCPA标准明确
+3: 需SOC2/ISO27001
+2: 需金融牌照
+1: 医疗HIPAA+FDA">监管</span><span class="score-num" style="background:#06d6a0">5</span><span class="score-label" data-tip="5: EXTREME
+4: HIGH
+3: MEDIUM
+2: LOW
+1: MINIMAL">机会</span><span class="score-num" style="background:#ffd166">3</span></div>
+  
+        <div class="detail">
+          <div class="detail-section"><strong>⏰ 为什么是现在</strong><p>2025-2026 年 AI 写作工具成本降至近零，导致 SEO 垃圾内容爆炸式增长；搜索引擎来不及过滤，用户体验急剧恶化；相关 HN/Reddit 的内容质量已明显下降。</p></div>
+          <div class="detail-section"><strong>🔧 旧系统失效</strong><p>内容平台靠人工审核和社区举报过滤垃圾，AI 生成内容数量已超出人工处理上限。</p></div>
+          <div class="detail-section"><strong>⚡ 新能力出现</strong><p>AI 内容检测技术（watermarking、perplexity scoring）已足够成熟，可以构建自动化过滤工具。</p></div>
+          <div class="detail-section"><strong>😤 痛点列表</strong><ul><li>技术社区搜索结果被 AI 垃圾内容污染</li><li>RSS/Newsletter 推荐质量下降</li><li>平台内容质量控制成本急剧上升</li></ul></div>
+        </div>
+  <div class="source-link"><a href="https://www.reddit.com/r/selfhosted/" target="_blank">📎 r/selfhosted</a></div>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+
+<!-- ── SIGNAL 6: 全面封禁 Cursor！又一家大厂出手了 ── -->
+<div class="signal-card opp-repeat collapsed" data-opp="repeat" onclick="toggleCard(this)">
+  <span class="tag-repeat" style="display:none"></span>
+  <div class="card-header">
+    <div class="left">
+      <span class="tag">AI工具封禁</span><span class="tag">合规</span>
+      <div class="signal-title-wrap"><span class="signal-title">全面封禁 Cursor！又一家大厂出手了</span></div>
+    </div>
+    <div class="badge-wrap">
+      <span class="badge" style="background:#ff9a3c">🔁 已追踪</span>
+      <span class="score-raw">↑628</span>
+    </div>
+  </div>
+  <p class="signal-desc">掘金热文：又一家大型科技公司全面封禁 AI 编程工具 Cursor，安全合规压力继续蔓延。</p>
+  <p class="signal-opp"><strong>💡 创业方向：</strong>国产合规 AI 编程工具私有化部署机会持续扩大。</p>
+  <div class="scores"><span class="score-label" data-tip="5: 强情绪+赞1000+有付费意愿
+4: 赞500+多人共鸣
+3: 赞100-500
+2: 低赞便利性
+1: 边缘抱怨">痛点</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 完全空白靠人工凑合
+4: 方案极贵仅服务大企业
+3: 竞品体验差
+2: 有2-3成熟竞品
+1: 已有巨头">空白</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 明确愿付$X
+4: 行业有付费习惯+核心工作流
+3: 需教育/nice-to-have
+2: 期望免费
+1: 强烈拒付">付费</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 信号社区即目标客户
+4: 清晰线上渠道
+3: 需销售但有搜索行为
+2: 需主动外呼
+1: 企业销售/医院">获客</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 纯软件无监管
+4: GDPR/CCPA标准明确
+3: 需SOC2/ISO27001
+2: 需金融牌照
+1: 医疗HIPAA+FDA">监管</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: EXTREME
+4: HIGH
+3: MEDIUM
+2: LOW
+1: MINIMAL">机会</span><span class="score-num" style="background:#ffd166">3</span></div>
+  
+  <div class="source-link"><a href="https://juejin.cn/" target="_blank">📎 掘金</a></div>
+</div>
+<!-- ── /SIGNAL 6 ── -->
+
+<!-- ── SIGNAL 7: Genuinely hate cyber security teams ── -->
+<div class="signal-card opp-repeat collapsed" data-opp="repeat" onclick="toggleCard(this)">
+  <span class="tag-repeat" style="display:none"></span>
+  <div class="card-header">
+    <div class="left">
+      <span class="tag">SecDevOps</span><span class="tag">安全团队摩擦</span>
+      <div class="signal-title-wrap"><span class="signal-title">Genuinely hate cyber security teams</span></div>
+    </div>
+    <div class="badge-wrap">
+      <span class="badge" style="background:#ff9a3c">🔁 已追踪</span>
+      <span class="score-raw">↑605</span>
+    </div>
+  </div>
+  <p class="signal-desc">r/sysadmin 605↑：工程师表达对安全团队的强烈不满，SecDevOps 协作工具需求持续发酵。</p>
+  <p class="signal-opp"><strong>💡 创业方向：</strong>安全与工程团队协作平台机会持续。</p>
+  <div class="scores"><span class="score-label" data-tip="5: 强情绪+赞1000+有付费意愿
+4: 赞500+多人共鸣
+3: 赞100-500
+2: 低赞便利性
+1: 边缘抱怨">痛点</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 完全空白靠人工凑合
+4: 方案极贵仅服务大企业
+3: 竞品体验差
+2: 有2-3成熟竞品
+1: 已有巨头">空白</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 明确愿付$X
+4: 行业有付费习惯+核心工作流
+3: 需教育/nice-to-have
+2: 期望免费
+1: 强烈拒付">付费</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 信号社区即目标客户
+4: 清晰线上渠道
+3: 需销售但有搜索行为
+2: 需主动外呼
+1: 企业销售/医院">获客</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 纯软件无监管
+4: GDPR/CCPA标准明确
+3: 需SOC2/ISO27001
+2: 需金融牌照
+1: 医疗HIPAA+FDA">监管</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: EXTREME
+4: HIGH
+3: MEDIUM
+2: LOW
+1: MINIMAL">机会</span><span class="score-num" style="background:#ffd166">3</span></div>
+  
+  <div class="source-link"><a href="https://www.reddit.com/r/sysadmin/" target="_blank">📎 r/sysadmin</a></div>
+</div>
+<!-- ── /SIGNAL 7 ── -->
+
+<!-- ── SIGNAL 8: Vulnerability found in framework used by VLLM, many MCP servers ── -->
+<div class="signal-card opp-repeat collapsed" data-opp="repeat" onclick="toggleCard(this)">
+  <span class="tag-repeat" style="display:none"></span>
+  <div class="card-header">
+    <div class="left">
+      <span class="tag">MCP安全</span><span class="tag">AI基础设施</span>
+      <div class="signal-title-wrap"><span class="signal-title">Vulnerability found in framework used by VLLM, many MCP servers</span></div>
+    </div>
+    <div class="badge-wrap">
+      <span class="badge" style="background:#ff9a3c">🔁 已追踪</span>
+      <span class="score-raw">↑289</span>
+    </div>
+  </div>
+  <p class="signal-desc">r/LocalLLaMA 289↑：MCP/VLLM 框架曝安全漏洞，AI 基础设施安全层需求信号再次出现。</p>
+  <p class="signal-opp"><strong>💡 创业方向：</strong>AI 基础设施安全监控工具机会持续。</p>
+  <div class="scores"><span class="score-label" data-tip="5: 强情绪+赞1000+有付费意愿
+4: 赞500+多人共鸣
+3: 赞100-500
+2: 低赞便利性
+1: 边缘抱怨">痛点</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 完全空白靠人工凑合
+4: 方案极贵仅服务大企业
+3: 竞品体验差
+2: 有2-3成熟竞品
+1: 已有巨头">空白</span><span class="score-num" style="background:#74c0fc">4</span><span class="score-label" data-tip="5: 明确愿付$X
+4: 行业有付费习惯+核心工作流
+3: 需教育/nice-to-have
+2: 期望免费
+1: 强烈拒付">付费</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 信号社区即目标客户
+4: 清晰线上渠道
+3: 需销售但有搜索行为
+2: 需主动外呼
+1: 企业销售/医院">获客</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: 纯软件无监管
+4: GDPR/CCPA标准明确
+3: 需SOC2/ISO27001
+2: 需金融牌照
+1: 医疗HIPAA+FDA">监管</span><span class="score-num" style="background:#ffd166">3</span><span class="score-label" data-tip="5: EXTREME
+4: HIGH
+3: MEDIUM
+2: LOW
+1: MINIMAL">机会</span><span class="score-num" style="background:#ffd166">3</span></div>
+  
+  <div class="source-link"><a href="https://www.reddit.com/r/LocalLLaMA/" target="_blank">📎 r/LocalLLaMA</a></div>
+</div>
+<!-- ── /SIGNAL 8 ── -->
+
+
+<div class="extras">
+  <h3>📎 额外观察（值得关注但不构成主信号）</h3>
+  <div class="extra-item"><div class="e-title">GitHub 全面故障</div><div class="e-source">Hacker News — score 299</div><div class="e-note">PR、Issues、Git Operations 同时故障，开发者基础设施单点依赖风险再次暴露。可靠性备份工具机会。</div></div><div class="extra-item"><div class="e-title">DevOps 岗位稀缺</div><div class="e-source">r/devops — score 62</div><div class="e-note">DevOps 工程师反映岗位越来越难找，AI 自动化正在压缩传统 DevOps 需求，AI-native 基础设施工具机会。</div></div><div class="extra-item"><div class="e-title">YouTube 标注 AI 视频</div><div class="e-source">Hacker News — score 848</div><div class="e-note">YouTube 将自动为 AI 生成视频打标签，内容真实性认证基础设施需求信号，跨平台 AI 内容标注工具机会。</div></div><div class="extra-item"><div class="e-title">开源废弃库复活</div><div class="e-source">dev.to — 12K stars abandoned library</div><div class="e-note">toastr-next 项目复活 12K star 废弃库，OSS 可持续性工具和维护服务需求持续存在。</div></div><div class="extra-item"><div class="e-title">Stop advertising in commits</div><div class="e-source">Lobsters — score 84</div><div class="e-note">开发者社区反感 git commit 广告，说明工程师文化对商业化极度敏感，B2D 产品定价策略的参考信号。</div></div>
+</div>
+
+<script type="application/json" id="signal-extras">
+[{"title": "GitHub 全面故障", "source": "Hacker News — score 299", "note": "PR、Issues、Git Operations 同时故障，开发者基础设施单点依赖风险再次暴露。可靠性备份工具机会。"}, {"title": "DevOps 岗位稀缺", "source": "r/devops — score 62", "note": "DevOps 工程师反映岗位越来越难找，AI 自动化正在压缩传统 DevOps 需求，AI-native 基础设施工具机会。"}, {"title": "YouTube 标注 AI 视频", "source": "Hacker News — score 848", "note": "YouTube 将自动为 AI 生成视频打标签，内容真实性认证基础设施需求信号，跨平台 AI 内容标注工具机会。"}, {"title": "开源废弃库复活", "source": "dev.to — 12K stars abandoned library", "note": "toastr-next 项目复活 12K star 废弃库，OSS 可持续性工具和维护服务需求持续存在。"}, {"title": "Stop advertising in commits", "source": "Lobsters — score 84", "note": "开发者社区反感 git commit 广告，说明工程师文化对商业化极度敏感，B2D 产品定价策略的参考信号。"}]
+</script>
+
+<script>
+function toggleCard(el) {
+  el.classList.toggle('collapsed');
+}
+function filterCards(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(c => {
+    if (type === 'all') { c.classList.remove('hidden'); return; }
+    const opp = c.dataset.opp || '';
+    c.classList.toggle('hidden', opp.toLowerCase() !== type.toLowerCase());
+  });
+}
+</script>
+</body>
+</html>
