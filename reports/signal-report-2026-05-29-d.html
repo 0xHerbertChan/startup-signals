@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创业信号 · 2026-05-29</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0d0d0f;color:#e8e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;padding:20px}
+  .header{max-width:900px;margin:0 auto 28px;padding:24px 0 20px;border-bottom:1px solid #222}
+  .header h1{font-size:22px;font-weight:700;color:#e8e8f0;margin-bottom:8px}
+  .meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .tag{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600}
+  .tag-daily{background:#1a2a3a;color:#74c0fc;border:1px solid #2a4a6a}
+  .stat{font-size:13px;color:#888}
+  .stat span{color:#e8e8f0;font-weight:600}
+  .filters{max-width:900px;margin:0 auto 20px;display:flex;gap:8px;flex-wrap:wrap}
+  .filter-btn{padding:6px 14px;border-radius:20px;border:1px solid #333;background:#1a1a22;color:#aaa;font-size:13px;cursor:pointer;transition:all .2s}
+  .filter-btn:hover,.filter-btn.active{border-color:#74c0fc;color:#74c0fc;background:#0f1a2a}
+  .container{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+  .signal-card{background:#13131a;border:1px solid #222;border-radius:12px;overflow:hidden;transition:border-color .2s}
+  .signal-card:hover{border-color:#333}
+  .card-header{padding:16px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;position:relative}
+  .card-header-inner{flex:1;min-width:0}
+  .signal-type{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-bottom:8px;background:#1e1e2e;color:#888}
+  .signal-title{display:block;font-size:16px;font-weight:600;color:#e8e8f0;line-height:1.4;margin-bottom:8px}
+  .signal-desc{font-size:13px;color:#888;line-height:1.6;margin-bottom:12px}
+  .scores-row{display:flex;gap:6px;flex-wrap:wrap}
+  .score-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .score-label{font-size:10px;color:#666}
+  .score-num{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#0d0d0f;position:relative;cursor:help}
+  [data-tip]{position:relative;cursor:help}
+  [data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#2a2a35;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:200px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
+  .badge{position:absolute;top:16px;right:20px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+  .badge-EXTREME{background:#ff4d6d22;color:#ff4d6d;border:1px solid #ff4d6d55}
+  .badge-HIGH{background:#74c0fc22;color:#74c0fc;border:1px solid #74c0fc55}
+  .badge-MEDIUM{background:#ffd16622;color:#ffd166;border:1px solid #ffd16655}
+  .badge-LOW{background:#ff9a3c22;color:#ff9a3c;border:1px solid #ff9a3c55}
+  .tag-repeat{position:absolute;top:16px;right:20px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;background:#ff9a3c22;color:#ff9a3c;border:1px solid #ff9a3c55}
+  .card-body{padding:0 20px 20px;display:none}
+  .card-body.open{display:block}
+  .detail-section{margin-top:14px}
+  .detail-section h4{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+  .detail-section p{font-size:13px;color:#aaa;line-height:1.7}
+  .detail-section ul{list-style:none;padding:0}
+  .detail-section ul li{font-size:13px;color:#aaa;line-height:1.6;padding:2px 0}
+  .detail-section ul li::before{content:"→ ";color:#555}
+  .opp-box{background:#1a1a25;border-left:3px solid #74c0fc;padding:12px 16px;border-radius:0 8px 8px 0;margin-top:8px}
+  .signal-opp{font-size:13px;color:#c8c8e0;line-height:1.7}
+  .source-link{margin-top:16px;font-size:12px;color:#555}
+  .source-link a{color:#74c0fc;text-decoration:none}
+  .source-link a:hover{text-decoration:underline}
+  .expand-icon{font-size:18px;color:#444;margin-left:8px;flex-shrink:0;margin-top:2px;transition:transform .2s}
+  .card-header.is-open .expand-icon{transform:rotate(180deg)}
+  .extras-section{max-width:900px;margin:32px auto 0;padding:20px;background:#13131a;border:1px solid #222;border-radius:12px}
+  .extras-section h3{font-size:14px;color:#666;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px}
+  .extra-item{padding:10px 0;border-bottom:1px solid #1e1e2e;display:flex;gap:12px;align-items:flex-start}
+  .extra-item:last-child{border-bottom:none}
+  .extra-dot{width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0;margin-top:6px}
+  .extra-title{font-size:13px;font-weight:600;color:#ccc;margin-bottom:3px}
+  .extra-note{font-size:12px;color:#666;line-height:1.5}
+  .divider{height:1px;background:#1e1e2e;margin:14px 0}
+  .s5{background:#06d6a0}
+  .s4{background:#74c0fc}
+  .s3{background:#ffd166}
+  .s2{background:#ff9a3c}
+  .s1{background:#ff4d6d}
+  .collapsed .card-body{display:none}
+  .footer{max-width:900px;margin:40px auto 0;padding-top:20px;border-top:1px solid #1e1e2e;font-size:12px;color:#444;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📡 创业信号雷达</h1>
+  <div class="meta">
+    <span class="tag tag-daily">最近 1 天</span>
+    <span class="stat">2026-05-29</span>
+    <span class="stat">今日累计新信号 <span>6</span> 条 · 重复追踪 <span>1</span> 条</span>
+    <span class="stat">数据源: HN · GitHub · DevTo · Lobsters · V2EX · Juejin · 36kr · sspai</span>
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterCards('all')">全部</button>
+  <button class="filter-btn" onclick="filterCards('EXTREME')">🔥 EXTREME</button>
+  <button class="filter-btn" onclick="filterCards('HIGH')">HIGH</button>
+  <button class="filter-btn" onclick="filterCards('MEDIUM')">MEDIUM</button>
+  <button class="filter-btn" onclick="filterCards('repeat')">🔁 已追踪</button>
+</div>
+
+<div class="container">
+
+<!-- ── SIGNAL 1: Claude Opus 4.8 发布：模型跃迁催生集成中间层商机 ── -->
+<div class="signal-card" data-opp="HIGH" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-header-inner">
+      <span class="signal-type">新能力出现 · AI 基础设施</span>
+      <span class="signal-title">Claude Opus 4.8 发布：模型跃迁窗口期催生 AI 集成中间层商机</span>
+      <p class="signal-desc">Anthropic 发布 Claude Opus 4.8，HN 1495 upvotes 冲顶。每次 frontier 模型大跃迁，企业侧都面临提示词工程重写、集成管道调整、评估基准失效等问题——而专门解决这个迁移摩擦的工具市场几乎为零。</p>
+      <div class="scores-row">
+        <div class="score-item">
+          <span class="score-label">痛点</span>
+          <span class="score-num s2" data-tip="2: 开发者/企业有FOMO但非紧急痛苦&#10;——更多是机会焦虑而非痛苦">2</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">空白</span>
+          <span class="score-num s4" data-tip="4: 模型版本管理/A-B测试基础设施极度匮乏&#10;每次升级靠人工搜改">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">付费</span>
+          <span class="score-num s4" data-tip="4: 企业AI工具预算充足，集成服务有明确ROI">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">获客</span>
+          <span class="score-num s5" data-tip="5: HN读者即目标客户，SEO/社区驱动分发极优">5</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">监管</span>
+          <span class="score-num s5" data-tip="5: 纯软件中间件，无行业监管">5</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">机会</span>
+          <span class="score-num s4" data-tip="4: HIGH — 窗口期明确，分发顺畅，付费意愿强">4</span>
+        </div>
+      </div>
+    </div>
+    <span class="badge badge-HIGH">HIGH</span>
+    <span class="expand-icon">▾</span>
+  </div>
+  <div class="card-body open">
+    <div class="divider"></div>
+    <div class="detail-section">
+      <h4>为什么偏偏是现在</h4>
+      <p>Opus 4.8 发布距上一个大版本不到 3 个月。模型迭代加速意味着企业 AI 管道需要持续维护——提示词漂移、输出格式变化、成本结构变化。目前大多数团队靠「人工回归测试」处理升级，没有任何自动化工具。</p>
+    </div>
+    <div class="detail-section">
+      <h4>旧系统失效</h4>
+      <p>企业 AI 集成大量硬编码特定模型版本。每次升级需要工程师手动：① 更新 system prompt ② 回归测试所有 use case ③ 评估输出质量变化 ④ 调整成本预算。没有类似 CI/CD 的自动化流程。</p>
+    </div>
+    <div class="detail-section">
+      <h4>创业方向</h4>
+      <div class="opp-box">
+        <p class="signal-opp">① <strong>LLM 版本管理 + A/B 测试 SaaS</strong>：类似 LaunchDarkly 但专为 LLM，支持灰度切换模型版本、自动评估输出质量变化<br>② <strong>企业 LLM 迁移助手</strong>：扫描代码库中所有 AI 集成点，自动生成升级 diff 和回归测试<br>③ <strong>模型无关路由层</strong>：统一 API 代理，基于任务类型自动路由至最优/最廉价模型，降低单一供应商锁定风险</p>
+      </div>
+    </div>
+    <p class="source-link">来源：<a href="https://www.anthropic.com/news/claude-opus-4-8" target="_blank">Anthropic News: Claude Opus 4.8</a> · HN 讨论 1495 upvotes</p>
+  </div>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+
+<!-- ── SIGNAL 2: Garnix Nix CI 停服：专业构建生态迁移窗口 ── -->
+<div class="signal-card" data-opp="HIGH" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-header-inner">
+      <span class="signal-type">旧系统失效 · DevOps 工具</span>
+      <span class="signal-title">Garnix (Nix CI) 宣布停服：专业构建用户面临迁移真空</span>
+      <p class="signal-desc">Nix 专属 CI 服务 Garnix 宣布关闭，HN + Lobsters 双平台发酵。Nix 生态的 CI/CD 需求高度专业化，主流 CI 提供商（GitHub Actions、CircleCI）对 Nix 支持极差，用户付费意愿强但无处可去。</p>
+      <div class="scores-row">
+        <div class="score-item">
+          <span class="score-label">痛点</span>
+          <span class="score-num s4" data-tip="4: CI工具关停=生产管道中断&#10;用户必须在几周内完成迁移，强制行动">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">空白</span>
+          <span class="score-num s4" data-tip="4: Nix-native CI极度稀缺&#10;现有大平台支持Nix的体验极差">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">付费</span>
+          <span class="score-num s5" data-tip="5: DevOps B2B工具，$50-500/月是正常预算&#10;CI故障成本极高，WTP强">5</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">获客</span>
+          <span class="score-num s3" data-tip="3: Nix社区集中但小众&#10;NixOS Discourse、HN可精准触达">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">监管</span>
+          <span class="score-num s5" data-tip="5: 纯DevOps SaaS，无行业监管">5</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">机会</span>
+          <span class="score-num s4" data-tip="4: HIGH — 迁移窗口明确，WTP极强，切入时机精准">4</span>
+        </div>
+      </div>
+    </div>
+    <span class="badge badge-HIGH">HIGH</span>
+    <span class="expand-icon">▾</span>
+  </div>
+  <div class="card-body open">
+    <div class="divider"></div>
+    <div class="detail-section">
+      <h4>为什么偏偏是现在</h4>
+      <p>Nix/NixOS 生态近两年高速增长（GitHub Stars 持续上涨），但专业基础设施工具严重滞后。Garnix 是少数专注 Nix 的 CI 服务之一，其关闭暴露了整个生态的基础设施脆弱性。用户现在处于强制迁移状态。</p>
+    </div>
+    <div class="detail-section">
+      <h4>旧系统失效</h4>
+      <ul>
+        <li>Nix 的确定性构建特性要求 CI 环境深度理解 Nix store、binary cache、flake.lock</li>
+        <li>GitHub Actions 虽可通过插件支持 Nix，但速度慢 10x+，无法利用 Nix 增量缓存</li>
+        <li>Garnix 停服意味着用户要么降级回慢速方案，要么寻找根本不存在的替代品</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>创业方向</h4>
+      <div class="opp-box">
+        <p class="signal-opp">① <strong>Nix-Native CI/CD 服务</strong>：从底层支持 Nix binary cache sharing、Nix flake evaluation、远程构建。Garnix 的关闭留下了明确的用户群等待迁移<br>② <strong>Universal Build Cache</strong>：不仅支持 Nix，还支持 Bazel/Buck，统一分布式缓存基础设施<br>③ <strong>Nix 迁移顾问服务</strong>：帮助中型团队将 Nix 工作流迁移到现有 CI 平台（短期服务）</p>
+      </div>
+    </div>
+    <p class="source-link">来源：<a href="https://discourse.nixos.org/t/garnix-is-shutting-down-not-oc/77895" target="_blank">NixOS Discourse: Garnix is shutting down</a> · HN 62 · Lobsters 49</p>
+  </div>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+
+<!-- ── SIGNAL 3: 汽车变成移动监控终端：车主数据主权被剥夺 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-header-inner">
+      <span class="signal-type">真实用户痛苦 · 隐私 / 数据主权</span>
+      <span class="signal-title">汽车变移动监控终端：车主数据主权无工具可用</span>
+      <p class="signal-desc">BBC Future 深度报道引爆 HN（311 upvotes）：现代汽车收集位置、行为、通讯录、面部表情甚至性生活推断数据，并与保险公司、数据经纪商共享。车主无任何工具审计、限制或删除这些数据。</p>
+      <div class="scores-row">
+        <div class="score-item">
+          <span class="score-label">痛点</span>
+          <span class="score-num s4" data-tip="4: 强情绪 + 涉及隐私核心权益&#10;HN评论充满愤怒，部分用户考虑换车">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">空白</span>
+          <span class="score-num s4" data-tip="4: 无任何主流工具可审计车辆数据采集&#10;完全依赖厂商自觉">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">付费</span>
+          <span class="score-num s3" data-tip="3: 消费者隐私工具付费意愿中等&#10;需要教育市场">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">获客</span>
+          <span class="score-num s3" data-tip="3: 车主分散，需内容营销/媒体报道驱动&#10;非天然聚合社区">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">监管</span>
+          <span class="score-num s2" data-tip="2: 汽车行业+数据隐私双重监管&#10;GDPR/CCPA + 汽车安全法规交叉">2</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">机会</span>
+          <span class="score-num s3" data-tip="3: MEDIUM — 监管复杂、分发难，但市场巨大">3</span>
+        </div>
+      </div>
+    </div>
+    <span class="badge badge-MEDIUM">MEDIUM</span>
+    <span class="expand-icon">▾</span>
+  </div>
+  <div class="card-body open">
+    <div class="divider"></div>
+    <div class="detail-section">
+      <h4>为什么偏偏是现在</h4>
+      <p>2025-2026 年汽车联网率快速提升（新车出厂均内置 4G/5G）。同期 GDPR 执法力度加强、美国各州隐私法陆续生效，汽车数据成为监管新热点。Mozilla 的「私隐不包括」报告把汽车列为最差隐私设备类别之一。</p>
+    </div>
+    <div class="detail-section">
+      <h4>痛点列表</h4>
+      <ul>
+        <li>保险公司通过车联网数据调整保费，车主不知情</li>
+        <li>位置数据被卖给数据经纪商，可追溯个人日常轨迹</li>
+        <li>车内语音交互被持续录音（麦克风热激活）</li>
+        <li>无法行使 GDPR 数据删除权（厂商流程极为繁琐）</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>创业方向</h4>
+      <div class="opp-box">
+        <p class="signal-opp">① <strong>车辆数据采集审计工具</strong>：连接 OBD2/车机 API，可视化展示车辆正在上传什么数据、发往哪些服务器<br>② <strong>汽车隐私权益服务</strong>：代理车主向厂商行使数据删除权（类似 DeleteMe 但针对汽车）<br>③ <strong>车联网数据拦截网关</strong>：硬件+软件，在车辆与互联网之间设置防火墙，选择性屏蔽数据上传（偏极客市场）</p>
+      </div>
+    </div>
+    <p class="source-link">来源：<a href="https://www.bbc.com/future/article/20260513-your-car-is-spying-on-you-its-about-to-get-worse" target="_blank">BBC Future: Your car is spying on you</a> · HN 311 upvotes</p>
+  </div>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+
+<!-- ── SIGNAL 4: AI 编程工具市场割据：开发者陷入选择疲劳 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-header-inner">
+      <span class="signal-type">真实用户痛苦 · 开发者工具</span>
+      <span class="signal-title">AI 编程工具市场割据：开发者深陷选择疲劳与团队标准化困境</span>
+      <p class="signal-desc">掘金（256 upvotes）：开发者密集体验 Cursor、Augment、Trae、Kiro、Claude Code 后最终回归 Cursor+Claude Code 组合。市场未收敛，团队内部工具选型分裂，测评/切换成本持续消耗大量工程效率。</p>
+      <div class="scores-row">
+        <div class="score-item">
+          <span class="score-label">痛点</span>
+          <span class="score-num s3" data-tip="3: 工具切换浪费时间但非生死攸关&#10;赞数中等，属效率痛点">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">空白</span>
+          <span class="score-num s3" data-tip="3: 有个人测评博客，但无系统化&#10;团队级工具决策支持工具几乎为零">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">付费</span>
+          <span class="score-num s4" data-tip="4: 开发者工具付费习惯强&#10;企业批量采购AI编程工具预算已存在">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">获客</span>
+          <span class="score-num s4" data-tip="4: 开发者社区（掘金/HN/Twitter）可精准触达&#10;口碑传播自然">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">监管</span>
+          <span class="score-num s5" data-tip="5: 纯开发者工具，无行业监管">5</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">机会</span>
+          <span class="score-num s3" data-tip="3: MEDIUM — 空白可做但竞争激烈，需快速建立数据壁垒">3</span>
+        </div>
+      </div>
+    </div>
+    <span class="badge badge-MEDIUM">MEDIUM</span>
+    <span class="expand-icon">▾</span>
+  </div>
+  <div class="card-body open">
+    <div class="divider"></div>
+    <div class="detail-section">
+      <h4>为什么偏偏是现在</h4>
+      <p>2026 年上半年 AI 编程工具爆发式增长（Cursor、GitHub Copilot、Claude Code、Windsurf、Trae、Kiro、Augment 等），产品迭代极快，没有一个客观的横向评测平台。企业 CTO 在做工具标准化决策时几乎没有可信依据。</p>
+    </div>
+    <div class="detail-section">
+      <h4>核心痛点</h4>
+      <ul>
+        <li>每个工具都号称「最强」，缺少基于真实任务的客观测评</li>
+        <li>团队内开发者各用不同工具，协作/代码一致性受影响</li>
+        <li>企业 IT 采购没有标准化依据，许可证管理混乱</li>
+        <li>工具快速迭代导致上周的测评下周就过期</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>创业方向</h4>
+      <div class="opp-box">
+        <p class="signal-opp">① <strong>AI 编程工具基准测试平台</strong>：持续更新的客观横测，按语言/任务类型/团队规模分类，类似 GPU 跑分网站<br>② <strong>企业 AI 开发环境管理平台</strong>：统一管理团队 AI 工具订阅、使用情况、成本、合规状态<br>③ <strong>AI Coding 工具选型顾问服务</strong>：帮助 50-500 人工程团队做工具标准化决策（咨询+实施）</p>
+      </div>
+    </div>
+    <p class="source-link">来源：<a href="https://juejin.cn/post/7559385680842883099" target="_blank">掘金：我为什么最终还是回归了Cursor</a> · 256 upvotes</p>
+  </div>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+
+<!-- ── SIGNAL 5: Protestware for Coding Agents：AI Agent 执行权限管控真空 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-header-inner">
+      <span class="signal-type">新能力出现 · AI 安全治理</span>
+      <span class="signal-title">Protestware for Coding Agents：开发者用代码抵制 AI 自主执行，揭示 Agent 治理真空</span>
+      <p class="signal-desc">Lobsters（65分）：开发者开始编写「Protestware」——当代码由 AI Agent 自主执行时会以不同方式（降级、告警、拒绝）响应。这是对 AI Agent 无审计执行权限的底层抵制，也揭示了 AI agent 行为验证工具市场的空白。</p>
+      <div class="scores-row">
+        <div class="score-item">
+          <span class="score-label">痛点</span>
+          <span class="score-num s3" data-tip="3: 开发者对AI自主执行有明确恐惧&#10;但目前主要停留在担忧而非紧急救火">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">空白</span>
+          <span class="score-num s4" data-tip="4: 无正式工具审计AI Agent执行了什么&#10;企业级AI Agent行为验证几乎为零">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">付费</span>
+          <span class="score-num s3" data-tip="3: 安全类工具企业愿付，但市场还在教育阶段&#10;需等AI Agent在企业规模化部署">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">获客</span>
+          <span class="score-num s3" data-tip="3: 安全/DevOps社区可触达&#10;Lobsters/HN是精准渠道">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">监管</span>
+          <span class="score-num s4" data-tip="4: 软件安全工具，标准法规明确(SOC2等)&#10;无特殊行业监管">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">机会</span>
+          <span class="score-num s3" data-tip="3: MEDIUM — 超前信号，市场正在形成&#10;现在布局6-12个月后将爆发">3</span>
+        </div>
+      </div>
+    </div>
+    <span class="badge badge-MEDIUM">MEDIUM</span>
+    <span class="expand-icon">▾</span>
+  </div>
+  <div class="card-body open">
+    <div class="divider"></div>
+    <div class="detail-section">
+      <h4>为什么偏偏是现在</h4>
+      <p>Claude Code、Devin、SWE-agent 等 AI Coding Agent 正在从「建议」转向「自主执行」——直接写代码、提交 PR、修改配置文件。企业风险暴露快速上升，但现有代码审查流程完全没有针对「AI 执行路径」的特殊处理。Protestware 的出现标志着开发者已从接受转向主动防御。</p>
+    </div>
+    <div class="detail-section">
+      <h4>痛点列表</h4>
+      <ul>
+        <li>无法判断一段代码修改是人写的还是 AI Agent 写的</li>
+        <li>AI Agent 执行权限过大，可在无人审查时修改生产配置</li>
+        <li>Protestware 说明开发者用「以暴制暴」方式应对——本质是正式治理工具缺席</li>
+        <li>企业合规要求代码变更留审计轨迹，AI Agent 执行破坏此假设</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>创业方向</h4>
+      <div class="opp-box">
+        <p class="signal-opp">① <strong>AI Agent 行为审计平台</strong>：记录 AI Agent 的每次文件读写/命令执行/API 调用，支持回滚和事后审查<br>② <strong>代码变更溯源系统</strong>：Git 提交自动标注「人工编写 vs AI 辅助 vs AI 自主执行」，满足企业合规需求<br>③ <strong>AI Agent 权限沙箱</strong>：类似 Docker 的容器化执行环境，限制 AI Agent 的文件系统和网络访问范围</p>
+      </div>
+    </div>
+    <p class="source-link">来源：<a href="https://nesbitt.io/2026/05/28/protestware-for-coding-agents.html" target="_blank">Lobsters: Protestware for coding agents</a> · 65 score</p>
+  </div>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+
+<!-- ── SIGNAL 6: GitHub 封禁安全研究员：漏洞披露的平台依赖风险 ── -->
+<div class="signal-card" data-opp="MEDIUM" data-repeat="false">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-header-inner">
+      <span class="signal-type">旧系统失效 · 安全基础设施</span>
+      <span class="signal-title">GitHub 封禁安全研究员：漏洞披露平台垄断的生存风险</span>
+      <p class="signal-desc">HN（370 upvotes）：GitHub 封禁了发布零日 Windows 漏洞利用代码的安全研究员，当事人描述此举为「毁掉我的事业」和「报复性行为」。安全研究界的代码托管和漏洞发布高度依赖 GitHub 这一单一平台。</p>
+      <div class="scores-row">
+        <div class="score-item">
+          <span class="score-label">痛点</span>
+          <span class="score-num s4" data-tip="4: 账号封禁=研究员职业生涯受威胁&#10;安全研究界对此有强烈共鸣">4</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">空白</span>
+          <span class="score-num s3" data-tip="3: CVE数据库、Bugtraq等存在但老旧&#10;现代化安全研究发布平台缺失">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">付费</span>
+          <span class="score-num s3" data-tip="3: 安全社区有付费能力&#10;但开源文化强，需合理定价">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">获客</span>
+          <span class="score-num s3" data-tip="3: 安全研究社区有明确聚集地&#10;(Twitter/X, Mastodon, conference circuits)">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">监管</span>
+          <span class="score-num s3" data-tip="3: 漏洞披露法律边界复杂&#10;需法律顾问确保平台合规">3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">机会</span>
+          <span class="score-num s3" data-tip="3: MEDIUM — 市场真实存在，但法律风险需认真评估">3</span>
+        </div>
+      </div>
+    </div>
+    <span class="badge badge-MEDIUM">MEDIUM</span>
+    <span class="expand-icon">▾</span>
+  </div>
+  <div class="card-body open">
+    <div class="divider"></div>
+    <div class="detail-section">
+      <h4>为什么偏偏是现在</h4>
+      <p>GitHub（微软旗下）与其最大客户 Microsoft 的利益冲突在此案例中赤裸裸暴露。同时微软发布了一个「永久性」GitHub 封禁，而非临时处置。安全研究界此前对 GitHub 的中立性有幻想，此案终结了这一幻想。</p>
+    </div>
+    <div class="detail-section">
+      <h4>问题本质</h4>
+      <ul>
+        <li>安全研究员 PoC 代码需要可靠托管和版本控制，与普通代码无区别</li>
+        <li>GitHub 作为私人平台有权封禁任何人，但安全研究生态过度依赖此单一渠道</li>
+        <li>现有替代品（Codeberg、SourceHut、Gitea）缺乏安全研究专属功能（负责任披露流程、CVE 联动、协调通知）</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h4>创业方向</h4>
+      <div class="opp-box">
+        <p class="signal-opp">① <strong>安全研究专属代码托管平台</strong>：Git + 内置负责任披露工作流，明确平台政策保护安全研究者（可参考 SourceHut 模式）<br>② <strong>去中心化漏洞披露协调工具</strong>：CVE 申请、厂商通知、公开发布的结构化流程管理，减少对平台审查的依赖<br>③ <strong>安全研究者数字身份工具</strong>：基于密码学的研究者身份证明，当账号被平台封禁时可快速迁移声誉</p>
+      </div>
+    </div>
+    <p class="source-link">来源：<a href="https://www.tomshardware.com/tech-industry/cyber-security/microsofts-github-bans-security-researcher-who-posted-zero-day-windows-exploits-because-company-ruined-their-life-expert-claims-action-is-vindictive-and-promises-further-retaliation" target="_blank">Tom's Hardware: GitHub bans security researcher</a> · HN 370 upvotes</p>
+  </div>
+</div>
+<!-- ── /SIGNAL 6 ── -->
+
+<!-- ── SIGNAL 7 (repeated): Cursor 大厂封禁持续升温 ── -->
+<div class="signal-card" data-opp="HIGH" data-repeat="true" style="opacity:0.7">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-header-inner">
+      <span class="signal-type">🔁 追踪中 · 企业 AI 合规</span>
+      <span class="signal-title">Cursor 大厂封禁浪潮持续升温：又有企业宣布屏蔽</span>
+      <p class="signal-desc">掘金（632 upvotes）：快手等大厂研发线发通知，Cursor 在办公电脑上直接闪退无法使用。企业封禁 AI 编程工具的势头持续，Cursor/Claude/ChatGPT 等工具面临系统性合规管控。</p>
+      <div class="scores-row">
+        <div class="score-item"><span class="score-label">痛点</span><span class="score-num s4">4</span></div>
+        <div class="score-item"><span class="score-label">空白</span><span class="score-num s4">4</span></div>
+        <div class="score-item"><span class="score-label">付费</span><span class="score-num s4">4</span></div>
+        <div class="score-item"><span class="score-label">获客</span><span class="score-num s4">4</span></div>
+        <div class="score-item"><span class="score-label">监管</span><span class="score-num s4">4</span></div>
+        <div class="score-item"><span class="score-label">机会</span><span class="score-num s4">4</span></div>
+      </div>
+    </div>
+    <span class="tag-repeat">🔁 已追踪</span>
+    <span class="expand-icon">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="divider"></div>
+    <p style="font-size:13px;color:#888;padding:8px 0">此信号已持续追踪（首次发现：2026-05-21）。本次出现为第 3+ 次，说明封禁浪潮仍在扩大。核心机会：面向中国大厂的私有化部署 AI 编程工具（国产合规替代方案）。</p>
+    <p class="source-link">来源：<a href="https://juejin.cn/post/7584110439933100078" target="_blank">掘金：全面封禁 Cursor！又一家大厂出手了</a> · 632 upvotes</p>
+  </div>
+</div>
+<!-- ── /SIGNAL 7 ── -->
+
+</div>
+
+<!-- Extras -->
+<div class="extras-section">
+  <h3>💡 额外关注（有价值但未达主信号门槛）</h3>
+  <div class="extra-item">
+    <div class="extra-dot"></div>
+    <div>
+      <div class="extra-title">豆包 AI 编程工具再度发力</div>
+      <div class="extra-note">掘金 327 赞 · 豆包持续加码 AI 编程，价格战继续。Doubao-Seed-Code 支持 256K 上下文，价格战已进入新一轮，中国 AI 编程工具订阅市场进一步压缩传统开发工具空间。</div>
+    </div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-dot"></div>
+    <div>
+      <div class="extra-title">阿里首款 Design Agent 冲击 UI/前端市场</div>
+      <div class="extra-note">掘金 32 赞 · 阿里 Design Agent 可直接生成 UI 设计稿并转换为前端代码。对设计/前端从业者产生明确焦虑。设计师+AI 协作工具市场开始成型，传统设计工具（Figma 等）面临集成压力。</div>
+    </div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-dot"></div>
+    <div>
+      <div class="extra-title">Postgres 作为持久化工作流基础设施</div>
+      <div class="extra-note">HN 311 赞 · DBOS 发文：Postgres is all you need for durable execution。无需额外消息队列的轻量级工作流方案，对中小团队极具吸引力。可能影响 Temporal/Airflow 的市场定位。</div>
+    </div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-dot"></div>
+    <div>
+      <div class="extra-title">V2EX：35 岁职场斩杀线焦虑持续发酵</div>
+      <div class="extra-note">V2EX 68 回复 · 技术从业者 35 岁职场危机话题持续高热度，AI 加速取代恐惧叠加经济下行。职业转型/再教育工具市场需求真实存在但商业化路径复杂。</div>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="signal-extras">
+[
+  {"title":"豆包AI编程工具再发力","source":"掘金 327 赞","note":"价格战新一轮，256K上下文，持续压缩传统开发工具空间"},
+  {"title":"阿里Design Agent冲击UI/前端","source":"掘金 32 赞","note":"可生成设计稿+前端代码，设计师职业焦虑加剧"},
+  {"title":"Postgres作为工作流基础设施","source":"HN 311 赞","note":"无需消息队列的轻量方案，影响Temporal/Airflow市场"},
+  {"title":"35岁职场斩杀线焦虑","source":"V2EX 68 回复","note":"AI加速+经济下行双重压力，职业转型工具需求真实"}
+]
+</script>
+
+<div class="footer">
+  创业信号雷达 · 2026-05-29 · 每日扫描<br>
+  数据源：Hacker News · GitHub · Dev.to · Lobsters · V2EX · 掘金 · 36kr · 少数派
+</div>
+
+<script>
+function toggleCard(header) {
+  const body = header.nextElementSibling.nextElementSibling || header.parentElement.querySelector('.card-body');
+  const bd = header.parentElement.querySelector('.card-body');
+  if (!bd) return;
+  const isOpen = bd.classList.contains('open');
+  bd.classList.toggle('open', !isOpen);
+  header.classList.toggle('is-open', !isOpen);
+}
+
+function filterCards(type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(card => {
+    if (type === 'all') { card.style.display = ''; return; }
+    if (type === 'repeat') {
+      card.style.display = card.dataset.repeat === 'true' ? '' : 'none';
+      return;
+    }
+    card.style.display = (card.dataset.opp === type && card.dataset.repeat !== 'true') ? '' : 'none';
+  });
+}
+
+// init: open all non-repeat cards, collapse repeat
+document.querySelectorAll('.signal-card').forEach(card => {
+  const header = card.querySelector('.card-header');
+  const body = card.querySelector('.card-body');
+  if (card.dataset.repeat === 'true') {
+    body.classList.remove('open');
+    header.classList.remove('is-open');
+  } else {
+    body.classList.add('open');
+    header.classList.add('is-open');
+  }
+});
+</script>
+</body>
+</html>
