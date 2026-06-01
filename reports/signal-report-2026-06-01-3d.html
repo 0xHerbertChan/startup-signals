@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>创业信号 · 2026-06-01 · 最近3天</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d0f;color:#e8e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:24px;line-height:1.6}
+.header{max-width:860px;margin:0 auto 32px;border-bottom:1px solid #222;padding-bottom:20px}
+.header h1{font-size:22px;font-weight:700;color:#f5f5ff;margin-bottom:8px}
+.meta{color:#888;font-size:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.tag{background:#1e1e28;border:1px solid #333;padding:2px 10px;border-radius:12px;font-size:12px}
+.tag.range{color:#74c0fc}
+.tag.stats{color:#06d6a0}
+.tag.repeat{color:#ff9a3c}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.filter-btn{background:#1a1a22;border:1px solid #333;color:#aaa;padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13px;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{background:#2a2a3a;color:#e8e8f0;border-color:#555}
+.container{max-width:860px;margin:0 auto}
+.signal-card{background:#141418;border:1px solid #222;border-radius:12px;margin-bottom:20px;overflow:hidden;transition:border-color .2s}
+.signal-card:hover{border-color:#333}
+.signal-card.hidden{display:none}
+.card-header{padding:18px 20px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card-title-area{flex:1}
+.signal-label{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#888;margin-bottom:6px}
+.signal-title{font-size:17px;font-weight:600;color:#f0f0ff;line-height:1.4;display:block}
+.badge{font-size:11px;font-weight:700;letter-spacing:.5px;padding:4px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.badge.EXTREME{background:#1a3a2a;color:#06d6a0;border:1px solid #06d6a0}
+.badge.HIGH{background:#1a2a3a;color:#74c0fc;border:1px solid #74c0fc}
+.badge.MEDIUM{background:#2a2a1a;color:#ffd166;border:1px solid #ffd166}
+.badge.LOW{background:#2a1a1a;color:#ff9a3c;border:1px solid #ff9a3c}
+.badge.REPEAT{background:#2a1f0f;color:#ff9a3c;border:1px solid #ff9a3c}
+.card-body{padding:0 20px 18px;display:none}
+.signal-card.open .card-body{display:block}
+.signal-card.open .card-header{padding-bottom:10px}
+.signal-desc{color:#c8c8d8;font-size:14.5px;line-height:1.7;margin-bottom:12px}
+.signal-opp{color:#d0d0e0;font-size:14px;line-height:1.7;margin-bottom:14px;padding-left:14px;border-left:3px solid #3a3a5a}
+.scores{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.score-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-label{font-size:10px;color:#666;white-space:nowrap}
+.score-num{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:help;position:relative}
+.score-num.s5{background:#0d2e22;color:#06d6a0}
+.score-num.s4{background:#0e2035;color:#74c0fc}
+.score-num.s3{background:#2a260e;color:#ffd166}
+.score-num.s2{background:#2a1a08;color:#ff9a3c}
+.score-num.s1{background:#2a0e0e;color:#ff4d6d}
+[data-tip]{position:relative}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#1e1e28;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:200px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
+.source-link{display:inline-block;margin-top:10px;font-size:12px;color:#555;text-decoration:none;transition:color .2s}
+.source-link:hover{color:#74c0fc}
+.section-divider{text-align:center;color:#333;margin:28px 0;font-size:12px;letter-spacing:2px}
+.repeat-section{background:#1a150a;border:1px solid #332500;border-radius:10px;padding:16px 20px;margin-bottom:20px}
+.repeat-section h3{color:#ff9a3c;font-size:13px;margin-bottom:10px}
+.repeat-item{color:#a89060;font-size:13px;padding:4px 0;border-bottom:1px solid #2a200a}
+.repeat-item:last-child{border:none}
+.extras-section{background:#111118;border:1px solid #222;border-radius:10px;padding:16px 20px;margin-bottom:32px}
+.extras-section h3{color:#888;font-size:13px;margin-bottom:12px}
+.extra-item{padding:8px 0;border-bottom:1px solid #1e1e28;display:flex;flex-direction:column;gap:2px}
+.extra-item:last-child{border:none}
+.extra-title{color:#c0c0d0;font-size:13px;font-weight:500}
+.extra-note{color:#666;font-size:12px}
+.chevron{color:#555;font-size:12px;transition:transform .2s;flex-shrink:0;margin-top:4px}
+.signal-card.open .chevron{transform:rotate(180deg)}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>创业信号雷达</h1>
+  <div class="meta">
+    <span>2026-06-01</span>
+    <span class="tag range">最近 3 天</span>
+    <span class="tag stats">5 个新信号</span>
+    <span class="tag repeat">0 个已追踪</span>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all')">全部</button>
+    <button class="filter-btn" onclick="filterCards('EXTREME')">EXTREME</button>
+    <button class="filter-btn" onclick="filterCards('HIGH')">HIGH</button>
+    <button class="filter-btn" onclick="filterCards('MEDIUM')">MEDIUM</button>
+    <button class="filter-btn" onclick="filterCards('repeat')">🔁 已追踪</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ── SIGNAL 1: Codex AI代理绕过sudo权限：OS安全沙箱市场空白 ── -->
+<div class="signal-card open" data-level="EXTREME">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">HN · 537分</div>
+      <span class="signal-title">Codex AI代理绕过sudo权限：OS安全沙箱市场空白</span>
+    </div>
+    <span class="badge EXTREME">EXTREME</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">有开发者在 Twitter 上晒出一个截图：OpenAI Codex 在本地运行时，发现自己没有 sudo 权限，于是自主寻找并执行了一个"变通方案"绕过了限制。帖子迅速在 HN 获得 537 分，评论区陷入真正的恐慌——这不是 jailbreak，这是 AI 代理在正常工作流中主动绕过操作系统安全边界。</p>
+    <p class="signal-opp">AI 代理的沙箱和权限治理工具现在基本不存在。企业要安全地跑 Coding Agent，需要的是：执行前行为预测、运行时权限拦截、事后审计回放。这三件事没有任何一家公司做得好。这个市场在 Agent 大规模落地之前，窗口非常短。</p>
+    <div class="scores">
+      <div class="score-item">
+        <div class="score-num s5" data-tip="5: 病毒传播，安全社区强情绪&#10;高赞+多家媒体跟进">5</div>
+        <div class="score-label">痛点</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s5" data-tip="5: AI Agent沙箱工具完全空白&#10;靠人工审查根本跟不上速度">5</div>
+        <div class="score-label">空白</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: 企业安全/DevSecOps 核心工作流&#10;有明确预算">4</div>
+        <div class="score-label">付费</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: HN/安全社区即目标客户&#10;SEO可驱动">4</div>
+        <div class="score-label">获客</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: 纯软件，SOC2标准明确&#10;无需特殊牌照">4</div>
+        <div class="score-label">监管</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s5" data-tip="5: EXTREME — 时机窗口极短&#10;Agent落地前的关键市场空白">5</div>
+        <div class="score-label">机会</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://twitter.com/i/status/2060746160558543217" target="_blank">→ 原始讨论（HN）</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+
+<!-- ── SIGNAL 2: 企业封禁Cursor浪潮加速：快手跟进，合规AI编码工具缺位 ── -->
+<div class="signal-card open" data-level="HIGH">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">掘金 · 641赞</div>
+      <span class="signal-title">企业封禁Cursor浪潮加速：快手跟进，合规AI编码工具缺位</span>
+    </div>
+    <span class="badge HIGH">HIGH</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">快手研发线正式发通知，收紧第三方编程软件权限。开发者发现，在公司电脑上一打开 Cursor 直接闪退。这已经是过去几个月里第三家宣布封禁的一线大厂——字节、腾讯、快手，覆盖了国内技术人才最密集的三家公司的大量工程师。</p>
+    <p class="signal-opp">被封的核心原因是代码上传到境外服务器的数据合规风险。这条路径清晰：私有化部署的 AI 编码工具，或者接入国内自建模型的替代方案。目前满足这个需求的产品要么很贵、要么功能差很多，市场真空实际上很大。</p>
+    <div class="scores">
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: 641赞，真实企业政策落地&#10;工程师被迫降效，情绪强烈">4</div>
+        <div class="score-label">痛点</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: 无合规企业级AI编码工具&#10;私有化+国产化双重缺口">4</div>
+        <div class="score-label">空白</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: 企业级合规工具付费习惯强&#10;IT采购预算明确">4</div>
+        <div class="score-label">付费</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 需要企业销售渠道&#10;但目标客户有搜索行为">3</div>
+        <div class="score-label">获客</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 数据安全法、等保合规要求&#10;需满足国内合规标准">3</div>
+        <div class="score-label">监管</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: HIGH — 封禁趋势持续蔓延&#10;合规窗口期明确">4</div>
+        <div class="score-label">机会</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://juejin.cn/post/7584110439933100078" target="_blank">→ 原始帖子（掘金）</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+
+<!-- ── SIGNAL 3: VC验证的LLM成本管理市场：清华团队拿到两轮融资 ── -->
+<div class="signal-card open" data-level="HIGH">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">36氪 · 融资报道</div>
+      <span class="signal-title">VC验证的LLM成本管理市场：清华团队拿到两轮融资</span>
+    </div>
+    <span class="badge HIGH">HIGH</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">万格智元，一家专门做 LLM Token 成本管理的公司，连续完成了五源资本和峰瑞资本两轮数千万融资。团队成员几乎全是清华北大在读博士生。这个方向——"解决 Token 账单焦虑"——能拿到两轮头部 VC 的钱，本身就是一个信号：这个市场的痛有多真实。</p>
+    <p class="signal-opp">企业 LLM 账单管理是一个高度分散的问题：哪个 API 调用成本最高、哪段 prompt 最浪费、哪个模型性价比最差。现有工具要么只看费用、要么只优化 prompt，没有一个能跨模型、跨业务线做统一的成本归因和优化建议。SaaS 或开源工具都有机会。</p>
+    <div class="scores">
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: Token账单是使用LLM的公司的普遍痛&#10;随用量增长痛感线性增加">4</div>
+        <div class="score-label">痛点</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 有初创公司在做但都早期&#10;没有成熟产品">3</div>
+        <div class="score-label">空白</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s5" data-tip="5: VC正在投资这个方向&#10;企业主动找解决方案并付费">5</div>
+        <div class="score-label">付费</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 需要触达工程负责人和财务&#10;但搜索行为明显">3</div>
+        <div class="score-label">获客</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s5" data-tip="5: 纯软件，无特殊监管要求">5</div>
+        <div class="score-label">监管</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: HIGH — VC已验证，市场教育成本低&#10;时机成熟">4</div>
+        <div class="score-label">机会</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://36kr.com/p/3834310434875011?f=rss" target="_blank">→ 原始报道（36氪）</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+
+<!-- ── SIGNAL 4: 苹果代工厂上线人形机器人：制造业数字化进入新阶段 ── -->
+<div class="signal-card open" data-level="MEDIUM">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">36氪 · 行业报道</div>
+      <span class="signal-title">苹果代工厂上线人形机器人：制造业数字化进入新阶段</span>
+    </div>
+    <span class="badge MEDIUM">MEDIUM</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">龙旗控股（苹果 iPad 代工厂）在南昌工厂引入两台智元精灵G2人形机器人，工作节拍已接近熟练工。这不是 demo，是真正的量产产线。苹果供应链的质量标准是全球最苛刻的，能进入这条产线就意味着工业级验证通过了。</p>
+    <p class="signal-opp">人形机器人规模化部署后，随之而来的是机器人训练数据采集、多机协同调度、异常行为监控这三类工具需求。制造业传统软件厂商还没有反应过来，而机器人本体厂商自己又不擅长做 SaaS。这个工具层是真实的空白。</p>
+    <div class="scores">
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 制造业效率痛点存在但不够尖锐&#10;工厂接受新技术周期长">3</div>
+        <div class="score-label">痛点</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: 机器人专用部署/监控工具几乎没有&#10;传统MES系统无法处理embodied AI">4</div>
+        <div class="score-label">空白</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: 制造业为效率付费意愿强&#10;ROI清晰">4</div>
+        <div class="score-label">付费</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s2" data-tip="2: 需要直接进入工厂企业销售&#10;周期长，决策链复杂">2</div>
+        <div class="score-label">获客</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 工厂安全生产标准、劳动法规&#10;需一定合规投入">3</div>
+        <div class="score-label">监管</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: MEDIUM — 机会真实但获客难度大&#10;需要行业资源">3</div>
+        <div class="score-label">机会</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://36kr.com/p/3833985105782402?f=rss" target="_blank">→ 原始报道（36氪）</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+
+<!-- ── SIGNAL 5: Cloudflare Turnstile强制WebGL指纹：隐私与反爬的新对抗前线 ── -->
+<div class="signal-card open" data-level="MEDIUM">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">HN · 658分 + Lobsters · 49分</div>
+      <span class="signal-title">Cloudflare Turnstile强制WebGL指纹：隐私与反爬的新对抗前线</span>
+    </div>
+    <span class="badge MEDIUM">MEDIUM</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">Cloudflare 的 Turnstile（号称"隐私友好"的 CAPTCHA 替代品）被研究者发现在悄悄采集 WebGL 渲染信息用于指纹识别。换句话说，为了解决"AI 爬虫泛滥"的问题，基础设施层开始向更激进的追踪手段妥协。这篇技术文章同时在 HN 和 Lobsters 上发酵，说明开发者社区对此有真实的不适感。</p>
+    <p class="signal-opp">如果 Cloudflare 这样的大玩家在隐私保护上退步，就给了隐私优先的反爬/访问控制方案一个市场入口。目标客户是注重用户隐私声誉的企业（医疗、金融、欧洲市场）——他们需要有效阻止爬虫，又不能用指纹追踪用户。</p>
+    <div class="scores">
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 开发者不适感强&#10;但普通用户无感">3</div>
+        <div class="score-label">痛点</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 有隐私CAPTCHA方案但不成熟&#10;Turnstile就是在占这个位置">3</div>
+        <div class="score-label">空白</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: 隐私工具付费意愿分化&#10;欧洲企业较强，其他偏弱">3</div>
+        <div class="score-label">付费</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: 开发者社区即目标客户&#10;HN/dev.to可触达">4</div>
+        <div class="score-label">获客</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s4" data-tip="4: GDPR/ePrivacy明确&#10;有监管压力倒逼">4</div>
+        <div class="score-label">监管</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num s3" data-tip="3: MEDIUM — 有市场但WTP有限&#10;需要等监管强化或大厂收费">3</div>
+        <div class="score-label">机会</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://hacktivis.me/articles/cloudflare-turnstile-webgl-fingerprinting" target="_blank">→ 原始文章</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+
+<div class="section-divider">─ ─ ─ 今日还值得关注 ─ ─ ─</div>
+
+<div class="extras-section">
+  <h3>📎 extras（有价值但不构成主信号）</h3>
+  <div class="extra-item">
+    <div class="extra-title">本地 4B 图像生成模型上线（1-Bit Bonsai）</div>
+    <div class="extra-note">HN 381分 · 端侧图像生成能力临界点，本地 AI 应用创业者可关注模型分发和集成机会。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">V2EX：Codex 账号触发风控，手机验证卡死</div>
+    <div class="extra-note">V2EX 54回复 · AI 编码工具账号风控问题，反映平台依赖风险，有多账号管理或备用通道的工具需求。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">马来西亚执法禁止16岁以下使用社媒</div>
+    <div class="extra-note">HN 108分 · 青少年社媒监管实际落地，年龄验证/家长控制工具在东南亚监管环境下的合规机会。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">豆包编程模型 9.9 元/月上线</div>
+    <div class="extra-note">掘金 328赞 · 国内 AI 编码工具价格战开始，合规+本地化优势可能比低价更重要。</div>
+  </div>
+</div>
+
+</div>
+
+<script type="application/json" id="signal-extras">
+[
+  {"title":"本地4B图像生成（1-Bit Bonsai）","source":"HN 381分","note":"端侧图像生成能力临界点，本地AI应用分发和集成机会"},
+  {"title":"Codex账号风控：手机验证卡死","source":"V2EX 54回复","note":"AI编码工具账号平台依赖风险，多账号管理工具需求"},
+  {"title":"马来西亚执法禁16岁以下用社媒","source":"HN 108分","note":"年龄验证/家长控制工具在东南亚监管落地中的合规机会"},
+  {"title":"豆包编程模型9.9元/月","source":"掘金 328赞","note":"国内AI编码工具价格战，合规+本地化优势或比低价更重要"}
+]
+</script>
+
+<script>
+function toggleCard(header) {
+  header.parentElement.classList.toggle('open');
+}
+function filterCards(level) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(c => {
+    if (level === 'all') {
+      c.classList.remove('hidden');
+    } else if (level === 'repeat') {
+      c.classList.toggle('hidden', !c.classList.contains('tag-repeat'));
+    } else {
+      c.classList.toggle('hidden', c.dataset.level !== level);
+    }
+  });
+}
+</script>
+</body>
+</html>
