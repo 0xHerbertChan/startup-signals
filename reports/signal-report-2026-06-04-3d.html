@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>创业信号 · 2026-06-04 · 最近3天</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d0f;color:#e8e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:24px;line-height:1.6}
+.header{max-width:860px;margin:0 auto 32px;border-bottom:1px solid #222;padding-bottom:20px}
+.header h1{font-size:22px;font-weight:700;color:#f5f5ff;margin-bottom:8px}
+.meta{color:#888;font-size:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.tag{background:#1e1e28;border:1px solid #333;padding:2px 10px;border-radius:12px;font-size:12px}
+.tag.range{color:#74c0fc}.tag.stats{color:#06d6a0}.tag.repeat{color:#ff9a3c}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.filter-btn{background:#1a1a22;border:1px solid #333;color:#aaa;padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13px;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{background:#2a2a3a;color:#e8e8f0;border-color:#555}
+.container{max-width:860px;margin:0 auto}
+.signal-card{background:#141418;border:1px solid #222;border-radius:12px;margin-bottom:20px;overflow:hidden;transition:border-color .2s}
+.signal-card:hover{border-color:#333}
+.signal-card.hidden{display:none}
+.card-header{padding:18px 20px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card-title-area{flex:1}
+.signal-label{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#888;margin-bottom:6px}
+.signal-title{font-size:17px;font-weight:600;color:#f0f0ff;line-height:1.4;display:block}
+.badge{font-size:11px;font-weight:700;letter-spacing:.5px;padding:4px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.badge.EXTREME{background:#1a3a2a;color:#06d6a0;border:1px solid #06d6a0}
+.badge.HIGH{background:#1a2a3a;color:#74c0fc;border:1px solid #74c0fc}
+.badge.MEDIUM{background:#2a2a1a;color:#ffd166;border:1px solid #ffd166}
+.badge.REPEAT{background:#2a1f0f;color:#ff9a3c;border:1px solid #ff9a3c}
+.card-body{padding:0 20px 18px;display:none}
+.signal-card.open .card-body{display:block}
+.signal-card.open .card-header{padding-bottom:10px}
+.signal-desc{color:#c8c8d8;font-size:14.5px;line-height:1.7;margin-bottom:12px}
+.signal-opp{color:#d0d0e0;font-size:14px;line-height:1.7;margin-bottom:14px;padding-left:14px;border-left:3px solid #3a3a5a}
+.scores{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.score-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-label{font-size:10px;color:#666;white-space:nowrap}
+.score-num{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:help;position:relative}
+.score-num.s5{background:#0d2e22;color:#06d6a0}
+.score-num.s4{background:#0e2035;color:#74c0fc}
+.score-num.s3{background:#2a260e;color:#ffd166}
+.score-num.s2{background:#2a1a08;color:#ff9a3c}
+.score-num.s1{background:#2a0e0e;color:#ff4d6d}
+[data-tip]{position:relative}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#1e1e28;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:200px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
+.source-link{display:inline-block;margin-top:10px;font-size:12px;color:#555;text-decoration:none;transition:color .2s}
+.source-link:hover{color:#74c0fc}
+.tag-repeat{display:inline-block;background:#2a1f0f;color:#ff9a3c;border:1px solid #ff9a3c;font-size:11px;padding:2px 8px;border-radius:4px;margin-left:8px}
+.section-divider{text-align:center;color:#333;margin:28px 0;font-size:12px;letter-spacing:2px}
+.extras-section{background:#111118;border:1px solid #222;border-radius:10px;padding:16px 20px;margin-bottom:32px}
+.extras-section h3{color:#888;font-size:13px;margin-bottom:12px}
+.extra-item{padding:8px 0;border-bottom:1px solid #1e1e28;display:flex;flex-direction:column;gap:2px}
+.extra-item:last-child{border:none}
+.extra-title{color:#c0c0d0;font-size:13px;font-weight:500}
+.extra-note{color:#666;font-size:12px}
+.chevron{color:#555;font-size:12px;transition:transform .2s;flex-shrink:0;margin-top:4px}
+.signal-card.open .chevron{transform:rotate(180deg)}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>创业信号雷达</h1>
+  <div class="meta">
+    <span>2026-06-04</span>
+    <span class="tag range">最近 3 天</span>
+    <span class="tag stats">4 个新信号</span>
+    <span class="tag repeat">1 个已追踪</span>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all',event)">全部</button>
+    <button class="filter-btn" onclick="filterCards('EXTREME',event)">EXTREME</button>
+    <button class="filter-btn" onclick="filterCards('HIGH',event)">HIGH</button>
+    <button class="filter-btn" onclick="filterCards('MEDIUM',event)">MEDIUM</button>
+    <button class="filter-btn" onclick="filterCards('repeat',event)">🔁 已追踪</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ── SIGNAL 1: Uber AI工具月费$1,500上限：企业AI预算治理市场浮现 ── -->
+<div class="signal-card open" data-level="HIGH">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">Hacker News · 474分</div>
+      <span class="signal-title">Uber AI工具月费$1,500上限：企业AI预算治理市场浮现</span>
+    </div>
+    <span class="badge HIGH">HIGH</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">Uber 给每名员工设了 $1,500/月的 AI 工具使用上限。这条政策本身不是新闻，有意思的是 HN 帖子标题直接说：「这个数字对 AI 工具定价是个有用的信号」——说明开发者已经开始用企业政策来反推市场价格区间。这是第一批可量化的「企业 AI 工具预算天花板」数据之一。</p>
+    <p class="signal-opp">企业 AI 预算管理和合规是个没人做好的位置：哪个员工用了多少、用在什么工具上、是否超了 $1,500 的上限、ROI 是多少。IT 部门现在靠 Excel 和信用卡账单来管这件事。这个工具层应该存在但还不存在。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s4" data-tip="4: HN 474分，CFO/CTO 都在关注&#10;AI支出失控是真实的企业痛点">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s4" data-tip="4: 企业AI支出可见性工具几乎没有&#10;只有通用SaaS管理平台，不够细">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-num s5" data-tip="5: 企业已经在花这个钱&#10;$1500/人/月验证了预算规模">5</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s4" data-tip="4: IT/Finance 有明确搜索行为&#10;可通过SEO和HN触达">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s5" data-tip="5: 纯软件SaaS，无特殊监管">5</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s4" data-tip="4: HIGH — 有量化数据支撑&#10;企业AI治理窗口正在打开">4</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://news.ycombinator.com/item?id=43984427" target="_blank">→ HN 讨论</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+
+<!-- ── SIGNAL 2: VSCode一键窃取GitHub Token：IDE供应链安全盲区 ── -->
+<div class="signal-card open" data-level="HIGH">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">Lobsters · 65分</div>
+      <span class="signal-title">VSCode一键窃取GitHub Token：IDE供应链安全盲区</span>
+    </div>
+    <span class="badge HIGH">HIGH</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">Full Disclosure 披露了一个 VSCode 漏洞：攻击者可以一键触发 GitHub token 窃取，无需任何用户交互。这不是「理论上可能」，是已证明的攻击链。VSCode 现在是全球最多开发者使用的 IDE，它的扩展生态本质上是一个没有沙箱的代码执行环境——任何人发布的扩展都可以访问你的 token、文件系统和环境变量。</p>
+    <p class="signal-opp">IDE 安全监控工具——扩展行为审计、token 泄露检测、VS Code 扩展沙箱——是一个几乎没人在认真做的方向。企业安全团队知道这个风险但没有好用的工具。如果你有 DevSecOps 背景，这里有一个很具体的产品空白。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s4" data-tip="4: 已有真实漏洞披露&#10;GitHub token 泄露是高危事件">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s5" data-tip="5: IDE安全监控工具基本不存在&#10;扩展生态完全没有沙箱">5</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-label" style="display:none"></span>
+        <div class="score-num s4" data-tip="4: 企业安全预算充足&#10;代码安全是优先级很高的采购">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s4" data-tip="4: HN/安全社区即目标客户&#10;事件驱动的搜索流量">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s3" data-tip="3: 需要SOC2/ISO27001合规&#10;但标准明确">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s4" data-tip="4: HIGH — 漏洞驱动的市场教育&#10;时机窗口在事件发酵期">4</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://lobste.rs/s/full-disclosure-1-click-github-token-stealing-vscode" target="_blank">→ Lobsters 讨论</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+
+<!-- ── SIGNAL 3: AI让Berkeley CS不及格率飙升：编程技能验证工具缺失 ── -->
+<div class="signal-card open" data-level="HIGH">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">Hacker News · 261分</div>
+      <span class="signal-title">AI让Berkeley CS不及格率飙升：编程技能验证工具缺失</span>
+    </div>
+    <span class="badge HIGH">HIGH</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">伯克利 CS 教授发现，自从学生大量使用 AI 后，课程不及格率大幅上升，数学基础能力也在退化。学生能用 AI 完成作业，但一到闭卷考试就垮掉。这是一个已经在最顶级的 CS 院校发生的现象，不是预测，是观察到的现实。HN 261 分，评论区充满了对「AI 拐杖」的真实讨论。</p>
+    <p class="signal-opp">教育机构现在迫切需要的不是「禁止 AI」，而是能区分「学生真正掌握了技能」和「学生会用 AI 完成任务」的评估工具。AI 感知型编程评估、自适应难度的技能验证系统——这个市场刚刚被这批数据点燃。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s4" data-tip="4: 顶级高校已有量化数据&#10;教授和学生都感受到了">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s4" data-tip="4: AI感知型编程评估工具很少&#10;现有方案仍是传统题库">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-num s4" data-tip="4: 高校和企业招聘都有付费意愿&#10;技能认证是一个已有的付费市场">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s3" data-tip="3: 需要进入高校和企业HR渠道&#10;但话题热度高，内容驱动有效">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s4" data-tip="4: 教育数据有FERPA等标准&#10;但相对明确可预期">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s4" data-tip="4: HIGH — 数据刚出来，市场教育成本低&#10;高校+企业双渠道">4</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://news.ycombinator.com/item?id=43980000" target="_blank">→ HN 讨论</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+
+<!-- ── SIGNAL 4: 深圳视触觉传感器获亿元融资：具身AI底层硬件窗口 ── -->
+<div class="signal-card open" data-level="MEDIUM">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">36氪 · 融资报道</div>
+      <span class="signal-title">深圳视触觉传感器获亿元融资：具身AI底层硬件窗口</span>
+    </div>
+    <span class="badge MEDIUM">MEDIUM</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">戴盟机器人完成亿元 A 轮，由汇川技术旗下产业基金和中国电信联合投资，做的是视触觉一体化传感器，出货量已是行业第一。汇川是工业自动化巨头，中国电信是运营商——两家战略投资人的同时入局，说明传感器这一层已经从技术验证阶段进入产业化节点。</p>
+    <p class="signal-opp">传感器之上是一层几乎空白的软件栈：多模态传感数据融合、机器人感知模型训练、部署到生产线的数据标注工具。硬件公司不擅长做软件，而传统 AI 公司缺乏具身场景数据。这个夹层现在没人认真占。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s3" data-tip="3: 工业场景技术问题&#10;不是情绪驱动的痛，是效率痛">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s4" data-tip="4: 具身AI软件栈几乎是空白&#10;传感数据工具链无人在做">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-num s4" data-tip="4: 工业客户为效率付费意愿强&#10;传感器已验证市场存在">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s2" data-tip="2: 需要直接进入制造/机器人厂商&#10;企业销售，周期长">2</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s3" data-tip="3: 工业安全标准，国产化要求&#10;有合规投入但可预期">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s3" data-tip="3: MEDIUM — 机会真实但获客难&#10;需要行业资源才能切入">3</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://36kr.com/p/3833985105782402" target="_blank">→ 36氪报道</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+
+<!-- ── SIGNAL 5: 企业封禁Cursor浪潮加速：合规AI编码工具缺位 ── -->
+<div class="signal-card" data-level="repeat">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">掘金 · 655赞 <span class="tag-repeat">🔁 已追踪</span></div>
+      <span class="signal-title">企业封禁Cursor浪潮加速：合规AI编码工具缺位</span>
+    </div>
+    <span class="badge REPEAT">🔁 已追踪</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">快手研发线封禁 Cursor，继字节、腾讯之后又一大厂收紧。这是本周第三次看到同一方向的信号——企业数据合规封禁 AI 编码工具的趋势在加速，且每次都有新的大厂名字加入。</p>
+    <p class="signal-opp">趋势持续强化：合规 AI 编码工具（私有化部署/国产模型）的市场需求在每次封禁事件后都会增强一次。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s4" data-tip="持续追踪中">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s4" data-tip="持续追踪中">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-num s4" data-tip="持续追踪中">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s3" data-tip="持续追踪中">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s3" data-tip="持续追踪中">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s4" data-tip="持续追踪中">4</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://juejin.cn/post/7584110439933100078" target="_blank">→ 掘金帖子</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+
+<div class="section-divider">─ ─ ─ 今日还值得关注 ─ ─ ─</div>
+
+<div class="extras-section">
+  <h3>📎 extras（有价值但不构成主信号）</h3>
+  <div class="extra-item">
+    <div class="extra-title">V2EX：5月消耗34亿Token，三个项目</div>
+    <div class="extra-note">V2EX 65回复 · 开发者实际token消耗数据，强化LLM成本管理的需求信号。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">字节AI 2026四大命题：世界模型+视频+Agent</div>
+    <div class="extra-note">36氪独家 · 字节战略方向透露，世界模型训练是核心，对AI基础设施创业有方向参考价值。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">I Spent 10x Longer Debugging AI Code</div>
+    <div class="extra-note">DevTo 64赞 · AI生成代码的调试成本远超编写成本，AI代码质量审计/调试工具需求。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">小红书金融专业号治理专项</div>
+    <div class="extra-note">36氪 · 金融内容合规要求升级，面向内容创作者的持牌合规SaaS工具机会。</div>
+  </div>
+</div>
+
+</div>
+
+<script type="application/json" id="signal-extras">
+[
+  {"title":"V2EX：5月消耗34亿Token","source":"V2EX 65回复","note":"开发者实际token消耗数据，强化LLM成本管理的需求信号"},
+  {"title":"字节AI 2026四大命题","source":"36氪独家","note":"世界模型训练是字节核心方向，对AI基础设施创业有方向参考价值"},
+  {"title":"I Spent 10x Longer Debugging AI Code","source":"DevTo 64赞","note":"AI代码调试成本远超编写，AI代码质量审计工具需求浮现"},
+  {"title":"小红书金融专业号治理专项","source":"36氪","note":"金融内容合规升级，持牌合规SaaS工具机会"}
+]
+</script>
+
+<script>
+function toggleCard(header){header.parentElement.classList.toggle('open')}
+function filterCards(level,event){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(c=>{
+    if(level==='all') c.classList.remove('hidden');
+    else if(level==='repeat') c.classList.toggle('hidden',c.dataset.level!=='repeat');
+    else c.classList.toggle('hidden',c.dataset.level!==level);
+  });
+}
+</script>
+</body>
+</html>
