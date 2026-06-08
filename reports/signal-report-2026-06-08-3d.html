@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>创业信号 · 2026-06-08 · 最近3天</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d0f;color:#e8e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:24px;line-height:1.6}
+.header{max-width:860px;margin:0 auto 32px;border-bottom:1px solid #222;padding-bottom:20px}
+.header h1{font-size:22px;font-weight:700;color:#f5f5ff;margin-bottom:8px}
+.meta{color:#888;font-size:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.tag{background:#1e1e28;border:1px solid #333;padding:2px 10px;border-radius:12px;font-size:12px}
+.tag.range{color:#74c0fc}.tag.stats{color:#06d6a0}.tag.rep{color:#ff9a3c}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.filter-btn{background:#1a1a22;border:1px solid #333;color:#aaa;padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13px;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{background:#2a2a3a;color:#e8e8f0;border-color:#555}
+.container{max-width:860px;margin:0 auto}
+.signal-card{background:#141418;border:1px solid #222;border-radius:12px;margin-bottom:20px;overflow:hidden}
+.signal-card:hover{border-color:#333}
+.signal-card.hidden{display:none}
+.card-header{padding:18px 20px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card-title-area{flex:1}
+.signal-label{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#888;margin-bottom:6px}
+.signal-title{font-size:17px;font-weight:600;color:#f0f0ff;line-height:1.4;display:block}
+.badge{font-size:11px;font-weight:700;letter-spacing:.5px;padding:4px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.badge.HIGH{background:#1a2a3a;color:#74c0fc;border:1px solid #74c0fc}
+.badge.MEDIUM{background:#2a2a1a;color:#ffd166;border:1px solid #ffd166}
+.badge.REPEAT{background:#2a1f0f;color:#ff9a3c;border:1px solid #ff9a3c}
+.card-body{padding:0 20px 18px;display:none}
+.signal-card.open .card-body{display:block}
+.signal-card.open .card-header{padding-bottom:10px}
+.signal-desc{color:#c8c8d8;font-size:14.5px;line-height:1.7;margin-bottom:12px}
+.signal-opp{color:#d0d0e0;font-size:14px;line-height:1.7;margin-bottom:14px;padding-left:14px;border-left:3px solid #3a3a5a}
+.scores{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.score-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-label{font-size:10px;color:#666;white-space:nowrap}
+.score-num{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:help;position:relative}
+.score-num.s5{background:#0d2e22;color:#06d6a0}
+.score-num.s4{background:#0e2035;color:#74c0fc}
+.score-num.s3{background:#2a260e;color:#ffd166}
+.score-num.s2{background:#2a1a08;color:#ff9a3c}
+.score-num.s1{background:#2a0e0e;color:#ff4d6d}
+[data-tip]{position:relative}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#1e1e28;color:#e8e8f0;font-size:11px;padding:6px 10px;border-radius:6px;white-space:pre-line;width:200px;z-index:100;border:1px solid #444;line-height:1.5;pointer-events:none}
+.source-link{display:inline-block;margin-top:10px;font-size:12px;color:#555;text-decoration:none;transition:color .2s}
+.source-link:hover{color:#74c0fc}
+.tag-repeat{display:inline-block;background:#2a1f0f;color:#ff9a3c;border:1px solid #ff9a3c;font-size:11px;padding:2px 8px;border-radius:4px;margin-left:8px}
+.section-divider{text-align:center;color:#333;margin:28px 0;font-size:12px;letter-spacing:2px}
+.extras-section{background:#111118;border:1px solid #222;border-radius:10px;padding:16px 20px;margin-bottom:32px}
+.extras-section h3{color:#888;font-size:13px;margin-bottom:12px}
+.extra-item{padding:8px 0;border-bottom:1px solid #1e1e28}
+.extra-item:last-child{border:none}
+.extra-title{color:#c0c0d0;font-size:13px;font-weight:500}
+.extra-note{color:#666;font-size:12px}
+.chevron{color:#555;font-size:12px;transition:transform .2s;flex-shrink:0;margin-top:4px}
+.signal-card.open .chevron{transform:rotate(180deg)}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>创业信号雷达</h1>
+  <div class="meta">
+    <span>2026-06-08</span>
+    <span class="tag range">最近 3 天</span>
+    <span class="tag stats">4 个新信号</span>
+    <span class="tag rep">2 个已追踪</span>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all',event)">全部</button>
+    <button class="filter-btn" onclick="filterCards('HIGH',event)">HIGH</button>
+    <button class="filter-btn" onclick="filterCards('MEDIUM',event)">MEDIUM</button>
+    <button class="filter-btn" onclick="filterCards('repeat',event)">🔁 已追踪</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ── SIGNAL 1: LLM侵蚀软件工程师职业：技能验证与转型工具市场 ── -->
+<div class="signal-card open" data-level="HIGH">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">Hacker News · 948分</div>
+      <span class="signal-title">LLM侵蚀软件工程师职业：技能验证与转型工具市场</span>
+    </div>
+    <span class="badge HIGH">HIGH</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">HN 948 分，标题直接：「LLMs are eroding my software engineering career and I don't know what to do」。这不是情绪帖，是一个真实的结构性困惑——工程师不知道自己还值多少钱，不知道哪些技能还有护城河，不知道怎么证明自己不是「会用 AI 的空心人」。评论区有几百个工程师在认真讨论这件事，这是一个极高质量的群体焦虑信号。</p>
+    <p class="signal-opp">公司越来越需要区分「真正掌握了技能的工程师」和「会用 AI 完成任务但底层不扎实的工程师」。AI 时代的技能评估工具——能测出候选人在没有 AI 辅助时是否真的懂——是一个没有好答案的市场。Leetcode 式的题库已经被 AI 攻破了。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s5" data-tip="5: HN 948分，强情绪&#10;大量工程师有切身感受">5</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s4" data-tip="4: AI时代技能验证工具几乎不存在&#10;现有方案都被AI破解了">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-num s3" data-tip="3: 个人付费意愿偏弱&#10;企业HR/招聘方有付费意愿">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s5" data-tip="5: HN社区即目标客户&#10;话题本身就在驱动流量">5</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s5" data-tip="5: 纯软件，无特殊监管">5</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s4" data-tip="4: HIGH — 极高话题热度&#10;双边市场：求职者+企业招聘">4</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://news.ycombinator.com/item?id=43982451" target="_blank">→ HN 讨论</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 1 ── -->
+
+<!-- ── SIGNAL 2: AI流量首超人类流量：API基础设施重构窗口 ── -->
+<div class="signal-card open" data-level="HIGH">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">36氪 · 行业报道</div>
+      <span class="signal-title">AI流量首超人类流量：API基础设施重构窗口</span>
+    </div>
+    <span class="badge HIGH">HIGH</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">36氪今日报道：AI 等机器产生的网络请求量，首次超过了人类用户的请求量。这个拐点意味着互联网基础设施上的大多数假设开始失效——速率限制是为人类行为模式设计的，定价模型是按席位的，数据分析工具区分不了 AI Agent 和真实用户，WAF 规则无法识别 AI 爬虫。</p>
+    <p class="signal-opp">整个 API 层需要重新设计：为 Agent 优化的速率限制策略、AI 流量与人类流量的分离分析、Agent 身份认证协议、按算力消耗而非按席位的定价引擎。这不是一个工具，是一个基础设施层的重写机会。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s4" data-tip="4: 每家有API的公司都受影响&#10;现有基础设施开始误判">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s4" data-tip="4: Agent感知的API基础设施几乎没有&#10;Cloudflare等巨头刚开始反应">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-num s4" data-tip="4: 开发者基础设施付费意愿强&#10;API安全/可观测性是成熟付费品类">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s4" data-tip="4: HN/开发者社区可直接触达&#10;SEO流量明显">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s5" data-tip="5: 纯软件基础设施，无特殊监管">5</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s4" data-tip="4: HIGH — 结构性拐点刚刚到来&#10;基础设施窗口期通常很长">4</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://36kr.com" target="_blank">→ 36氪报道</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 2 ── -->
+
+<!-- ── SIGNAL 3: 1000次泄露后披露延迟反更严重：合规自动化工具市场 ── -->
+<div class="signal-card open" data-level="MEDIUM">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">Hacker News · 134分</div>
+      <span class="signal-title">1000次泄露后披露延迟反更严重：合规自动化工具市场</span>
+    </div>
+    <span class="badge MEDIUM">MEDIUM</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">HN 134 分的研究报告：分析了 1000+ 次数据泄露事件后，披露延迟时间非但没有改善，反而越来越长。监管越来越严（GDPR 72小时通知、SEC 4天披露规则），但企业实际执行越来越慢。这说明合规流程本身是断裂的——没有工具帮公司在发现泄露后快速走完「确认→评估→通知→上报」这条链路。</p>
+    <p class="signal-opp">数据泄露响应自动化工具：自动化评估受影响范围、生成监管机构通知草稿、追踪多管辖区的不同报告要求。这是一个 CISO 和法务团队都有明确需求、但市场上几乎没有好产品的方向。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s4" data-tip="4: 监管罚款是真实的财务风险&#10;延迟披露后果严重">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s3" data-tip="3: 有GRC平台但针对披露流程的自动化工具少&#10;现有方案不够细分">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-num s4" data-tip="4: 合规工具企业付费意愿强&#10;罚款金额远高于工具费用">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s3" data-tip="3: CISO/法务是目标&#10;需要销售但有搜索行为">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s3" data-tip="3: 需SOC2，处理敏感合规数据&#10;但标准明确">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s3" data-tip="3: MEDIUM — 需求真实但市场进入门槛高&#10;需要安全行业资源">3</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://news.ycombinator.com/item?id=43978000" target="_blank">→ HN 讨论</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 3 ── -->
+
+<!-- ── SIGNAL 4: 全球AI公司支付卡在上个时代：AI原生支付基础设施缺失 ── -->
+<div class="signal-card open" data-level="MEDIUM">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">36氪 · 行业观察</div>
+      <span class="signal-title">全球AI公司支付卡在上个时代：AI原生支付基础设施缺失</span>
+    </div>
+    <span class="badge MEDIUM">MEDIUM</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">36氪观察：全球 AI 行业正在以每小时诞生一家新公司的速度增长，但这些公司的收款方式还停留在上一个时代。按 token 计费、按 API 调用计费、按算力小时计费——这些商业模式现有的支付基础设施都不擅长处理。要么需要复杂的自定义计费系统，要么需要把消费用量换算成月度套餐来凑合。</p>
+    <p class="signal-opp">AI 原生的 usage-based billing 基础设施：毫秒级计量、实时扣费、多模型多维度计费规则引擎。Stripe 和 Paddle 能处理订阅，但 AI 用量计费这套逻辑基本要自己造。国内出海的 AI 公司尤其难——跨境支付加用量计费，双重复杂。</p>
+    <div class="scores">
+      <div class="score-item">
+        <span class="score-label">痛点</span>
+        <div class="score-num s3" data-tip="3: 真实工程痛苦&#10;但不是紧急崩溃型">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">空白</span>
+        <div class="score-num s4" data-tip="4: AI用量计费专用工具几乎没有&#10;Stripe/Paddle不够细">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">付费</span>
+        <div class="score-num s4" data-tip="4: B2B支付基础设施付费意愿强&#10;是核心工作流">4</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">获客</span>
+        <div class="score-num s3" data-tip="3: 需要触达AI创业公司的CTO/CFO&#10;有搜索行为，but niche">3</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">监管</span>
+        <div class="score-num s2" data-tip="2: 需要支付牌照&#10;跨境合规复杂">2</div>
+      </div>
+      <div class="score-item">
+        <span class="score-label">机会</span>
+        <div class="score-num s3" data-tip="3: MEDIUM — 市场真实但支付牌照门槛高&#10;适合有fintech背景的团队">3</div>
+      </div>
+    </div>
+    <a class="source-link" href="https://36kr.com" target="_blank">→ 36氪报道</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 4 ── -->
+
+<!-- ── SIGNAL 5: 企业封禁Cursor浪潮加速（持续追踪） ── -->
+<div class="signal-card" data-level="repeat">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">掘金 · 663赞 <span class="tag-repeat">🔁 已追踪</span></div>
+      <span class="signal-title">企业封禁Cursor浪潮加速（持续追踪）</span>
+    </div>
+    <span class="badge REPEAT">🔁 已追踪</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">快手封禁 Cursor 的帖子再次出现在本期候选中（663赞，高于上期）。继续追踪：大厂封禁名单在扩大，合规 AI 编码工具的窗口期跟着延长。</p>
+    <div class="scores">
+      <div class="score-item"><span class="score-label">痛点</span><div class="score-num s4" data-tip="持续追踪">4</div></div>
+      <div class="score-item"><span class="score-label">空白</span><div class="score-num s4" data-tip="持续追踪">4</div></div>
+      <div class="score-item"><span class="score-label">付费</span><div class="score-num s4" data-tip="持续追踪">4</div></div>
+      <div class="score-item"><span class="score-label">获客</span><div class="score-num s3" data-tip="持续追踪">3</div></div>
+      <div class="score-item"><span class="score-label">监管</span><div class="score-num s3" data-tip="持续追踪">3</div></div>
+      <div class="score-item"><span class="score-label">机会</span><div class="score-num s4" data-tip="持续追踪">4</div></div>
+    </div>
+    <a class="source-link" href="https://juejin.cn/post/7584110439933100078" target="_blank">→ 掘金帖子</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 5 ── -->
+
+<!-- ── SIGNAL 6: LLM烧token比招员工还贵（持续追踪） ── -->
+<div class="signal-card" data-level="repeat">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="card-title-area">
+      <div class="signal-label">掘金 · 34赞 <span class="tag-repeat">🔁 已追踪</span></div>
+      <span class="signal-title">LLM烧token比招员工还贵（持续追踪）</span>
+    </div>
+    <span class="badge REPEAT">🔁 已追踪</span>
+    <span class="chevron">▼</span>
+  </div>
+  <div class="card-body">
+    <p class="signal-desc">老板发现 LLM token 账单超过了招员工的成本。与上期「VC验证的LLM成本管理市场」信号一脉相承，企业 AI 支出管理的需求在持续浮现。</p>
+    <div class="scores">
+      <div class="score-item"><span class="score-label">痛点</span><div class="score-num s4" data-tip="持续追踪">4</div></div>
+      <div class="score-item"><span class="score-label">空白</span><div class="score-num s3" data-tip="持续追踪">3</div></div>
+      <div class="score-item"><span class="score-label">付费</span><div class="score-num s5" data-tip="持续追踪">5</div></div>
+      <div class="score-item"><span class="score-label">获客</span><div class="score-num s3" data-tip="持续追踪">3</div></div>
+      <div class="score-item"><span class="score-label">监管</span><div class="score-num s5" data-tip="持续追踪">5</div></div>
+      <div class="score-item"><span class="score-label">机会</span><div class="score-num s4" data-tip="持续追踪">4</div></div>
+    </div>
+    <a class="source-link" href="https://juejin.cn/post/7621878684524740671" target="_blank">→ 掘金帖子</a>
+  </div>
+</div>
+<!-- ── /SIGNAL 6 ── -->
+
+<div class="section-divider">─ ─ ─ 今日还值得关注 ─ ─ ─</div>
+
+<div class="extras-section">
+  <h3>📎 extras</h3>
+  <div class="extra-item">
+    <div class="extra-title">How's Linear so fast? 技术拆解</div>
+    <div class="extra-note">HN 402分 · Linear的性能作为竞争壁垒的技术分析，工具类产品「感觉快」是可以工程化的护城河。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">华超神控：AI超声脑机接口亿元融资</div>
+    <div class="extra-note">36氪首发 · 非侵入式BCI公司完成亿元天使轮，AI超声脑机接口临床工具软件栈的早期信号。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">大语言模型正在变成大编程模型</div>
+    <div class="extra-note">少数派 · LLM的语言能力未随模型迭代提升，但编程能力提升显著，代码理解工具的机会窗口。</div>
+  </div>
+  <div class="extra-item">
+    <div class="extra-title">Am I Becoming Too Slow for the AI World?</div>
+    <div class="extra-note">DevTo 73赞 · 开发者对跟不上AI节奏的集体焦虑，与HN 948分信号互为印证。</div>
+  </div>
+</div>
+
+</div>
+
+<script type="application/json" id="signal-extras">
+[
+  {"title":"Linear为何如此之快","source":"HN 402分","note":"性能作为竞争壁垒的技术分析，工具类产品速度是可工程化的护城河"},
+  {"title":"华超神控：AI超声脑机接口亿元融资","source":"36氪首发","note":"非侵入式BCI公司完成亿元天使轮，BCI软件栈早期信号"},
+  {"title":"大语言模型正在变成大编程模型","source":"少数派","note":"LLM编程能力提升显著，代码理解工具机会窗口"},
+  {"title":"Am I Becoming Too Slow for the AI World?","source":"DevTo 73赞","note":"开发者对跟不上AI节奏的集体焦虑，与HN 948分信号互为印证"}
+]
+</script>
+
+<script>
+function toggleCard(h){h.parentElement.classList.toggle('open')}
+function filterCards(level,e){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(c=>{
+    if(level==='all') c.classList.remove('hidden');
+    else if(level==='repeat') c.classList.toggle('hidden',c.dataset.level!=='repeat');
+    else c.classList.toggle('hidden',c.dataset.level!==level);
+  });
+}
+</script>
+</body>
+</html>
