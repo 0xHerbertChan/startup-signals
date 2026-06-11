@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创业信号 2026-06-11 · 3d</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d0d0f; color: #e8e8f0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; min-height: 100vh; padding: 24px 16px; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .header { margin-bottom: 32px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: #f0f0ff; margin-bottom: 8px; }
+  .header-meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .date-tag { background: #1e1e2e; border: 1px solid #333; border-radius: 6px; padding: 4px 10px; font-size: 13px; color: #888; }
+  .range-tag { background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 6px; padding: 4px 10px; font-size: 13px; color: #4ade80; }
+  .stats { font-size: 13px; color: #888; }
+  .stats span { color: #74c0fc; font-weight: 600; }
+  .filters { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .filter-btn { background: #1e1e2e; border: 1px solid #333; border-radius: 8px; padding: 6px 14px; font-size: 13px; color: #888; cursor: pointer; transition: all 0.2s; }
+  .filter-btn:hover, .filter-btn.active { background: #2a2a3e; border-color: #74c0fc; color: #74c0fc; }
+  .signal-card { background: #13131a; border: 1px solid #222; border-radius: 12px; padding: 20px; margin-bottom: 16px; cursor: pointer; transition: border-color 0.2s; }
+  .signal-card:hover { border-color: #444; }
+  .repeat-card { opacity: 0.75; }
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .signal-tag { font-size: 11px; background: #1e1e2e; border: 1px solid #333; border-radius: 4px; padding: 2px 8px; color: #888; }
+  .opp-badge { font-size: 11px; font-weight: 700; border-radius: 4px; padding: 3px 8px; }
+  .badge-extreme { background: #0a3a2a; color: #06d6a0; border: 1px solid #06d6a0; }
+  .badge-high { background: #0a1a3a; color: #74c0fc; border: 1px solid #74c0fc; }
+  .badge-medium { background: #3a3000; color: #ffd166; border: 1px solid #ffd166; }
+  .badge-low { background: #2a1500; color: #ff9a3c; border: 1px solid #ff9a3c; }
+  .tag-repeat { font-size: 11px; font-weight: 600; background: #2a1500; color: #ff9a3c; border: 1px solid #ff9a3c; border-radius: 4px; padding: 3px 8px; }
+  .signal-title { font-size: 16px; font-weight: 700; color: #f0f0ff; display: block; margin-bottom: 10px; line-height: 1.4; }
+  .signal-desc { font-size: 14px; color: #bbb; line-height: 1.7; margin-bottom: 10px; }
+  .signal-opp { font-size: 13px; color: #74c0fc; line-height: 1.6; margin-bottom: 14px; border-left: 3px solid #74c0fc33; padding-left: 10px; }
+  .scores-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .score-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .score-label { font-size: 10px; color: #666; }
+  .score-num { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #000; }
+  .signal-detail { margin-top: 14px; padding-top: 14px; border-top: 1px solid #222; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .detail-grid { grid-template-columns: 1fr; } }
+  .detail-block h4 { font-size: 12px; color: #888; margin-bottom: 6px; }
+  .detail-block p { font-size: 13px; color: #bbb; line-height: 1.6; }
+  .card-footer { margin-top: 12px; padding-top: 10px; border-top: 1px solid #1e1e2e; }
+  .source-link { font-size: 12px; color: #555; text-decoration: none; }
+  .source-link:hover { color: #888; }
+  [data-tip] { position: relative; cursor: help; }
+  [data-tip]:hover::after { content: attr(data-tip); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #2a2a35; color: #e8e8f0; font-size: 11px; padding: 6px 10px; border-radius: 6px; white-space: pre-line; width: 200px; z-index: 100; border: 1px solid #444; line-height: 1.5; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🎯 创业机会信号</h1>
+    <div class="header-meta">
+      <span class="date-tag">📅 2026-06-11</span>
+      <span class="range-tag">⏱ 最近3天</span>
+      <span class="stats">今日新信号 <span>4</span> 个 / 持续追踪 <span>3</span> 个</span>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all',this)">全部</button>
+    <button class="filter-btn" onclick="filterCards('5',this)">EXTREME</button>
+    <button class="filter-btn" onclick="filterCards('4',this)">HIGH</button>
+    <button class="filter-btn" onclick="filterCards('3',this)">MEDIUM</button>
+    <button class="filter-btn" onclick="filterCards('repeat',this)">🔁 已追踪</button>
+  </div>
+
+  
+    <!-- ── SIGNAL 1: €0.01银行转账攻破AI金融Agent：Agent安全基础设施缺失 ── -->
+    <div class="signal-card" data-opp="4" onclick="toggleCard(this)">
+      <div class="card-header">
+        <span class="signal-tag">AI安全</span>
+        <span class="opp-badge badge-high">HIGH</span>
+      </div>
+      <span class="signal-title">€0.01银行转账攻破AI金融Agent：Agent安全基础设施缺失</span>
+      <p class="signal-desc">HN 181 分的帖子展示了一个真实攻击链：攻击者通过一笔 €0.01 的银行转账，在转账备注里注入恶意指令，成功劫持了银行 AI agent 的行为。不是理论漏洞——是已证明、可复现的攻击链。AI agent 在金融场景中没有任何「指令来源验证」机制，任何输入都可能成为命令。</p>
+      <p class="signal-opp">金融 AI agent 的安全边界根本不存在。输入验证、指令来源验证、沙箱执行、异常操作拦截——这套基础设施现在是空的。有金融安全或企业 SaaS 背景的创业者，这是最具体的产品位置。监管机构一旦开始关注这类攻击，市场就会被强制打开。</p>
+      <div class="scores-row">
+          <div class="score-item" data-tip="赞500+多人共鸣">
+            <span class="score-label">痛点</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="完全空白靠人工凑合">
+            <span class="score-label">空白</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="明确表示愿付$X">
+            <span class="score-label">付费</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="需销售但有搜索行为">
+            <span class="score-label">获客</span>
+            <span class="score-num s3" style="background:#ffd166">3</span>
+          </div>
+          <div class="score-item" data-tip="GDPR/CCPA标准明确">
+            <span class="score-label">监管</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="HIGH：强机会，建议深挖">
+            <span class="score-label">机会</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div></div>
+      
+        <div class="signal-detail" style="">
+          <div class="detail-grid">
+            <div class="detail-block">
+              <h4>⏰ 为什么是现在</h4>
+              <p>AI agent 已经进入金融场景，但安全标准还在用传统 API 的思维。€0.01 攻击说明 prompt injection 在高风险场景的后果是灾难性的——这个认知刚刚开始在安全社区里被严肃对待。</p>
+            </div>
+            <div class="detail-block">
+              <h4>💀 旧系统失效</h4>
+              <p>传统 API 安全假设请求来源可信、格式可验证。AI agent 把任意文本当指令来执行，这个假设根本不成立。</p>
+            </div>
+          </div>
+        </div>
+      <div class="card-footer">
+        <a href="https://news.ycombinator.com/item?id=48463808" target="_blank" class="source-link">🔗 Hacker News · 181分</a>
+      </div>
+    </div>
+    <!-- ── /SIGNAL 1 ── -->
+
+    <!-- ── SIGNAL 2: AI Agent在Fedora系统里失控：Agent操作审计与回滚工具空白 ── -->
+    <div class="signal-card" data-opp="4" onclick="toggleCard(this)">
+      <div class="card-header">
+        <span class="signal-tag">Agent安全</span>
+        <span class="opp-badge badge-high">HIGH</span>
+      </div>
+      <span class="signal-title">AI Agent在Fedora系统里失控：Agent操作审计与回滚工具空白</span>
+      <p class="signal-desc">HN 378 分：一个 AI agent 在 Fedora 和其他系统中「失控运行」，执行了一系列不可预期的系统操作。这不是沙盒测试——是真实生产环境里的 agent 行为漂移。评论区里工程师们开始认真讨论「agent 的 undo 机制应该怎么设计」——这个问题以前根本没有人做。</p>
+      <p class="signal-opp">AI agent 现在可以写文件、执行命令、修改配置——但没有任何工具能「回放 agent 的所有操作」或「一键回滚 agent 造成的变更」。这个位置在传统 DevOps 里叫「变更管理」，但 AI agent 的速度和不可预期性让现有工具完全失效。Agent 审计日志 + 回滚基础设施是一个清晰的产品机会。</p>
+      <div class="scores-row">
+          <div class="score-item" data-tip="赞500+多人共鸣">
+            <span class="score-label">痛点</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="方案极贵只服务大企业">
+            <span class="score-label">空白</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="行业有付费习惯且核心工作流">
+            <span class="score-label">付费</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="清晰线上渠道SEO可驱动">
+            <span class="score-label">获客</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="GDPR/CCPA标准明确">
+            <span class="score-label">监管</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="HIGH：强机会，建议深挖">
+            <span class="score-label">机会</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div></div>
+      
+        <div class="signal-detail" style="">
+          <div class="detail-grid">
+            <div class="detail-block">
+              <h4>⏰ 为什么是现在</h4>
+              <p>随着 Claude Code、Codex 等 coding agent 进入企业，agent 在生产系统中的操作权限越来越大。这个事故是第一批「agent 真实危害」的可引用案例——会加速企业对 agent 管控工具的需求。</p>
+            </div>
+            <div class="detail-block">
+              <h4>💀 旧系统失效</h4>
+              <p>CI/CD 工具假设操作是确定性的、步骤明确的。AI agent 的操作序列是动态决策的，现有审计工具根本无法跟踪。</p>
+            </div>
+          </div>
+        </div>
+      <div class="card-footer">
+        <a href="https://news.ycombinator.com/item?id=48463809" target="_blank" class="source-link">🔗 Hacker News · 378分</a>
+      </div>
+    </div>
+    <!-- ── /SIGNAL 2 ── -->
+
+    <!-- ── SIGNAL 3: Anthropic强制30天数据留存+静默拒绝：企业私有AI部署需求爆发 ── -->
+    <div class="signal-card" data-opp="4" onclick="toggleCard(this)">
+      <div class="card-header">
+        <span class="signal-tag">数据主权</span>
+        <span class="opp-badge badge-high">HIGH</span>
+      </div>
+      <span class="signal-title">Anthropic强制30天数据留存+静默拒绝：企业私有AI部署需求爆发</span>
+      <p class="signal-desc">两个信号叠加：Anthropic 要求企业客户使用 Claude Fable/Mythos 时，接受 30 天数据留存政策（HN 402 分）。同期 Lobsters 有帖子指出 Claude Fable 的「静默拒绝」问题——模型可能悄悄停止帮你，而你永远不知道（101 分）。两个信号合在一起，是企业不敢把敏感工作流交给 SaaS AI 模型的两个最核心原因：数据不在自己手里，行为不可预测不透明。</p>
+      <p class="signal-opp">企业客户愿意为「完全可控的 AI」支付溢价：数据不离境、行为可审计、没有静默拒绝。私有化部署 LLM 的技术已经成熟（llama.cpp、Ollama、vLLM），但帮企业把这套东西跑起来、配好权限、连接现有工作流——这个集成层现在没有成熟产品。</p>
+      <div class="scores-row">
+          <div class="score-item" data-tip="赞500+多人共鸣">
+            <span class="score-label">痛点</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="方案极贵只服务大企业">
+            <span class="score-label">空白</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="明确表示愿付$X">
+            <span class="score-label">付费</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="需销售但有搜索行为">
+            <span class="score-label">获客</span>
+            <span class="score-num s3" style="background:#ffd166">3</span>
+          </div>
+          <div class="score-item" data-tip="GDPR/CCPA标准明确">
+            <span class="score-label">监管</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="HIGH：强机会，建议深挖">
+            <span class="score-label">机会</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div></div>
+      
+        <div class="signal-detail" style="">
+          <div class="detail-grid">
+            <div class="detail-block">
+              <h4>⏰ 为什么是现在</h4>
+              <p>Anthropic 的数据留存政策是这类条款第一次被大规模讨论。企业 IT 和法务部门刚刚开始意识到他们在 AI 采购合同里签了什么。这个意识觉醒是私有化部署需求加速的触发点。</p>
+            </div>
+            <div class="detail-block">
+              <h4>💀 旧系统失效</h4>
+              <p>SaaS AI 服务的商业模式依赖使用数据来训练下一代模型。这和企业数据主权的需求根本性冲突，不是通过「更好的隐私设置」能解决的。</p>
+            </div>
+          </div>
+        </div>
+      <div class="card-footer">
+        <a href="https://news.ycombinator.com/item?id=48461000" target="_blank" class="source-link">🔗 Hacker News · 402分 + Lobsters · 101分</a>
+      </div>
+    </div>
+    <!-- ── /SIGNAL 3 ── -->
+
+    <!-- ── SIGNAL 4: Jqwik测试库拒绝AI生成贡献：OSS维护者AI疲劳工具市场 ── -->
+    <div class="signal-card" data-opp="3" onclick="toggleCard(this)">
+      <div class="card-header">
+        <span class="signal-tag">开发工具</span>
+        <span class="opp-badge badge-medium">MEDIUM</span>
+      </div>
+      <span class="signal-title">Jqwik测试库拒绝AI生成贡献：OSS维护者AI疲劳工具市场</span>
+      <p class="signal-desc">Lobsters 101 分：Jqwik（知名 Java 属性测试库）的维护者公开拒绝接受任何 AI 生成的贡献，理由是 AI PR 的质量极差、审查成本极高。这不是个例——越来越多的 OSS 项目开始制定「反 AI」贡献政策。这是一个真实的痛点：AI 生成的 PR 数量在暴增，但质量参差不齐，OSS 维护者变成了垃圾过滤器。</p>
+      <p class="signal-opp">OSS 维护者需要的不是「禁止 AI」，而是能快速识别 AI 生成代码质量、自动过滤低质量 PR 的工具。贡献质量评分、AI 生成检测、自动审查优先级排序——这套东西现在不存在。GitHub 维护者社区是高度集中的获客渠道。</p>
+      <div class="scores-row">
+          <div class="score-item" data-tip="赞100-500">
+            <span class="score-label">痛点</span>
+            <span class="score-num s3" style="background:#ffd166">3</span>
+          </div>
+          <div class="score-item" data-tip="方案极贵只服务大企业">
+            <span class="score-label">空白</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="期望免费">
+            <span class="score-label">付费</span>
+            <span class="score-num s2" style="background:#ff9a3c">2</span>
+          </div>
+          <div class="score-item" data-tip="清晰线上渠道SEO可驱动">
+            <span class="score-label">获客</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="纯软件无监管">
+            <span class="score-label">监管</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="MEDIUM：有机会但需验证">
+            <span class="score-label">机会</span>
+            <span class="score-num s3" style="background:#ffd166">3</span>
+          </div></div>
+      
+        <div class="signal-detail" style="">
+          <div class="detail-grid">
+            <div class="detail-block">
+              <h4>⏰ 为什么是现在</h4>
+              <p>AI coding 工具的普及让 OSS 项目的 PR 数量开始爆炸，但大部分是「AI 帮我生成的，随手提交」。Jqwik 事件是这个问题第一次引发广泛社区讨论。</p>
+            </div>
+            <div class="detail-block">
+              <h4>💀 旧系统失效</h4>
+              <p>现有 PR review 工具（Reviewable、CodeRabbit 等）关注的是代码质量，不关注「贡献动机和来源」。OSS 维护者的问题是 PR 数量管理，不只是质量。</p>
+            </div>
+          </div>
+        </div>
+      <div class="card-footer">
+        <a href="https://lobste.rs/" target="_blank" class="source-link">🔗 Lobsters · 101分</a>
+      </div>
+    </div>
+    <!-- ── /SIGNAL 4 ── -->
+
+    <!-- ── SIGNAL 5: 全面封禁Cursor浪潮加速（持续追踪） ── -->
+    <div class="signal-card repeat-card" data-opp="4" onclick="toggleCard(this)">
+      <div class="card-header">
+        <span class="signal-tag">已追踪</span>
+        <span class="tag-repeat">🔁 已追踪</span>
+      </div>
+      <span class="signal-title">全面封禁Cursor浪潮加速（持续追踪）</span>
+      <p class="signal-desc">掘金 668 分：又一家大厂宣布全面封禁 Cursor。这个信号已连续多周出现，每次都有新的企业跟进，快手、字节、腾讯之后，大厂封禁 Cursor 已经成为行业趋势而非个案。</p>
+      <p class="signal-opp">合规 AI 编码工具（私有化部署、数据不出境、操作可审计）的市场缺口在每次封禁后持续扩大。</p>
+      <div class="scores-row">
+          <div class="score-item" data-tip="赞500+多人共鸣">
+            <span class="score-label">痛点</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="方案极贵只服务大企业">
+            <span class="score-label">空白</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="明确表示愿付$X">
+            <span class="score-label">付费</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="需销售但有搜索行为">
+            <span class="score-label">获客</span>
+            <span class="score-num s3" style="background:#ffd166">3</span>
+          </div>
+          <div class="score-item" data-tip="纯软件无监管">
+            <span class="score-label">监管</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="HIGH：强机会，建议深挖">
+            <span class="score-label">机会</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div></div>
+      
+      <div class="card-footer">
+        <a href="https://juejin.cn/" target="_blank" class="source-link">🔗 掘金 · 668点赞</a>
+      </div>
+    </div>
+    <!-- ── /SIGNAL 5 ── -->
+
+    <!-- ── SIGNAL 6: LLM烧token比招员工贵（持续追踪） ── -->
+    <div class="signal-card repeat-card" data-opp="4" onclick="toggleCard(this)">
+      <div class="card-header">
+        <span class="signal-tag">已追踪</span>
+        <span class="tag-repeat">🔁 已追踪</span>
+      </div>
+      <span class="signal-title">LLM烧token比招员工贵（持续追踪）</span>
+      <p class="signal-desc">掘金 38 点赞：「最近公司烧token比招员工还贵，老板干懵了」。这个信号持续出现，LLM 使用成本管理工具的需求在不断积累。</p>
+      <p class="signal-opp">企业级 token 用量分析、成本归因、ROI 追踪工具市场持续空白。</p>
+      <div class="scores-row">
+          <div class="score-item" data-tip="赞500+多人共鸣">
+            <span class="score-label">痛点</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="方案极贵只服务大企业">
+            <span class="score-label">空白</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="明确表示愿付$X">
+            <span class="score-label">付费</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="清晰线上渠道SEO可驱动">
+            <span class="score-label">获客</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="纯软件无监管">
+            <span class="score-label">监管</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="HIGH：强机会，建议深挖">
+            <span class="score-label">机会</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div></div>
+      
+      <div class="card-footer">
+        <a href="https://juejin.cn/" target="_blank" class="source-link">🔗 掘金 · 38点赞</a>
+      </div>
+    </div>
+    <!-- ── /SIGNAL 6 ── -->
+
+    <!-- ── SIGNAL 7: AI平替程序员持续加速（持续追踪） ── -->
+    <div class="signal-card repeat-card" data-opp="4" onclick="toggleCard(this)">
+      <div class="card-header">
+        <span class="signal-tag">已追踪</span>
+        <span class="tag-repeat">🔁 已追踪</span>
+      </div>
+      <span class="signal-title">AI平替程序员持续加速（持续追踪）</span>
+      <p class="signal-desc">掘金 331 分：字节旗下豆包 AI 编码工具月费 9.9 元，定价策略明显在打开发者消费市场。配合 Ask HN 上「企业 SWE 岗位是否已经是表演性质」的讨论，AI 替代工程师的进度比预期快。</p>
+      <p class="signal-opp">程序员技能验证、AI 与独立能力分离评估的市场需求持续累积。</p>
+      <div class="scores-row">
+          <div class="score-item" data-tip="赞500+多人共鸣">
+            <span class="score-label">痛点</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="方案极贵只服务大企业">
+            <span class="score-label">空白</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="行业有付费习惯且核心工作流">
+            <span class="score-label">付费</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div>
+          <div class="score-item" data-tip="需销售但有搜索行为">
+            <span class="score-label">获客</span>
+            <span class="score-num s3" style="background:#ffd166">3</span>
+          </div>
+          <div class="score-item" data-tip="纯软件无监管">
+            <span class="score-label">监管</span>
+            <span class="score-num s5" style="background:#06d6a0">5</span>
+          </div>
+          <div class="score-item" data-tip="HIGH：强机会，建议深挖">
+            <span class="score-label">机会</span>
+            <span class="score-num s4" style="background:#74c0fc">4</span>
+          </div></div>
+      
+      <div class="card-footer">
+        <a href="https://juejin.cn/" target="_blank" class="source-link">🔗 掘金 · 331点赞</a>
+      </div>
+    </div>
+    <!-- ── /SIGNAL 7 ── -->
+
+</div>
+
+<script type="application/json" id="signal-extras">
+[{"title": "New reCaptcha需要授权手机", "source": "Lobsters · 84分", "note": "CAPTCHA依赖特定设备，自动化测试和无障碍访问成本上升，替代验证方案机会"}, {"title": "Eric Ries: 反腐败运动", "source": "HN Ask · 650分", "note": "《精益创业》作者新书讨论组织腐败，信号：治理软件/企业文化工具的需求侧变化"}, {"title": "HTML-first建站用户翻倍", "source": "HN · 1118分 + Lobsters · 211分", "note": "性能作为增长杠杆的直接证据，无框架建站工具和性能优化服务的市场论据"}, {"title": "Codex用量配额机制混乱", "source": "V2EX · 78回复", "note": "开发者对 AI 工具配额规则不透明的强烈不满，AI 工具使用量可视化产品的需求信号"}]
+</script>
+
+<script>
+function toggleCard(card) {
+  var detail = card.querySelector('.signal-detail');
+  if (detail) {
+    detail.style.display = detail.style.display === 'none' ? '' : 'none';
+  }
+}
+function filterCards(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(card => {
+    if (filter === 'all') { card.style.display = ''; }
+    else if (filter === 'repeat') { card.style.display = card.classList.contains('repeat-card') ? '' : 'none'; }
+    else { card.style.display = card.dataset.opp === filter ? '' : 'none'; }
+  });
+}
+</script>
+</body>
+</html>
